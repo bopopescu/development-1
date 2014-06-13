@@ -1,0 +1,506 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F3574971946822A006BB572 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3574961946822A006BB572 /* Foundation.framework */; };
+		8F3574991946822A006BB572 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3574981946822A006BB572 /* CoreGraphics.framework */; };
+		8F35749B1946822A006BB572 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F35749A1946822A006BB572 /* UIKit.framework */; };
+		8F3574A11946822A006BB572 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F35749F1946822A006BB572 /* InfoPlist.strings */; };
+		8F3574A31946822A006BB572 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3574A21946822A006BB572 /* main.m */; };
+		8F3574A71946822A006BB572 /* TableViewStoryAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3574A61946822A006BB572 /* TableViewStoryAppDelegate.m */; };
+		8F3574AA1946822A006BB572 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574A81946822A006BB572 /* Main.storyboard */; };
+		8F3574AF1946822A006BB572 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574AE1946822A006BB572 /* Images.xcassets */; };
+		8F3574B61946822A006BB572 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3574B51946822A006BB572 /* XCTest.framework */; };
+		8F3574B71946822A006BB572 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3574961946822A006BB572 /* Foundation.framework */; };
+		8F3574B81946822A006BB572 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F35749A1946822A006BB572 /* UIKit.framework */; };
+		8F3574C01946822A006BB572 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574BE1946822A006BB572 /* InfoPlist.strings */; };
+		8F3574C21946822A006BB572 /* TableViewStoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3574C11946822A006BB572 /* TableViewStoryTests.m */; };
+		8F3574CD194683B4006BB572 /* CarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3574CC194683B4006BB572 /* CarTableViewController.m */; };
+		8F3574D01946843D006BB572 /* CarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3574CF1946843D006BB572 /* CarTableViewCell.m */; };
+		8F3574D719468A8F006BB572 /* chevy_volt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574D219468A8F006BB572 /* chevy_volt.jpg */; };
+		8F3574D819468A8F006BB572 /* mini_clubman.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574D319468A8F006BB572 /* mini_clubman.jpg */; };
+		8F3574D919468A8F006BB572 /* smart_fortwo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574D419468A8F006BB572 /* smart_fortwo.jpg */; };
+		8F3574DA19468A8F006BB572 /* toyota_venza.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574D519468A8F006BB572 /* toyota_venza.jpg */; };
+		8F3574DB19468A8F006BB572 /* volvo_s60.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F3574D619468A8F006BB572 /* volvo_s60.jpg */; };
+		8F3574DE19469083006BB572 /* CarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3574DD19469083006BB572 /* CarDetailViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F3574B91946822A006BB572 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F35748B1946822A006BB572 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F3574921946822A006BB572;
+			remoteInfo = TableViewStory;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8F3574931946822A006BB572 /* TableViewStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F3574961946822A006BB572 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8F3574981946822A006BB572 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8F35749A1946822A006BB572 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8F35749E1946822A006BB572 /* TableViewStory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewStory-Info.plist"; sourceTree = "<group>"; };
+		8F3574A01946822A006BB572 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8F3574A21946822A006BB572 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8F3574A41946822A006BB572 /* TableViewStory-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableViewStory-Prefix.pch"; sourceTree = "<group>"; };
+		8F3574A51946822A006BB572 /* TableViewStoryAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewStoryAppDelegate.h; sourceTree = "<group>"; };
+		8F3574A61946822A006BB572 /* TableViewStoryAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewStoryAppDelegate.m; sourceTree = "<group>"; };
+		8F3574A91946822A006BB572 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8F3574AE1946822A006BB572 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8F3574B41946822A006BB572 /* TableViewStoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableViewStoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F3574B51946822A006BB572 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8F3574BD1946822A006BB572 /* TableViewStoryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewStoryTests-Info.plist"; sourceTree = "<group>"; };
+		8F3574BF1946822A006BB572 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8F3574C11946822A006BB572 /* TableViewStoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewStoryTests.m; sourceTree = "<group>"; };
+		8F3574CB194683B4006BB572 /* CarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarTableViewController.h; sourceTree = "<group>"; };
+		8F3574CC194683B4006BB572 /* CarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarTableViewController.m; sourceTree = "<group>"; };
+		8F3574CE1946843D006BB572 /* CarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarTableViewCell.h; path = TableViewStory/CarTableViewCell.h; sourceTree = "<group>"; };
+		8F3574CF1946843D006BB572 /* CarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarTableViewCell.m; path = TableViewStory/CarTableViewCell.m; sourceTree = "<group>"; };
+		8F3574D219468A8F006BB572 /* chevy_volt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = chevy_volt.jpg; path = ../carImages/chevy_volt.jpg; sourceTree = "<group>"; };
+		8F3574D319468A8F006BB572 /* mini_clubman.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mini_clubman.jpg; path = ../carImages/mini_clubman.jpg; sourceTree = "<group>"; };
+		8F3574D419468A8F006BB572 /* smart_fortwo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = smart_fortwo.jpg; path = ../carImages/smart_fortwo.jpg; sourceTree = "<group>"; };
+		8F3574D519468A8F006BB572 /* toyota_venza.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = toyota_venza.jpg; path = ../carImages/toyota_venza.jpg; sourceTree = "<group>"; };
+		8F3574D619468A8F006BB572 /* volvo_s60.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = volvo_s60.jpg; path = ../carImages/volvo_s60.jpg; sourceTree = "<group>"; };
+		8F3574DC19469083006BB572 /* CarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarDetailViewController.h; sourceTree = "<group>"; };
+		8F3574DD19469083006BB572 /* CarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarDetailViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8F3574901946822A006BB572 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F3574991946822A006BB572 /* CoreGraphics.framework in Frameworks */,
+				8F35749B1946822A006BB572 /* UIKit.framework in Frameworks */,
+				8F3574971946822A006BB572 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F3574B11946822A006BB572 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F3574B61946822A006BB572 /* XCTest.framework in Frameworks */,
+				8F3574B81946822A006BB572 /* UIKit.framework in Frameworks */,
+				8F3574B71946822A006BB572 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8F35748A1946822A006BB572 = {
+			isa = PBXGroup;
+			children = (
+				8F3574DC19469083006BB572 /* CarDetailViewController.h */,
+				8F3574DD19469083006BB572 /* CarDetailViewController.m */,
+				8F3574CE1946843D006BB572 /* CarTableViewCell.h */,
+				8F3574CF1946843D006BB572 /* CarTableViewCell.m */,
+				8F3574CB194683B4006BB572 /* CarTableViewController.h */,
+				8F3574CC194683B4006BB572 /* CarTableViewController.m */,
+				8F35749C1946822A006BB572 /* TableViewStory */,
+				8F3574BB1946822A006BB572 /* TableViewStoryTests */,
+				8F3574951946822A006BB572 /* Frameworks */,
+				8F3574941946822A006BB572 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8F3574941946822A006BB572 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F3574931946822A006BB572 /* TableViewStory.app */,
+				8F3574B41946822A006BB572 /* TableViewStoryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F3574951946822A006BB572 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F3574961946822A006BB572 /* Foundation.framework */,
+				8F3574981946822A006BB572 /* CoreGraphics.framework */,
+				8F35749A1946822A006BB572 /* UIKit.framework */,
+				8F3574B51946822A006BB572 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F35749C1946822A006BB572 /* TableViewStory */ = {
+			isa = PBXGroup;
+			children = (
+				8F3574A51946822A006BB572 /* TableViewStoryAppDelegate.h */,
+				8F3574A61946822A006BB572 /* TableViewStoryAppDelegate.m */,
+				8F3574A81946822A006BB572 /* Main.storyboard */,
+				8F3574AE1946822A006BB572 /* Images.xcassets */,
+				8F35749D1946822A006BB572 /* Supporting Files */,
+			);
+			path = TableViewStory;
+			sourceTree = "<group>";
+		};
+		8F35749D1946822A006BB572 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8F3574D219468A8F006BB572 /* chevy_volt.jpg */,
+				8F3574D319468A8F006BB572 /* mini_clubman.jpg */,
+				8F3574D419468A8F006BB572 /* smart_fortwo.jpg */,
+				8F3574D519468A8F006BB572 /* toyota_venza.jpg */,
+				8F3574D619468A8F006BB572 /* volvo_s60.jpg */,
+				8F35749E1946822A006BB572 /* TableViewStory-Info.plist */,
+				8F35749F1946822A006BB572 /* InfoPlist.strings */,
+				8F3574A21946822A006BB572 /* main.m */,
+				8F3574A41946822A006BB572 /* TableViewStory-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8F3574BB1946822A006BB572 /* TableViewStoryTests */ = {
+			isa = PBXGroup;
+			children = (
+				8F3574C11946822A006BB572 /* TableViewStoryTests.m */,
+				8F3574BC1946822A006BB572 /* Supporting Files */,
+			);
+			path = TableViewStoryTests;
+			sourceTree = "<group>";
+		};
+		8F3574BC1946822A006BB572 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8F3574BD1946822A006BB572 /* TableViewStoryTests-Info.plist */,
+				8F3574BE1946822A006BB572 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8F3574921946822A006BB572 /* TableViewStory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F3574C51946822A006BB572 /* Build configuration list for PBXNativeTarget "TableViewStory" */;
+			buildPhases = (
+				8F35748F1946822A006BB572 /* Sources */,
+				8F3574901946822A006BB572 /* Frameworks */,
+				8F3574911946822A006BB572 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TableViewStory;
+			productName = TableViewStory;
+			productReference = 8F3574931946822A006BB572 /* TableViewStory.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8F3574B31946822A006BB572 /* TableViewStoryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F3574C81946822A006BB572 /* Build configuration list for PBXNativeTarget "TableViewStoryTests" */;
+			buildPhases = (
+				8F3574B01946822A006BB572 /* Sources */,
+				8F3574B11946822A006BB572 /* Frameworks */,
+				8F3574B21946822A006BB572 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F3574BA1946822A006BB572 /* PBXTargetDependency */,
+			);
+			name = TableViewStoryTests;
+			productName = TableViewStoryTests;
+			productReference = 8F3574B41946822A006BB572 /* TableViewStoryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F35748B1946822A006BB572 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TableViewStory;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "DHAP Digital Inc";
+				TargetAttributes = {
+					8F3574B31946822A006BB572 = {
+						TestTargetID = 8F3574921946822A006BB572;
+					};
+				};
+			};
+			buildConfigurationList = 8F35748E1946822A006BB572 /* Build configuration list for PBXProject "TableViewStory" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8F35748A1946822A006BB572;
+			productRefGroup = 8F3574941946822A006BB572 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8F3574921946822A006BB572 /* TableViewStory */,
+				8F3574B31946822A006BB572 /* TableViewStoryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8F3574911946822A006BB572 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F3574D719468A8F006BB572 /* chevy_volt.jpg in Resources */,
+				8F3574AF1946822A006BB572 /* Images.xcassets in Resources */,
+				8F3574DB19468A8F006BB572 /* volvo_s60.jpg in Resources */,
+				8F3574D919468A8F006BB572 /* smart_fortwo.jpg in Resources */,
+				8F3574DA19468A8F006BB572 /* toyota_venza.jpg in Resources */,
+				8F3574D819468A8F006BB572 /* mini_clubman.jpg in Resources */,
+				8F3574A11946822A006BB572 /* InfoPlist.strings in Resources */,
+				8F3574AA1946822A006BB572 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F3574B21946822A006BB572 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F3574C01946822A006BB572 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8F35748F1946822A006BB572 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F3574A71946822A006BB572 /* TableViewStoryAppDelegate.m in Sources */,
+				8F3574DE19469083006BB572 /* CarDetailViewController.m in Sources */,
+				8F3574A31946822A006BB572 /* main.m in Sources */,
+				8F3574D01946843D006BB572 /* CarTableViewCell.m in Sources */,
+				8F3574CD194683B4006BB572 /* CarTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F3574B01946822A006BB572 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F3574C21946822A006BB572 /* TableViewStoryTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F3574BA1946822A006BB572 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F3574921946822A006BB572 /* TableViewStory */;
+			targetProxy = 8F3574B91946822A006BB572 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8F35749F1946822A006BB572 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F3574A01946822A006BB572 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8F3574A81946822A006BB572 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F3574A91946822A006BB572 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8F3574BE1946822A006BB572 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F3574BF1946822A006BB572 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8F3574C31946822A006BB572 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8F3574C41946822A006BB572 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F3574C61946822A006BB572 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableViewStory/TableViewStory-Prefix.pch";
+				INFOPLIST_FILE = "TableViewStory/TableViewStory-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8F3574C71946822A006BB572 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableViewStory/TableViewStory-Prefix.pch";
+				INFOPLIST_FILE = "TableViewStory/TableViewStory-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8F3574C91946822A006BB572 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableViewStory.app/TableViewStory";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableViewStory/TableViewStory-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TableViewStoryTests/TableViewStoryTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		8F3574CA1946822A006BB572 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableViewStory.app/TableViewStory";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableViewStory/TableViewStory-Prefix.pch";
+				INFOPLIST_FILE = "TableViewStoryTests/TableViewStoryTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8F35748E1946822A006BB572 /* Build configuration list for PBXProject "TableViewStory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F3574C31946822A006BB572 /* Debug */,
+				8F3574C41946822A006BB572 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F3574C51946822A006BB572 /* Build configuration list for PBXNativeTarget "TableViewStory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F3574C61946822A006BB572 /* Debug */,
+				8F3574C71946822A006BB572 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F3574C81946822A006BB572 /* Build configuration list for PBXNativeTarget "TableViewStoryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F3574C91946822A006BB572 /* Debug */,
+				8F3574CA1946822A006BB572 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F35748B1946822A006BB572 /* Project object */;
+}

@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DE4787319197775003708C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4787219197775003708C9 /* Foundation.framework */; };
+		6DE4787519197775003708C9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4787419197775003708C9 /* CoreGraphics.framework */; };
+		6DE4787719197775003708C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4787619197775003708C9 /* UIKit.framework */; };
+		6DE4787D19197775003708C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DE4787B19197775003708C9 /* InfoPlist.strings */; };
+		6DE4787F19197775003708C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4787E19197775003708C9 /* main.m */; };
+		6DE4788319197775003708C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4788219197775003708C9 /* AppDelegate.m */; };
+		6DE4788519197775003708C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DE4788419197775003708C9 /* Images.xcassets */; };
+		6DE4788C19197775003708C9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4788B19197775003708C9 /* XCTest.framework */; };
+		6DE4788D19197775003708C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4787219197775003708C9 /* Foundation.framework */; };
+		6DE4788E19197775003708C9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4787619197775003708C9 /* UIKit.framework */; };
+		6DE4789619197775003708C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DE4789419197775003708C9 /* InfoPlist.strings */; };
+		6DE4789819197775003708C9 /* DHAPBeaconCatClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE4789719197775003708C9 /* DHAPBeaconCatClientTests.m */; };
+		6DE478A21919778D003708C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478A11919778D003708C9 /* Main.storyboard */; };
+		6DE478A7191977D0003708C9 /* DHAPBeaconCat+Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE478A4191977D0003708C9 /* DHAPBeaconCat+Client.m */; };
+		6DE478A8191977D0003708C9 /* CatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE478A6191977D0003708C9 /* CatViewController.m */; };
+		6DE478C31919786E003708C9 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478AA1919786E003708C9 /* 0.jpg */; };
+		6DE478C41919786E003708C9 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478AB1919786E003708C9 /* 1.jpg */; };
+		6DE478C51919786E003708C9 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478AC1919786E003708C9 /* 10.jpg */; };
+		6DE478C61919786E003708C9 /* 11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478AD1919786E003708C9 /* 11.jpg */; };
+		6DE478C71919786E003708C9 /* 12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478AE1919786E003708C9 /* 12.jpg */; };
+		6DE478C81919786E003708C9 /* 13.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478AF1919786E003708C9 /* 13.jpg */; };
+		6DE478C91919786E003708C9 /* 14.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B01919786E003708C9 /* 14.jpg */; };
+		6DE478CA1919786E003708C9 /* 15.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B11919786E003708C9 /* 15.jpg */; };
+		6DE478CB1919786E003708C9 /* 16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B21919786E003708C9 /* 16.jpg */; };
+		6DE478CC1919786E003708C9 /* 17.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B31919786E003708C9 /* 17.jpg */; };
+		6DE478CD1919786E003708C9 /* 18.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B41919786E003708C9 /* 18.jpg */; };
+		6DE478CE1919786E003708C9 /* 19.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B51919786E003708C9 /* 19.jpg */; };
+		6DE478CF1919786E003708C9 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B61919786E003708C9 /* 2.jpg */; };
+		6DE478D01919786E003708C9 /* 20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B71919786E003708C9 /* 20.jpg */; };
+		6DE478D11919786E003708C9 /* 21.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B81919786E003708C9 /* 21.jpg */; };
+		6DE478D21919786E003708C9 /* 22.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478B91919786E003708C9 /* 22.jpg */; };
+		6DE478D31919786E003708C9 /* 23.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478BA1919786E003708C9 /* 23.jpg */; };
+		6DE478D41919786E003708C9 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478BB1919786E003708C9 /* 3.jpg */; };
+		6DE478D51919786E003708C9 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478BC1919786E003708C9 /* 4.jpg */; };
+		6DE478D61919786E003708C9 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478BD1919786E003708C9 /* 5.jpg */; };
+		6DE478D71919786E003708C9 /* 6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478BE1919786E003708C9 /* 6.jpg */; };
+		6DE478D81919786E003708C9 /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478BF1919786E003708C9 /* 7.jpg */; };
+		6DE478D91919786E003708C9 /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478C01919786E003708C9 /* 8.jpg */; };
+		6DE478DA1919786E003708C9 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478C11919786E003708C9 /* 9.jpg */; };
+		6DE478DB1919786E003708C9 /* DHAPBeaconCat.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DE478C21919786E003708C9 /* DHAPBeaconCat.plist */; };
+		6DE4791619197BE9003708C9 /* libDHAPBeaconCatLibrary_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4791519197BE9003708C9 /* libDHAPBeaconCatLibrary_iOS.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DE4788F19197775003708C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DE4786719197775003708C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DE4786E19197775003708C9;
+			remoteInfo = DHAPBeaconCatClient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6DE4786F19197775003708C9 /* DHAPBeaconCatClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DHAPBeaconCatClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DE4787219197775003708C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6DE4787419197775003708C9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6DE4787619197775003708C9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6DE4787A19197775003708C9 /* DHAPBeaconCatClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DHAPBeaconCatClient-Info.plist"; sourceTree = "<group>"; };
+		6DE4787C19197775003708C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DE4787E19197775003708C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6DE4788019197775003708C9 /* DHAPBeaconCatClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DHAPBeaconCatClient-Prefix.pch"; sourceTree = "<group>"; };
+		6DE4788119197775003708C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6DE4788219197775003708C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6DE4788419197775003708C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6DE4788A19197775003708C9 /* DHAPBeaconCatClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DHAPBeaconCatClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DE4788B19197775003708C9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6DE4789319197775003708C9 /* DHAPBeaconCatClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DHAPBeaconCatClientTests-Info.plist"; sourceTree = "<group>"; };
+		6DE4789519197775003708C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DE4789719197775003708C9 /* DHAPBeaconCatClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHAPBeaconCatClientTests.m; sourceTree = "<group>"; };
+		6DE478A11919778D003708C9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6DE478A3191977D0003708C9 /* DHAPBeaconCat+Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DHAPBeaconCat+Client.h"; sourceTree = "<group>"; };
+		6DE478A4191977D0003708C9 /* DHAPBeaconCat+Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DHAPBeaconCat+Client.m"; sourceTree = "<group>"; };
+		6DE478A5191977D0003708C9 /* CatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatViewController.h; sourceTree = "<group>"; };
+		6DE478A6191977D0003708C9 /* CatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatViewController.m; sourceTree = "<group>"; };
+		6DE478AA1919786E003708C9 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
+		6DE478AB1919786E003708C9 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		6DE478AC1919786E003708C9 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
+		6DE478AD1919786E003708C9 /* 11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpg; sourceTree = "<group>"; };
+		6DE478AE1919786E003708C9 /* 12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.jpg; sourceTree = "<group>"; };
+		6DE478AF1919786E003708C9 /* 13.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 13.jpg; sourceTree = "<group>"; };
+		6DE478B01919786E003708C9 /* 14.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 14.jpg; sourceTree = "<group>"; };
+		6DE478B11919786E003708C9 /* 15.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 15.jpg; sourceTree = "<group>"; };
+		6DE478B21919786E003708C9 /* 16.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 16.jpg; sourceTree = "<group>"; };
+		6DE478B31919786E003708C9 /* 17.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 17.jpg; sourceTree = "<group>"; };
+		6DE478B41919786E003708C9 /* 18.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 18.jpg; sourceTree = "<group>"; };
+		6DE478B51919786E003708C9 /* 19.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 19.jpg; sourceTree = "<group>"; };
+		6DE478B61919786E003708C9 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		6DE478B71919786E003708C9 /* 20.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 20.jpg; sourceTree = "<group>"; };
+		6DE478B81919786E003708C9 /* 21.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 21.jpg; sourceTree = "<group>"; };
+		6DE478B91919786E003708C9 /* 22.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 22.jpg; sourceTree = "<group>"; };
+		6DE478BA1919786E003708C9 /* 23.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 23.jpg; sourceTree = "<group>"; };
+		6DE478BB1919786E003708C9 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		6DE478BC1919786E003708C9 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		6DE478BD1919786E003708C9 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpg; sourceTree = "<group>"; };
+		6DE478BE1919786E003708C9 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpg; sourceTree = "<group>"; };
+		6DE478BF1919786E003708C9 /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
+		6DE478C01919786E003708C9 /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
+		6DE478C11919786E003708C9 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
+		6DE478C21919786E003708C9 /* DHAPBeaconCat.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DHAPBeaconCat.plist; path = ../../DHAPBeaconCat.plist; sourceTree = "<group>"; };
+		6DE4791119197B69003708C9 /* libDHAPBeaconCatLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDHAPBeaconCatLibrary.a; path = "../../../Library/Developer/Xcode/DerivedData/DHAPBeaconCat-ahbplvfymkisntddeqvasxxojsxg/Build/Products/Debug/libDHAPBeaconCatLibrary.a"; sourceTree = "<group>"; };
+		6DE4791519197BE9003708C9 /* libDHAPBeaconCatLibrary_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDHAPBeaconCatLibrary_iOS.a; path = "../DHAPBeaconCatLibrary/build/Debug-iphoneos/libDHAPBeaconCatLibrary_iOS.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6DE4786C19197775003708C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE4791619197BE9003708C9 /* libDHAPBeaconCatLibrary_iOS.a in Frameworks */,
+				6DE4787519197775003708C9 /* CoreGraphics.framework in Frameworks */,
+				6DE4787719197775003708C9 /* UIKit.framework in Frameworks */,
+				6DE4787319197775003708C9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DE4788719197775003708C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE4788C19197775003708C9 /* XCTest.framework in Frameworks */,
+				6DE4788E19197775003708C9 /* UIKit.framework in Frameworks */,
+				6DE4788D19197775003708C9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DE4786619197775003708C9 = {
+			isa = PBXGroup;
+			children = (
+				6DE4787819197775003708C9 /* DHAPBeaconCatClient */,
+				6DE4789119197775003708C9 /* DHAPBeaconCatClientTests */,
+				6DE4787119197775003708C9 /* Frameworks */,
+				6DE4787019197775003708C9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6DE4787019197775003708C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4786F19197775003708C9 /* DHAPBeaconCatClient.app */,
+				6DE4788A19197775003708C9 /* DHAPBeaconCatClientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DE4787119197775003708C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4791519197BE9003708C9 /* libDHAPBeaconCatLibrary_iOS.a */,
+				6DE4791119197B69003708C9 /* libDHAPBeaconCatLibrary.a */,
+				6DE4787219197775003708C9 /* Foundation.framework */,
+				6DE4787419197775003708C9 /* CoreGraphics.framework */,
+				6DE4787619197775003708C9 /* UIKit.framework */,
+				6DE4788B19197775003708C9 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DE4787819197775003708C9 /* DHAPBeaconCatClient */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4788119197775003708C9 /* AppDelegate.h */,
+				6DE4788219197775003708C9 /* AppDelegate.m */,
+				6DE478A11919778D003708C9 /* Main.storyboard */,
+				6DE478A5191977D0003708C9 /* CatViewController.h */,
+				6DE478A6191977D0003708C9 /* CatViewController.m */,
+				6DE478A3191977D0003708C9 /* DHAPBeaconCat+Client.h */,
+				6DE478A4191977D0003708C9 /* DHAPBeaconCat+Client.m */,
+				6DE4788419197775003708C9 /* Images.xcassets */,
+				6DE4787919197775003708C9 /* Supporting Files */,
+			);
+			path = DHAPBeaconCatClient;
+			sourceTree = "<group>";
+		};
+		6DE4787919197775003708C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4787A19197775003708C9 /* DHAPBeaconCatClient-Info.plist */,
+				6DE4787B19197775003708C9 /* InfoPlist.strings */,
+				6DE4787E19197775003708C9 /* main.m */,
+				6DE4788019197775003708C9 /* DHAPBeaconCatClient-Prefix.pch */,
+				6DE478C21919786E003708C9 /* DHAPBeaconCat.plist */,
+				6DE478A91919786E003708C9 /* Cats */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DE4789119197775003708C9 /* DHAPBeaconCatClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4789719197775003708C9 /* DHAPBeaconCatClientTests.m */,
+				6DE4789219197775003708C9 /* Supporting Files */,
+			);
+			path = DHAPBeaconCatClientTests;
+			sourceTree = "<group>";
+		};
+		6DE4789219197775003708C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4789319197775003708C9 /* DHAPBeaconCatClientTests-Info.plist */,
+				6DE4789419197775003708C9 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DE478A91919786E003708C9 /* Cats */ = {
+			isa = PBXGroup;
+			children = (
+				6DE478AA1919786E003708C9 /* 0.jpg */,
+				6DE478AB1919786E003708C9 /* 1.jpg */,
+				6DE478AC1919786E003708C9 /* 10.jpg */,
+				6DE478AD1919786E003708C9 /* 11.jpg */,
+				6DE478AE1919786E003708C9 /* 12.jpg */,
+				6DE478AF1919786E003708C9 /* 13.jpg */,
+				6DE478B01919786E003708C9 /* 14.jpg */,
+				6DE478B11919786E003708C9 /* 15.jpg */,
+				6DE478B21919786E003708C9 /* 16.jpg */,
+				6DE478B31919786E003708C9 /* 17.jpg */,
+				6DE478B41919786E003708C9 /* 18.jpg */,
+				6DE478B51919786E003708C9 /* 19.jpg */,
+				6DE478B61919786E003708C9 /* 2.jpg */,
+				6DE478B71919786E003708C9 /* 20.jpg */,
+				6DE478B81919786E003708C9 /* 21.jpg */,
+				6DE478B91919786E003708C9 /* 22.jpg */,
+				6DE478BA1919786E003708C9 /* 23.jpg */,
+				6DE478BB1919786E003708C9 /* 3.jpg */,
+				6DE478BC1919786E003708C9 /* 4.jpg */,
+				6DE478BD1919786E003708C9 /* 5.jpg */,
+				6DE478BE1919786E003708C9 /* 6.jpg */,
+				6DE478BF1919786E003708C9 /* 7.jpg */,
+				6DE478C01919786E003708C9 /* 8.jpg */,
+				6DE478C11919786E003708C9 /* 9.jpg */,
+			);
+			name = Cats;
+			path = ../../Cats;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6DE4786E19197775003708C9 /* DHAPBeaconCatClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DE4789B19197775003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatClient" */;
+			buildPhases = (
+				6DE4786B19197775003708C9 /* Sources */,
+				6DE4786C19197775003708C9 /* Frameworks */,
+				6DE4786D19197775003708C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DHAPBeaconCatClient;
+			productName = DHAPBeaconCatClient;
+			productReference = 6DE4786F19197775003708C9 /* DHAPBeaconCatClient.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6DE4788919197775003708C9 /* DHAPBeaconCatClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DE4789E19197775003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatClientTests" */;
+			buildPhases = (
+				6DE4788619197775003708C9 /* Sources */,
+				6DE4788719197775003708C9 /* Frameworks */,
+				6DE4788819197775003708C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DE4789019197775003708C9 /* PBXTargetDependency */,
+			);
+			name = DHAPBeaconCatClientTests;
+			productName = DHAPBeaconCatClientTests;
+			productReference = 6DE4788A19197775003708C9 /* DHAPBeaconCatClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DE4786719197775003708C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "DHAP Digital";
+				TargetAttributes = {
+					6DE4788919197775003708C9 = {
+						TestTargetID = 6DE4786E19197775003708C9;
+					};
+				};
+			};
+			buildConfigurationList = 6DE4786A19197775003708C9 /* Build configuration list for PBXProject "DHAPBeaconCatClient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6DE4786619197775003708C9;
+			productRefGroup = 6DE4787019197775003708C9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6DE4786E19197775003708C9 /* DHAPBeaconCatClient */,
+				6DE4788919197775003708C9 /* DHAPBeaconCatClientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6DE4786D19197775003708C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE478D51919786E003708C9 /* 4.jpg in Resources */,
+				6DE478D21919786E003708C9 /* 22.jpg in Resources */,
+				6DE478CC1919786E003708C9 /* 17.jpg in Resources */,
+				6DE478C91919786E003708C9 /* 14.jpg in Resources */,
+				6DE478D01919786E003708C9 /* 20.jpg in Resources */,
+				6DE478C71919786E003708C9 /* 12.jpg in Resources */,
+				6DE478C81919786E003708C9 /* 13.jpg in Resources */,
+				6DE478C31919786E003708C9 /* 0.jpg in Resources */,
+				6DE478CB1919786E003708C9 /* 16.jpg in Resources */,
+				6DE478CF1919786E003708C9 /* 2.jpg in Resources */,
+				6DE478A21919778D003708C9 /* Main.storyboard in Resources */,
+				6DE478D31919786E003708C9 /* 23.jpg in Resources */,
+				6DE478D81919786E003708C9 /* 7.jpg in Resources */,
+				6DE4787D19197775003708C9 /* InfoPlist.strings in Resources */,
+				6DE478DB1919786E003708C9 /* DHAPBeaconCat.plist in Resources */,
+				6DE478D41919786E003708C9 /* 3.jpg in Resources */,
+				6DE4788519197775003708C9 /* Images.xcassets in Resources */,
+				6DE478C51919786E003708C9 /* 10.jpg in Resources */,
+				6DE478CE1919786E003708C9 /* 19.jpg in Resources */,
+				6DE478DA1919786E003708C9 /* 9.jpg in Resources */,
+				6DE478D91919786E003708C9 /* 8.jpg in Resources */,
+				6DE478C61919786E003708C9 /* 11.jpg in Resources */,
+				6DE478D71919786E003708C9 /* 6.jpg in Resources */,
+				6DE478C41919786E003708C9 /* 1.jpg in Resources */,
+				6DE478D61919786E003708C9 /* 5.jpg in Resources */,
+				6DE478CD1919786E003708C9 /* 18.jpg in Resources */,
+				6DE478D11919786E003708C9 /* 21.jpg in Resources */,
+				6DE478CA1919786E003708C9 /* 15.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DE4788819197775003708C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE4789619197775003708C9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6DE4786B19197775003708C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE4788319197775003708C9 /* AppDelegate.m in Sources */,
+				6DE478A8191977D0003708C9 /* CatViewController.m in Sources */,
+				6DE478A7191977D0003708C9 /* DHAPBeaconCat+Client.m in Sources */,
+				6DE4787F19197775003708C9 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DE4788619197775003708C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE4789819197775003708C9 /* DHAPBeaconCatClientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DE4789019197775003708C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DE4786E19197775003708C9 /* DHAPBeaconCatClient */;
+			targetProxy = 6DE4788F19197775003708C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6DE4787B19197775003708C9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DE4787C19197775003708C9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6DE4789419197775003708C9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DE4789519197775003708C9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6DE4789919197775003708C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6DE4789A19197775003708C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6DE4789C19197775003708C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatClient/DHAPBeaconCatClient-Prefix.pch";
+				INFOPLIST_FILE = "DHAPBeaconCatClient/DHAPBeaconCatClient-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/DHAPBeaconCat-ahbplvfymkisntddeqvasxxojsxg/Build/Products/Debug",
+					"/Users/kkim/Documents/DHAPBeaconCat/DHAPBeaconCatLibrary/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6DE4789D19197775003708C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatClient/DHAPBeaconCatClient-Prefix.pch";
+				INFOPLIST_FILE = "DHAPBeaconCatClient/DHAPBeaconCatClient-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/DHAPBeaconCat-ahbplvfymkisntddeqvasxxojsxg/Build/Products/Debug",
+					"/Users/kkim/Documents/DHAPBeaconCat/DHAPBeaconCatLibrary/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6DE4789F19197775003708C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DHAPBeaconCatClient.app/DHAPBeaconCatClient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatClient/DHAPBeaconCatClient-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DHAPBeaconCatClientTests/DHAPBeaconCatClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6DE478A019197775003708C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DHAPBeaconCatClient.app/DHAPBeaconCatClient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatClient/DHAPBeaconCatClient-Prefix.pch";
+				INFOPLIST_FILE = "DHAPBeaconCatClientTests/DHAPBeaconCatClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6DE4786A19197775003708C9 /* Build configuration list for PBXProject "DHAPBeaconCatClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE4789919197775003708C9 /* Debug */,
+				6DE4789A19197775003708C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DE4789B19197775003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE4789C19197775003708C9 /* Debug */,
+				6DE4789D19197775003708C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6DE4789E19197775003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE4789F19197775003708C9 /* Debug */,
+				6DE478A019197775003708C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DE4786719197775003708C9 /* Project object */;
+}

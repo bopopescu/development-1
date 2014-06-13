@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DE4778E191973A5003708C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4778D191973A5003708C9 /* Cocoa.framework */; };
+		6DE4779F191973A5003708C9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4779E191973A5003708C9 /* XCTest.framework */; };
+		6DE477A0191973A5003708C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4778D191973A5003708C9 /* Cocoa.framework */; };
+		6DE477A3191973A5003708C9 /* libDHAPBeaconCatLibrary_OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE4778A191973A5003708C9 /* libDHAPBeaconCatLibrary_OSX.a */; };
+		6DE477A9191973A5003708C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DE477A7191973A5003708C9 /* InfoPlist.strings */; };
+		6DE477AB191973A5003708C9 /* DHAPBeaconCatLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE477AA191973A5003708C9 /* DHAPBeaconCatLibraryTests.m */; };
+		6DE477B6191973C2003708C9 /* DHAPBeaconCatManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DE477B4191973C2003708C9 /* DHAPBeaconCatManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6DE477B7191973C2003708C9 /* DHAPBeaconCatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE477B5191973C2003708C9 /* DHAPBeaconCatManager.m */; };
+		6DE477BA191973D3003708C9 /* DHAPBeaconCat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DE477B8191973D3003708C9 /* DHAPBeaconCat.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6DE477BB191973D3003708C9 /* DHAPBeaconCat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE477B9191973D3003708C9 /* DHAPBeaconCat.m */; };
+		6DE477C21919750F003708C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE477C11919750F003708C9 /* Foundation.framework */; };
+		6DE477E4191975C8003708C9 /* DHAPBeaconCatLibrary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6DE47796191973A5003708C9 /* DHAPBeaconCatLibrary.h */; };
+		6DE477E5191975D4003708C9 /* DHAPBeaconCatLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DE47796191973A5003708C9 /* DHAPBeaconCatLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DE4790F19197AB7003708C9 /* DHAPBeaconCatManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6DE477B4191973C2003708C9 /* DHAPBeaconCatManager.h */; };
+		6DE4791019197AB7003708C9 /* DHAPBeaconCat.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6DE477B8191973D3003708C9 /* DHAPBeaconCat.h */; };
+		6DE4791719197DA8003708C9 /* DHAPBeaconCatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE477B5191973C2003708C9 /* DHAPBeaconCatManager.m */; };
+		6DE4791819197DA8003708C9 /* DHAPBeaconCat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE477B9191973D3003708C9 /* DHAPBeaconCat.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DE477A1191973A5003708C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DE47782191973A5003708C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DE47789191973A5003708C9;
+			remoteInfo = DHAPBeaconCatLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6DE477BE1919750F003708C9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = include/DHAPBeaconCatLibrary;
+			dstSubfolderSpec = 16;
+			files = (
+				6DE4790F19197AB7003708C9 /* DHAPBeaconCatManager.h in CopyFiles */,
+				6DE4791019197AB7003708C9 /* DHAPBeaconCat.h in CopyFiles */,
+				6DE477E4191975C8003708C9 /* DHAPBeaconCatLibrary.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6DE4778A191973A5003708C9 /* libDHAPBeaconCatLibrary_OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDHAPBeaconCatLibrary_OSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DE4778D191973A5003708C9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		6DE47790191973A5003708C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6DE47791191973A5003708C9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6DE47792191973A5003708C9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6DE47795191973A5003708C9 /* DHAPBeaconCatLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DHAPBeaconCatLibrary-Prefix.pch"; sourceTree = "<group>"; };
+		6DE47796191973A5003708C9 /* DHAPBeaconCatLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHAPBeaconCatLibrary.h; sourceTree = "<group>"; };
+		6DE4779D191973A5003708C9 /* DHAPBeaconCatLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DHAPBeaconCatLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DE4779E191973A5003708C9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6DE477A6191973A5003708C9 /* DHAPBeaconCatLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DHAPBeaconCatLibraryTests-Info.plist"; sourceTree = "<group>"; };
+		6DE477A8191973A5003708C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DE477AA191973A5003708C9 /* DHAPBeaconCatLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHAPBeaconCatLibraryTests.m; sourceTree = "<group>"; };
+		6DE477B4191973C2003708C9 /* DHAPBeaconCatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHAPBeaconCatManager.h; sourceTree = "<group>"; };
+		6DE477B5191973C2003708C9 /* DHAPBeaconCatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHAPBeaconCatManager.m; sourceTree = "<group>"; };
+		6DE477B8191973D3003708C9 /* DHAPBeaconCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHAPBeaconCat.h; sourceTree = "<group>"; };
+		6DE477B9191973D3003708C9 /* DHAPBeaconCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHAPBeaconCat.m; sourceTree = "<group>"; };
+		6DE477C01919750F003708C9 /* libDHAPBeaconCatLibrary_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDHAPBeaconCatLibrary_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DE477C11919750F003708C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6DE477D119197510003708C9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6DE47787191973A5003708C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE4778E191973A5003708C9 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DE4779A191973A5003708C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE477A0191973A5003708C9 /* Cocoa.framework in Frameworks */,
+				6DE477A3191973A5003708C9 /* libDHAPBeaconCatLibrary_OSX.a in Frameworks */,
+				6DE4779F191973A5003708C9 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DE477BD1919750F003708C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE477C21919750F003708C9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6DE47781191973A5003708C9 = {
+			isa = PBXGroup;
+			children = (
+				6DE47793191973A5003708C9 /* DHAPBeaconCatLibrary */,
+				6DE477A4191973A5003708C9 /* DHAPBeaconCatLibraryTests */,
+				6DE4778C191973A5003708C9 /* Frameworks */,
+				6DE4778B191973A5003708C9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6DE4778B191973A5003708C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4778A191973A5003708C9 /* libDHAPBeaconCatLibrary_OSX.a */,
+				6DE4779D191973A5003708C9 /* DHAPBeaconCatLibraryTests.xctest */,
+				6DE477C01919750F003708C9 /* libDHAPBeaconCatLibrary_iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DE4778C191973A5003708C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DE4778D191973A5003708C9 /* Cocoa.framework */,
+				6DE4779E191973A5003708C9 /* XCTest.framework */,
+				6DE477C11919750F003708C9 /* Foundation.framework */,
+				6DE477D119197510003708C9 /* UIKit.framework */,
+				6DE4778F191973A5003708C9 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DE4778F191973A5003708C9 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DE47790191973A5003708C9 /* Foundation.framework */,
+				6DE47791191973A5003708C9 /* CoreData.framework */,
+				6DE47792191973A5003708C9 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		6DE47793191973A5003708C9 /* DHAPBeaconCatLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				6DE47796191973A5003708C9 /* DHAPBeaconCatLibrary.h */,
+				6DE477B4191973C2003708C9 /* DHAPBeaconCatManager.h */,
+				6DE477B5191973C2003708C9 /* DHAPBeaconCatManager.m */,
+				6DE477B8191973D3003708C9 /* DHAPBeaconCat.h */,
+				6DE477B9191973D3003708C9 /* DHAPBeaconCat.m */,
+				6DE47794191973A5003708C9 /* Supporting Files */,
+			);
+			path = DHAPBeaconCatLibrary;
+			sourceTree = "<group>";
+		};
+		6DE47794191973A5003708C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DE47795191973A5003708C9 /* DHAPBeaconCatLibrary-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DE477A4191973A5003708C9 /* DHAPBeaconCatLibraryTests */ = {
+			isa = PBXGroup;
+			children = (
+				6DE477AA191973A5003708C9 /* DHAPBeaconCatLibraryTests.m */,
+				6DE477A5191973A5003708C9 /* Supporting Files */,
+			);
+			path = DHAPBeaconCatLibraryTests;
+			sourceTree = "<group>";
+		};
+		6DE477A5191973A5003708C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DE477A6191973A5003708C9 /* DHAPBeaconCatLibraryTests-Info.plist */,
+				6DE477A7191973A5003708C9 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6DE47788191973A5003708C9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE477E5191975D4003708C9 /* DHAPBeaconCatLibrary.h in Headers */,
+				6DE477BA191973D3003708C9 /* DHAPBeaconCat.h in Headers */,
+				6DE477B6191973C2003708C9 /* DHAPBeaconCatManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6DE47789191973A5003708C9 /* DHAPBeaconCatLibrary_OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DE477AE191973A5003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatLibrary_OSX" */;
+			buildPhases = (
+				6DE47786191973A5003708C9 /* Sources */,
+				6DE47787191973A5003708C9 /* Frameworks */,
+				6DE47788191973A5003708C9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DHAPBeaconCatLibrary_OSX;
+			productName = DHAPBeaconCatLibrary;
+			productReference = 6DE4778A191973A5003708C9 /* libDHAPBeaconCatLibrary_OSX.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		6DE4779C191973A5003708C9 /* DHAPBeaconCatLibraryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DE477B1191973A5003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatLibraryTests" */;
+			buildPhases = (
+				6DE47799191973A5003708C9 /* Sources */,
+				6DE4779A191973A5003708C9 /* Frameworks */,
+				6DE4779B191973A5003708C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DE477A2191973A5003708C9 /* PBXTargetDependency */,
+			);
+			name = DHAPBeaconCatLibraryTests;
+			productName = DHAPBeaconCatLibraryTests;
+			productReference = 6DE4779D191973A5003708C9 /* DHAPBeaconCatLibraryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6DE477BF1919750F003708C9 /* DHAPBeaconCatLibrary_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DE477DE19197510003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatLibrary_iOS" */;
+			buildPhases = (
+				6DE477BC1919750F003708C9 /* Sources */,
+				6DE477BD1919750F003708C9 /* Frameworks */,
+				6DE477BE1919750F003708C9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DHAPBeaconCatLibrary_iOS;
+			productName = DHAPBeaconCatLibrary;
+			productReference = 6DE477C01919750F003708C9 /* libDHAPBeaconCatLibrary_iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DE47782191973A5003708C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "DHAP Digital";
+			};
+			buildConfigurationList = 6DE47785191973A5003708C9 /* Build configuration list for PBXProject "DHAPBeaconCatLibrary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6DE47781191973A5003708C9;
+			productRefGroup = 6DE4778B191973A5003708C9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6DE47789191973A5003708C9 /* DHAPBeaconCatLibrary_OSX */,
+				6DE477BF1919750F003708C9 /* DHAPBeaconCatLibrary_iOS */,
+				6DE4779C191973A5003708C9 /* DHAPBeaconCatLibraryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6DE4779B191973A5003708C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE477A9191973A5003708C9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6DE47786191973A5003708C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE477BB191973D3003708C9 /* DHAPBeaconCat.m in Sources */,
+				6DE477B7191973C2003708C9 /* DHAPBeaconCatManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DE47799191973A5003708C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE477AB191973A5003708C9 /* DHAPBeaconCatLibraryTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DE477BC1919750F003708C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DE4791719197DA8003708C9 /* DHAPBeaconCatManager.m in Sources */,
+				6DE4791819197DA8003708C9 /* DHAPBeaconCat.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DE477A2191973A5003708C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DE47789191973A5003708C9 /* DHAPBeaconCatLibrary_OSX */;
+			targetProxy = 6DE477A1191973A5003708C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6DE477A7191973A5003708C9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DE477A8191973A5003708C9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6DE477AC191973A5003708C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6DE477AD191973A5003708C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		6DE477AF191973A5003708C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatLibrary/DHAPBeaconCatLibrary-Prefix.pch";
+				PRIVATE_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+			};
+			name = Debug;
+		};
+		6DE477B0191973A5003708C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatLibrary/DHAPBeaconCatLibrary-Prefix.pch";
+				PRIVATE_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+			};
+			name = Release;
+		};
+		6DE477B2191973A5003708C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatLibrary/DHAPBeaconCatLibrary-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DHAPBeaconCatLibraryTests/DHAPBeaconCatLibraryTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6DE477B3191973A5003708C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatLibrary/DHAPBeaconCatLibrary-Prefix.pch";
+				INFOPLIST_FILE = "DHAPBeaconCatLibraryTests/DHAPBeaconCatLibraryTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		6DE477DF19197510003708C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/DHAPBeaconCatLibrary.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatLibrary/DHAPBeaconCatLibrary-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6DE477E019197510003708C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/DHAPBeaconCatLibrary.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DHAPBeaconCatLibrary/DHAPBeaconCatLibrary-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/DHAPBeaconCatLibrary;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6DE47785191973A5003708C9 /* Build configuration list for PBXProject "DHAPBeaconCatLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE477AC191973A5003708C9 /* Debug */,
+				6DE477AD191973A5003708C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DE477AE191973A5003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatLibrary_OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE477AF191973A5003708C9 /* Debug */,
+				6DE477B0191973A5003708C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6DE477B1191973A5003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatLibraryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE477B2191973A5003708C9 /* Debug */,
+				6DE477B3191973A5003708C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6DE477DE19197510003708C9 /* Build configuration list for PBXNativeTarget "DHAPBeaconCatLibrary_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DE477DF19197510003708C9 /* Debug */,
+				6DE477E019197510003708C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DE47782191973A5003708C9 /* Project object */;
+}

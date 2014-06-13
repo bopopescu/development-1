@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F7AFBA6194B7FCE00932FB4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AFBA5194B7FCE00932FB4 /* Foundation.framework */; };
+		8F7AFBA8194B7FCE00932FB4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AFBA7194B7FCE00932FB4 /* CoreGraphics.framework */; };
+		8F7AFBAA194B7FCE00932FB4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AFBA9194B7FCE00932FB4 /* UIKit.framework */; };
+		8F7AFBB0194B7FCE00932FB4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F7AFBAE194B7FCE00932FB4 /* InfoPlist.strings */; };
+		8F7AFBB2194B7FCE00932FB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AFBB1194B7FCE00932FB4 /* main.m */; };
+		8F7AFBB6194B7FCE00932FB4 /* LoginJsonAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AFBB5194B7FCE00932FB4 /* LoginJsonAppDelegate.m */; };
+		8F7AFBB9194B7FCE00932FB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F7AFBB7194B7FCE00932FB4 /* Main.storyboard */; };
+		8F7AFBBC194B7FCE00932FB4 /* LoginJsonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AFBBB194B7FCE00932FB4 /* LoginJsonViewController.m */; };
+		8F7AFBBE194B7FCE00932FB4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7AFBBD194B7FCE00932FB4 /* Images.xcassets */; };
+		8F7AFBC5194B7FCE00932FB4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AFBC4194B7FCE00932FB4 /* XCTest.framework */; };
+		8F7AFBC6194B7FCE00932FB4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AFBA5194B7FCE00932FB4 /* Foundation.framework */; };
+		8F7AFBC7194B7FCE00932FB4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AFBA9194B7FCE00932FB4 /* UIKit.framework */; };
+		8F7AFBCF194B7FCE00932FB4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F7AFBCD194B7FCE00932FB4 /* InfoPlist.strings */; };
+		8F7AFBD1194B7FCE00932FB4 /* LoginJsonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AFBD0194B7FCE00932FB4 /* LoginJsonTests.m */; };
+		8F7AFBDB194B80DE00932FB4 /* SignUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F7AFBDA194B80DE00932FB4 /* SignUp.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F7AFBC8194B7FCE00932FB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F7AFB9A194B7FCE00932FB4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F7AFBA1194B7FCE00932FB4;
+			remoteInfo = LoginJson;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8F7AFBA2194B7FCE00932FB4 /* LoginJson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginJson.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F7AFBA5194B7FCE00932FB4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8F7AFBA7194B7FCE00932FB4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8F7AFBA9194B7FCE00932FB4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8F7AFBAD194B7FCE00932FB4 /* LoginJson-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoginJson-Info.plist"; sourceTree = "<group>"; };
+		8F7AFBAF194B7FCE00932FB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8F7AFBB1194B7FCE00932FB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8F7AFBB3194B7FCE00932FB4 /* LoginJson-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoginJson-Prefix.pch"; sourceTree = "<group>"; };
+		8F7AFBB4194B7FCE00932FB4 /* LoginJsonAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginJsonAppDelegate.h; sourceTree = "<group>"; };
+		8F7AFBB5194B7FCE00932FB4 /* LoginJsonAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginJsonAppDelegate.m; sourceTree = "<group>"; };
+		8F7AFBB8194B7FCE00932FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8F7AFBBA194B7FCE00932FB4 /* LoginJsonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginJsonViewController.h; sourceTree = "<group>"; };
+		8F7AFBBB194B7FCE00932FB4 /* LoginJsonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginJsonViewController.m; sourceTree = "<group>"; };
+		8F7AFBBD194B7FCE00932FB4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8F7AFBC3194B7FCE00932FB4 /* LoginJsonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginJsonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F7AFBC4194B7FCE00932FB4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8F7AFBCC194B7FCE00932FB4 /* LoginJsonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoginJsonTests-Info.plist"; sourceTree = "<group>"; };
+		8F7AFBCE194B7FCE00932FB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8F7AFBD0194B7FCE00932FB4 /* LoginJsonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginJsonTests.m; sourceTree = "<group>"; };
+		8F7AFBDA194B80DE00932FB4 /* SignUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignUp.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8F7AFB9F194B7FCE00932FB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7AFBA8194B7FCE00932FB4 /* CoreGraphics.framework in Frameworks */,
+				8F7AFBAA194B7FCE00932FB4 /* UIKit.framework in Frameworks */,
+				8F7AFBA6194B7FCE00932FB4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F7AFBC0194B7FCE00932FB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7AFBC5194B7FCE00932FB4 /* XCTest.framework in Frameworks */,
+				8F7AFBC7194B7FCE00932FB4 /* UIKit.framework in Frameworks */,
+				8F7AFBC6194B7FCE00932FB4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8F7AFB99194B7FCE00932FB4 = {
+			isa = PBXGroup;
+			children = (
+				8F7AFBAB194B7FCE00932FB4 /* LoginJson */,
+				8F7AFBCA194B7FCE00932FB4 /* LoginJsonTests */,
+				8F7AFBA4194B7FCE00932FB4 /* Frameworks */,
+				8F7AFBA3194B7FCE00932FB4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8F7AFBA3194B7FCE00932FB4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F7AFBA2194B7FCE00932FB4 /* LoginJson.app */,
+				8F7AFBC3194B7FCE00932FB4 /* LoginJsonTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F7AFBA4194B7FCE00932FB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F7AFBA5194B7FCE00932FB4 /* Foundation.framework */,
+				8F7AFBA7194B7FCE00932FB4 /* CoreGraphics.framework */,
+				8F7AFBA9194B7FCE00932FB4 /* UIKit.framework */,
+				8F7AFBC4194B7FCE00932FB4 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F7AFBAB194B7FCE00932FB4 /* LoginJson */ = {
+			isa = PBXGroup;
+			children = (
+				8F7AFBB4194B7FCE00932FB4 /* LoginJsonAppDelegate.h */,
+				8F7AFBB5194B7FCE00932FB4 /* LoginJsonAppDelegate.m */,
+				8F7AFBB7194B7FCE00932FB4 /* Main.storyboard */,
+				8F7AFBBA194B7FCE00932FB4 /* LoginJsonViewController.h */,
+				8F7AFBBB194B7FCE00932FB4 /* LoginJsonViewController.m */,
+				8F7AFBBD194B7FCE00932FB4 /* Images.xcassets */,
+				8F7AFBAC194B7FCE00932FB4 /* Supporting Files */,
+			);
+			path = LoginJson;
+			sourceTree = "<group>";
+		};
+		8F7AFBAC194B7FCE00932FB4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8F7AFBDA194B80DE00932FB4 /* SignUp.png */,
+				8F7AFBAD194B7FCE00932FB4 /* LoginJson-Info.plist */,
+				8F7AFBAE194B7FCE00932FB4 /* InfoPlist.strings */,
+				8F7AFBB1194B7FCE00932FB4 /* main.m */,
+				8F7AFBB3194B7FCE00932FB4 /* LoginJson-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8F7AFBCA194B7FCE00932FB4 /* LoginJsonTests */ = {
+			isa = PBXGroup;
+			children = (
+				8F7AFBD0194B7FCE00932FB4 /* LoginJsonTests.m */,
+				8F7AFBCB194B7FCE00932FB4 /* Supporting Files */,
+			);
+			path = LoginJsonTests;
+			sourceTree = "<group>";
+		};
+		8F7AFBCB194B7FCE00932FB4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8F7AFBCC194B7FCE00932FB4 /* LoginJsonTests-Info.plist */,
+				8F7AFBCD194B7FCE00932FB4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8F7AFBA1194B7FCE00932FB4 /* LoginJson */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F7AFBD4194B7FCE00932FB4 /* Build configuration list for PBXNativeTarget "LoginJson" */;
+			buildPhases = (
+				8F7AFB9E194B7FCE00932FB4 /* Sources */,
+				8F7AFB9F194B7FCE00932FB4 /* Frameworks */,
+				8F7AFBA0194B7FCE00932FB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LoginJson;
+			productName = LoginJson;
+			productReference = 8F7AFBA2194B7FCE00932FB4 /* LoginJson.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8F7AFBC2194B7FCE00932FB4 /* LoginJsonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F7AFBD7194B7FCE00932FB4 /* Build configuration list for PBXNativeTarget "LoginJsonTests" */;
+			buildPhases = (
+				8F7AFBBF194B7FCE00932FB4 /* Sources */,
+				8F7AFBC0194B7FCE00932FB4 /* Frameworks */,
+				8F7AFBC1194B7FCE00932FB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F7AFBC9194B7FCE00932FB4 /* PBXTargetDependency */,
+			);
+			name = LoginJsonTests;
+			productName = LoginJsonTests;
+			productReference = 8F7AFBC3194B7FCE00932FB4 /* LoginJsonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F7AFB9A194B7FCE00932FB4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = LoginJson;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "DHAP Digital Inc";
+				TargetAttributes = {
+					8F7AFBC2194B7FCE00932FB4 = {
+						TestTargetID = 8F7AFBA1194B7FCE00932FB4;
+					};
+				};
+			};
+			buildConfigurationList = 8F7AFB9D194B7FCE00932FB4 /* Build configuration list for PBXProject "LoginJson" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8F7AFB99194B7FCE00932FB4;
+			productRefGroup = 8F7AFBA3194B7FCE00932FB4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8F7AFBA1194B7FCE00932FB4 /* LoginJson */,
+				8F7AFBC2194B7FCE00932FB4 /* LoginJsonTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8F7AFBA0194B7FCE00932FB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7AFBBE194B7FCE00932FB4 /* Images.xcassets in Resources */,
+				8F7AFBB0194B7FCE00932FB4 /* InfoPlist.strings in Resources */,
+				8F7AFBB9194B7FCE00932FB4 /* Main.storyboard in Resources */,
+				8F7AFBDB194B80DE00932FB4 /* SignUp.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F7AFBC1194B7FCE00932FB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7AFBCF194B7FCE00932FB4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8F7AFB9E194B7FCE00932FB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7AFBB6194B7FCE00932FB4 /* LoginJsonAppDelegate.m in Sources */,
+				8F7AFBB2194B7FCE00932FB4 /* main.m in Sources */,
+				8F7AFBBC194B7FCE00932FB4 /* LoginJsonViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F7AFBBF194B7FCE00932FB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7AFBD1194B7FCE00932FB4 /* LoginJsonTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F7AFBC9194B7FCE00932FB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F7AFBA1194B7FCE00932FB4 /* LoginJson */;
+			targetProxy = 8F7AFBC8194B7FCE00932FB4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8F7AFBAE194B7FCE00932FB4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F7AFBAF194B7FCE00932FB4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8F7AFBB7194B7FCE00932FB4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F7AFBB8194B7FCE00932FB4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8F7AFBCD194B7FCE00932FB4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F7AFBCE194B7FCE00932FB4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8F7AFBD2194B7FCE00932FB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8F7AFBD3194B7FCE00932FB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F7AFBD5194B7FCE00932FB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginJson/LoginJson-Prefix.pch";
+				INFOPLIST_FILE = "LoginJson/LoginJson-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8F7AFBD6194B7FCE00932FB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginJson/LoginJson-Prefix.pch";
+				INFOPLIST_FILE = "LoginJson/LoginJson-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8F7AFBD8194B7FCE00932FB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LoginJson.app/LoginJson";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginJson/LoginJson-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LoginJsonTests/LoginJsonTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		8F7AFBD9194B7FCE00932FB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LoginJson.app/LoginJson";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginJson/LoginJson-Prefix.pch";
+				INFOPLIST_FILE = "LoginJsonTests/LoginJsonTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8F7AFB9D194B7FCE00932FB4 /* Build configuration list for PBXProject "LoginJson" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F7AFBD2194B7FCE00932FB4 /* Debug */,
+				8F7AFBD3194B7FCE00932FB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F7AFBD4194B7FCE00932FB4 /* Build configuration list for PBXNativeTarget "LoginJson" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F7AFBD5194B7FCE00932FB4 /* Debug */,
+				8F7AFBD6194B7FCE00932FB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8F7AFBD7194B7FCE00932FB4 /* Build configuration list for PBXNativeTarget "LoginJsonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F7AFBD8194B7FCE00932FB4 /* Debug */,
+				8F7AFBD9194B7FCE00932FB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F7AFB9A194B7FCE00932FB4 /* Project object */;
+}

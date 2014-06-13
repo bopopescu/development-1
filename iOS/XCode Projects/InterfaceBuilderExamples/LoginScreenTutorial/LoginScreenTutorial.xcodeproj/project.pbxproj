@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EAF799C7186BE0910050F239 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF799C6186BE0910050F239 /* Foundation.framework */; };
+		EAF799C9186BE0910050F239 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF799C8186BE0910050F239 /* CoreGraphics.framework */; };
+		EAF799CB186BE0910050F239 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF799CA186BE0910050F239 /* UIKit.framework */; };
+		EAF799D1186BE0910050F239 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAF799CF186BE0910050F239 /* InfoPlist.strings */; };
+		EAF799D3186BE0910050F239 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF799D2186BE0910050F239 /* main.m */; };
+		EAF799D7186BE0910050F239 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF799D6186BE0910050F239 /* AppDelegate.m */; };
+		EAF799DA186BE0910050F239 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAF799D8186BE0910050F239 /* Main.storyboard */; };
+		EAF799DD186BE0910050F239 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF799DC186BE0910050F239 /* ViewController.m */; };
+		EAF799DF186BE0910050F239 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAF799DE186BE0910050F239 /* Images.xcassets */; };
+		EAF799E6186BE0910050F239 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF799E5186BE0910050F239 /* XCTest.framework */; };
+		EAF799E7186BE0910050F239 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF799C6186BE0910050F239 /* Foundation.framework */; };
+		EAF799E8186BE0910050F239 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF799CA186BE0910050F239 /* UIKit.framework */; };
+		EAF799F0186BE0910050F239 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAF799EE186BE0910050F239 /* InfoPlist.strings */; };
+		EAF799F2186BE0910050F239 /* LoginScreenTutorialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF799F1186BE0910050F239 /* LoginScreenTutorialTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAF799E9186BE0910050F239 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAF799BB186BE0910050F239 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAF799C2186BE0910050F239;
+			remoteInfo = LoginScreenTutorial;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EAF799C3186BE0910050F239 /* LoginScreenTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginScreenTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAF799C6186BE0910050F239 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EAF799C8186BE0910050F239 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EAF799CA186BE0910050F239 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EAF799CE186BE0910050F239 /* LoginScreenTutorial-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoginScreenTutorial-Info.plist"; sourceTree = "<group>"; };
+		EAF799D0186BE0910050F239 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EAF799D2186BE0910050F239 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EAF799D4186BE0910050F239 /* LoginScreenTutorial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoginScreenTutorial-Prefix.pch"; sourceTree = "<group>"; };
+		EAF799D5186BE0910050F239 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EAF799D6186BE0910050F239 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EAF799D9186BE0910050F239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EAF799DB186BE0910050F239 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EAF799DC186BE0910050F239 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EAF799DE186BE0910050F239 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EAF799E4186BE0910050F239 /* LoginScreenTutorialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginScreenTutorialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAF799E5186BE0910050F239 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		EAF799ED186BE0910050F239 /* LoginScreenTutorialTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoginScreenTutorialTests-Info.plist"; sourceTree = "<group>"; };
+		EAF799EF186BE0910050F239 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EAF799F1186BE0910050F239 /* LoginScreenTutorialTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginScreenTutorialTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EAF799C0186BE0910050F239 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF799C9186BE0910050F239 /* CoreGraphics.framework in Frameworks */,
+				EAF799CB186BE0910050F239 /* UIKit.framework in Frameworks */,
+				EAF799C7186BE0910050F239 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAF799E1186BE0910050F239 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF799E6186BE0910050F239 /* XCTest.framework in Frameworks */,
+				EAF799E8186BE0910050F239 /* UIKit.framework in Frameworks */,
+				EAF799E7186BE0910050F239 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EAF799BA186BE0910050F239 = {
+			isa = PBXGroup;
+			children = (
+				EAF799CC186BE0910050F239 /* LoginScreenTutorial */,
+				EAF799EB186BE0910050F239 /* LoginScreenTutorialTests */,
+				EAF799C5186BE0910050F239 /* Frameworks */,
+				EAF799C4186BE0910050F239 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EAF799C4186BE0910050F239 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAF799C3186BE0910050F239 /* LoginScreenTutorial.app */,
+				EAF799E4186BE0910050F239 /* LoginScreenTutorialTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAF799C5186BE0910050F239 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EAF799C6186BE0910050F239 /* Foundation.framework */,
+				EAF799C8186BE0910050F239 /* CoreGraphics.framework */,
+				EAF799CA186BE0910050F239 /* UIKit.framework */,
+				EAF799E5186BE0910050F239 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EAF799CC186BE0910050F239 /* LoginScreenTutorial */ = {
+			isa = PBXGroup;
+			children = (
+				EAF799D5186BE0910050F239 /* AppDelegate.h */,
+				EAF799D6186BE0910050F239 /* AppDelegate.m */,
+				EAF799D8186BE0910050F239 /* Main.storyboard */,
+				EAF799DB186BE0910050F239 /* ViewController.h */,
+				EAF799DC186BE0910050F239 /* ViewController.m */,
+				EAF799DE186BE0910050F239 /* Images.xcassets */,
+				EAF799CD186BE0910050F239 /* Supporting Files */,
+			);
+			path = LoginScreenTutorial;
+			sourceTree = "<group>";
+		};
+		EAF799CD186BE0910050F239 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAF799CE186BE0910050F239 /* LoginScreenTutorial-Info.plist */,
+				EAF799CF186BE0910050F239 /* InfoPlist.strings */,
+				EAF799D2186BE0910050F239 /* main.m */,
+				EAF799D4186BE0910050F239 /* LoginScreenTutorial-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAF799EB186BE0910050F239 /* LoginScreenTutorialTests */ = {
+			isa = PBXGroup;
+			children = (
+				EAF799F1186BE0910050F239 /* LoginScreenTutorialTests.m */,
+				EAF799EC186BE0910050F239 /* Supporting Files */,
+			);
+			path = LoginScreenTutorialTests;
+			sourceTree = "<group>";
+		};
+		EAF799EC186BE0910050F239 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAF799ED186BE0910050F239 /* LoginScreenTutorialTests-Info.plist */,
+				EAF799EE186BE0910050F239 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EAF799C2186BE0910050F239 /* LoginScreenTutorial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAF799F5186BE0910050F239 /* Build configuration list for PBXNativeTarget "LoginScreenTutorial" */;
+			buildPhases = (
+				EAF799BF186BE0910050F239 /* Sources */,
+				EAF799C0186BE0910050F239 /* Frameworks */,
+				EAF799C1186BE0910050F239 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LoginScreenTutorial;
+			productName = LoginScreenTutorial;
+			productReference = EAF799C3186BE0910050F239 /* LoginScreenTutorial.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EAF799E3186BE0910050F239 /* LoginScreenTutorialTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAF799F8186BE0910050F239 /* Build configuration list for PBXNativeTarget "LoginScreenTutorialTests" */;
+			buildPhases = (
+				EAF799E0186BE0910050F239 /* Sources */,
+				EAF799E1186BE0910050F239 /* Frameworks */,
+				EAF799E2186BE0910050F239 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAF799EA186BE0910050F239 /* PBXTargetDependency */,
+			);
+			name = LoginScreenTutorialTests;
+			productName = LoginScreenTutorialTests;
+			productReference = EAF799E4186BE0910050F239 /* LoginScreenTutorialTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EAF799BB186BE0910050F239 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Dipin Krishna";
+				TargetAttributes = {
+					EAF799E3186BE0910050F239 = {
+						TestTargetID = EAF799C2186BE0910050F239;
+					};
+				};
+			};
+			buildConfigurationList = EAF799BE186BE0910050F239 /* Build configuration list for PBXProject "LoginScreenTutorial" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EAF799BA186BE0910050F239;
+			productRefGroup = EAF799C4186BE0910050F239 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EAF799C2186BE0910050F239 /* LoginScreenTutorial */,
+				EAF799E3186BE0910050F239 /* LoginScreenTutorialTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EAF799C1186BE0910050F239 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF799DF186BE0910050F239 /* Images.xcassets in Resources */,
+				EAF799D1186BE0910050F239 /* InfoPlist.strings in Resources */,
+				EAF799DA186BE0910050F239 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAF799E2186BE0910050F239 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF799F0186BE0910050F239 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EAF799BF186BE0910050F239 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF799DD186BE0910050F239 /* ViewController.m in Sources */,
+				EAF799D7186BE0910050F239 /* AppDelegate.m in Sources */,
+				EAF799D3186BE0910050F239 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAF799E0186BE0910050F239 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF799F2186BE0910050F239 /* LoginScreenTutorialTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAF799EA186BE0910050F239 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAF799C2186BE0910050F239 /* LoginScreenTutorial */;
+			targetProxy = EAF799E9186BE0910050F239 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EAF799CF186BE0910050F239 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAF799D0186BE0910050F239 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EAF799D8186BE0910050F239 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAF799D9186BE0910050F239 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EAF799EE186BE0910050F239 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAF799EF186BE0910050F239 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EAF799F3186BE0910050F239 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EAF799F4186BE0910050F239 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EAF799F6186BE0910050F239 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginScreenTutorial/LoginScreenTutorial-Prefix.pch";
+				INFOPLIST_FILE = "LoginScreenTutorial/LoginScreenTutorial-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EAF799F7186BE0910050F239 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginScreenTutorial/LoginScreenTutorial-Prefix.pch";
+				INFOPLIST_FILE = "LoginScreenTutorial/LoginScreenTutorial-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EAF799F9186BE0910050F239 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LoginScreenTutorial.app/LoginScreenTutorial";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginScreenTutorial/LoginScreenTutorial-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LoginScreenTutorialTests/LoginScreenTutorialTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		EAF799FA186BE0910050F239 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LoginScreenTutorial.app/LoginScreenTutorial";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoginScreenTutorial/LoginScreenTutorial-Prefix.pch";
+				INFOPLIST_FILE = "LoginScreenTutorialTests/LoginScreenTutorialTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EAF799BE186BE0910050F239 /* Build configuration list for PBXProject "LoginScreenTutorial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAF799F3186BE0910050F239 /* Debug */,
+				EAF799F4186BE0910050F239 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAF799F5186BE0910050F239 /* Build configuration list for PBXNativeTarget "LoginScreenTutorial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAF799F6186BE0910050F239 /* Debug */,
+				EAF799F7186BE0910050F239 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EAF799F8186BE0910050F239 /* Build configuration list for PBXNativeTarget "LoginScreenTutorialTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAF799F9186BE0910050F239 /* Debug */,
+				EAF799FA186BE0910050F239 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EAF799BB186BE0910050F239 /* Project object */;
+}

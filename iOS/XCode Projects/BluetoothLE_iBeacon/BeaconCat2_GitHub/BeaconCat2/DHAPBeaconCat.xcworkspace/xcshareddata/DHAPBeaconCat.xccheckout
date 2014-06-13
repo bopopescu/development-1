@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E4ED914E-BA39-449E-84E0-585E9E20E5E9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DHAPBeaconCat</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1A7AD653-154B-4EB1-9AF8-A946AF2DB1EB</key>
+		<string>https://github.com/dhapdigitalinc/BeaconCat2.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DHAPBeaconCat.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1A7AD653-154B-4EB1-9AF8-A946AF2DB1EB</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/dhapdigitalinc/BeaconCat2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1A7AD653-154B-4EB1-9AF8-A946AF2DB1EB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1A7AD653-154B-4EB1-9AF8-A946AF2DB1EB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BeaconCat2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
