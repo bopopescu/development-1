@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.tms.slp20</groupId>
+	<artifactId>slpclient</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	<name>slpclient</name>
+	<repositories>
+		<repository>
+			<id>maven-repo2</id>
+			<url>http://repo2.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>codehaus-snapshots</id>
+			<url>http://snapshots.repository.codehaus.org</url>
+		</repository>
+		<repository>
+			<id>JBoss repository</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+		<repository>
+			<id>archiva.localrepo</id>
+			<name>Local Maven Repository</name>
+			<url>http://pswebp41:8888/archiva/repository/localrepo/</url>
+		</repository>
+	</repositories>
+	
+	<profiles>
+		<profile>
+			<id>ic-sonar</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<sonar.jdbc.url>
+				    jdbc:mysql://localhost:3306/sonar?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true
+				</sonar.jdbc.url>
+				<sonar.jdbc.driverClassName>com.mysql.jdbc.Driver</sonar.jdbc.driverClassName>
+				<sonar.jdbc.username>sonarmaven</sonar.jdbc.username>
+				<sonar.jdbc.password>sonar</sonar.jdbc.password>
+				<sonar.host.url>
+					http://localhost
+				</sonar.host.url>
+			</properties>
+		</profile>
+	</profiles>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.tms.framework.v2</groupId>
+			<artifactId>TMSFrameworkV2</artifactId>
+			<version>${TMSFrameworkV2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.tms.slp20</groupId>
+  			<artifactId>SLPServiceSchema</artifactId>
+  			<version>${SLPServiceSchema.version}</version>
+		</dependency>
+	</dependencies>
+	<properties>
+		<TMSFrameworkV2.version>1.0.0</TMSFrameworkV2.version>
+		<SLPServiceSchema.version>0.0.1</SLPServiceSchema.version>
+	</properties>
+</project>

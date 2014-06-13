@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tms.slp20</groupId>
+  <artifactId>SLPServiceSchema</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <name>Sales Lead Processor 2 (SLP2) Service Schema Module</name>
+
+	<repositories>
+		<repository>
+			<id>maven-repo2</id>
+			<url>http://repo2.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
+		
+	</repositories>
+</project>
