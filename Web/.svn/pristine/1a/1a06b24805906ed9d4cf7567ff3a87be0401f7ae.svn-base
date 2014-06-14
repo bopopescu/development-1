@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <directoryBrowse enabled="false" />
+        <handlers accessPolicy="Read, Execute, Script">
+            <remove name="ColdFusion (*.jws)" />
+            <remove name="ColdFusion (*.cfswf)" />
+            <remove name="ColdFusion (*.cfr)" />
+            <remove name="ColdFusion (*.cfml)" />
+            <remove name="ColdFusion (*.cfm)" />
+            <remove name="ColdFusion (*.cfc)" />
+        </handlers>
+        <defaultDocument>
+            <files>
+                <clear />
+                <add value="default.cfm" />
+                <add value="index.cfm" />
+                <add value="index.html" />
+                <add value="index.php" />
+                <add value="Default.htm" />
+                <add value="Default.asp" />
+                <add value="index.htm" />
+                <add value="iisstart.htm" />
+                <add value="default.aspx" />
+            </files>
+        </defaultDocument>
+        <httpErrors errorMode="Detailed" />
+    </system.webServer>
+</configuration>

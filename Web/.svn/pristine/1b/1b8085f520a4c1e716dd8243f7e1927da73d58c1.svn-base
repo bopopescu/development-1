@@ -1,0 +1,183 @@
+<html><head>
+
+<!-- CHANGE THE NEXT THREE LINES -->
+
+<title>Mail Test</title>
+
+
+<SCRIPT>
+function CheckData()       {
+var BoxCheck = document.info.elements[0].value
+        if (BoxCheck == "")  {
+        alert("Please enter your name.")
+return false
+        }
+var BoxCheck = document.info.elements[1].value
+        if (BoxCheck == "")  {
+        alert("Please enter your phone number.")
+return false
+        }
+var BoxCheck = document.info.elements[2].value
+        if (BoxCheck.indexOf("@") == -1)  {
+        alert("Please enter your email address.")
+return false
+        }
+}
+</SCRIPT>
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#99CCCC" VLINK="#99CCCC" ALINK="#FFFFFF" leftmargin="0" rightmargin="0" topmargin="0" bottommargin="0" marginheight="0" marginwidth="0">
+
+
+
+<!-- OUTER TABLE-->
+<TABLE cellpadding="0" cellspacing="0" border="0" width="100%" height="100%"><tr><td VALIGN="TOP">
+
+<!-- top TABLE-->
+<TABLE cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td ALIGN="left" VALIGN="top">
+
+<!---
+//<script language="JavaScript" src="header.js"></script>
+--->
+<br>
+
+
+<CENTER>
+<!-- MAIN TABLE-->
+<TABLE cellpadding="0" cellspacing=10 border="0" width="450">
+<tr><td ALIGN="LEFT" VALIGN="TOP">
+
+
+
+
+<H2>MAIL TEST</H2><BR>
+
+Fill out form below to test CFMAIL / Mail Server functionality.
+
+<br>
+<br>
+
+
+
+
+
+<form ACTION="mailtest.cfm" method=post name="info" onSubmit="return CheckData()" target="_top">
+
+
+<TABLE BORDER="0" cellpadding=2 cellspacing="0" width="95%">
+
+<TR><TD VALIGN=TOP>
+
+
+<INPUT TYPE="TEXT" NAME="name" SIZE="30" > <B>Name</B><BR>
+
+</TD></TR><TR><TD>
+
+<INPUT TYPE="TEXT" NAME="phone" SIZE="30" > <B>Phone</B><BR>
+
+</TD></TR><TR><TD>
+
+<INPUT TYPE="TEXT" NAME="mailfrom" SIZE="30" > <B>E-Mail</B><BR>
+
+
+
+</TD></TR><TR><TD>
+
+</td></tr></table>
+
+
+<BR>
+
+
+
+<TABLE BORDER="0"  cellpadding=4 cellspacing="0" width="90%"><TR><TD VALIGN=TOP>
+
+<B>Comments/Questions:</B><BR>
+
+</td></tr></table>
+
+
+<TEXTAREA NAME="questions" ROWS=5 COLS=35 wrap=soft CLASS="textarea"></TEXTAREA><p>
+
+<br>
+
+<input type=submit value="Submit">&nbsp;<input type=reset value="Clear" ><br>
+
+
+
+
+
+</FORM>
+
+
+
+
+
+
+
+
+
+
+
+
+<BR>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+</td></tr></table>
+<!-- MAIN TABLE-->
+</CENTER>
+
+
+
+
+
+
+
+<br>
+</td><td align="left" valign="top" width="150">
+
+
+
+</td></tr></table>
+<!-- top TABLE-->
+
+
+
+
+
+</TD></TR><TR><TD VALIGN="BOTTOM"><!-- OUTER TABLE-->
+
+
+
+</td><td ALIGN=LEFT VALIGN=TOP>
+
+
+</td><td ALIGN=RIGHT VALIGN=TOP>
+
+
+
+</TD><td WIDTH="3">
+
+
+</td></tr></table>
+
+</td></tr></table>
+
+
+
+
+</BODY>
+</HTML>

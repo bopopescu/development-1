@@ -1,0 +1,58 @@
+             	<div class="main-menu">
+                	<span class="menu-item">
+                  	<a href="/">
+                			HOME
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="/search">
+                			SEARCH
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="">
+                			MY AUCTIONS
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="/stallions.cfm">
+                			STALLIONS
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="">
+                			MARES
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="">
+                			GELDINGS
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="/terms.cfm">
+                			TERMS
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="/registration">
+                			REGISTRATION
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="/contactus.cfm">
+                			CONTACT US
+                    </a>
+                  </span>
+                	<span class="menu-item">
+                  	<a href="/help.cfm">
+                			HELP
+                    </a>
+                  </span>
+                </div>
+              	<div class="logo">
+					<img src="../images/logo.jpg" alt="Equibidz Logo" />
+					<div class="logo-text">
+						Equibidz.com
+					</div>
+                </div>				

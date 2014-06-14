@@ -1,0 +1,393 @@
+<!--
+  gen_seller_results.cfm
+  
+  setup information about auction to email to the seller...
+  uses eml_seller_results.cfm to send info..
+  
+  <!---
+
+  <cfmodule template="gen_seller_results.cfm"
+    itemnum="[item number]"
+    datasource="[system dsn]"
+    timenow="[timenow]"
+    fromEmail="[from email address]">
+
+  --->
+
+-->
+
+<!-- define values -->
+<cfset itemsSold = 0>
+<cfset qualBid = 0>
+<cfset numBidders = 0>
+
+<!-- inc app_globals -->
+<cfinclude template="../../includes/app_globals.cfm">
+<cfif #Attributes.auction_mode# is 0>
+<!-- get item information -->
+<cfquery username="#db_username#" password="#db_password#" name="getInfo" datasource="#Attributes.datasource#">
+    SELECT I.org_quantity, I.quantity, I.minimum_bid, I.reserve_bid, I.auction_type, I.private, I.title, I.date_start, I.date_end, I.user_id, I.buynow, U.email
+      FROM items I, users U
+     WHERE itemnum = #Attributes.itemnum#
+       AND I.user_id = U.user_id
+</cfquery>
+
+<!-- get currency type -->
+<cfquery username="#db_username#" password="#db_password#" name="getCurrency" datasource="#Attributes.datasource#">
+    SELECT pair AS type
+      FROM defaults
+     WHERE name = 'site_currency'
+</cfquery>
+
+<!-- get bidders -->
+<cfquery username="#db_username#" password="#db_password#" name="getBidders" datasource="#Attributes.datasource#">
+    SELECT B.user_id, B.bid, B.quantity, U.nickname, U.email, U.address1, U.address2, U.city, U.state, U.postal_code, U.country, U.same_address, U.shipping_address1, U.shipping_address2, U.shipping_city, U.shipping_state, U.shipping_postal_code, U.shipping_country
+      FROM bids B, users U, items I
+     WHERE B.itemnum = #Attributes.itemnum#
+	 	AND B.itemnum = I.itemnum
+		AND I.quantity > 0
+       AND B.user_id = U.user_id
+	   AND B.bid > 0
+	   AND B.buynow = 0
+     ORDER BY bid DESC, time_placed ASC
+</cfquery>
+
+<!-- chk IEscrow enabled/disabled -->
+<cfmodule template="../../functions/iescrow.cfm"
+  sOpt="ChkStatus">
+
+<cfif getBidders.RecordCount>
+  <cfif getInfo.auction_type IS "E">
+    <cfset qualBid = getBidders.bid>
+    <cfset itemsSold = 1>
+    <cfset numBidders = 1>
+    
+  <cfelseif getInfo.auction_type IS "V">
+    <cfif getBidders.RecordCount LT 2>
+      <cfset qualBid = getInfo.minimum_bid>
+    <cfelse>
+      <cfloop query="getBidders" endrow="2">
+        <cfset qualBid = getBidders.bid>
+      </cfloop>
+    </cfif>
+    <cfset itemsSold = 1>
+    <cfset numBidders = 1>
+    
+  <cfelseif getInfo.auction_type IS "D">
+    <cfset itemsSold = 0>
+    <cfset numBidders = 0>
+    <cfloop query="getBidders">
+      <cfset itemsSold = itemsSold + getBidders.quantity>
+      <cfset numBidders = IncrementValue(numBidders)>
+      <cfif itemsSold GTE getInfo.quantity>
+        <cfset qualBid = getBidders.bid>
+        <cfbreak>
+      </cfif>
+    </cfloop>
+    <cfif itemsSold LT getInfo.quantity>
+      <cfset qualBid = getInfo.minimum_bid>
+    </cfif>
+    
+  <cfelseif getInfo.auction_type IS "Y">
+    <cfset itemsSold = 0>
+    <cfset numBidders = 0>
+    <cfloop query="getBidders">
+      <cfset itemsSold = itemsSold + getBidders.quantity>
+      <cfset numBidders = IncrementValue(numBidders)>
+      <cfif itemsSold GTE getInfo.quantity OR getBidders.CurrentRow IS getBidders.RecordCount>
+        <cfset qualBid = getBidders.bid>
+        <cfbreak>
+      </cfif>
+    </cfloop>
+  </cfif>
+<cfelse>
+  <cfset itemsSold = 0>
+  <cfset numBidders = 0>
+  <cfset qualBid = getInfo.minimum_bid>
+</cfif>
+
+<!-- setup message -->
+<cfset message = "">
+<cfset nl = Chr(13) & Chr(10)>
+<cfif getInfo.auction_type IS "E" AND numBidders AND qualBid GTE getInfo.reserve_bid
+  OR getInfo.auction_type IS "V" AND numBidders AND qualBid GTE getInfo.reserve_bid
+  OR getInfo.auction_type IS "D" AND numBidders
+  OR getInfo.auction_type IS "Y" AND numBidders>
+  
+  <!-- def auction type title -->
+  <cfset typeTitle = "">
+  <cfif getInfo.auction_type IS "E">
+    <cfset typeTitle = "English">
+  <cfelseif getInfo.auction_type IS "V">
+    <cfset typeTitle = "Vickery">
+  <cfelseif getInfo.auction_type IS "D">
+    <cfset typeTitle = "Dutch">
+  <cfelseif getInfo.auction_type IS "Y">
+    <cfset typeTitle = "Yankee">
+  </cfif>
+  
+  <cfset message = message & "Item Number: " & Attributes.itemnum & nl>
+  <cfset message = message & "Item Title: " & Trim(getInfo.title) & nl>
+  <cfset message = message & "Date Started: " & DateFormat(getInfo.date_start, "mm/dd/yyyy") & " " & TimeFormat(getInfo.date_start, "HH:mm:ss") & nl>
+  <cfset message = message & "Date Ended: " & DateFormat(getInfo.date_end, "mm/dd/yyyy") & " " & TimeFormat(getInfo.date_start, "HH:mm:ss") & nl>
+  <cfset message = message & "Auction Type: " & typeTitle & nl & nl>
+  <cfset message = message & "Qualified bidders in order of rank, highest to lowest" & nl & nl>
+  
+  <cfloop query="getBidders" endrow="#numBidders#">
+    <cfif getInfo.auction_type IS "E" OR getInfo.auction_type IS "Y">
+	   <cfset price = getBidders.bid>
+    <cfelseif getInfo.auction_type IS "V" OR getInfo.auction_type IS "D">
+      <cfset price = qualBid>
+    </cfif>
+
+    
+    <cfset message = message & "Nickname: " & Trim(getBidders.nickname) & nl>
+    <cfset message = message & "Email: " & Trim(getBidders.email) & nl>
+    <cfset message = message & "Rank: " & getBidders.CurrentRow & nl>
+    <cfset message = message & "Quantity desired: " & getBidders.quantity & nl>
+    <cfset message = message & "Price: " & numberFormat(price,numbermask) & " " & Trim(getCurrency.type) & nl>
+	<cfif getBidders.same_address eq 1>
+	<cfset message = message & "Shipping address is the same as billing address." & nl>
+	<cfelse>
+	<cfset message = message & "Shipping address: " & getBidders.shipping_address1 & nl>
+	<cfif getBidders.shipping_address2 neq ""><cfset message = message & "                 " & getBidders.shipping_address2 & nl></cfif>
+	<cfset message = message & "                 " & getBidders.shipping_city & ", " & getBidders.shipping_state & " " & getBidders.shipping_postal_code & nl>
+	<cfset message = message & "                 " & getBidders.shipping_country & nl>
+	</cfif>
+	<cfset message = message & "Billing address: " & getBidders.address1 & nl>
+	<cfif getBidders.address2 neq ""><cfset message = message & "                 " & getBidders.address2 & nl></cfif>
+	<cfset message = message & "                 " & getBidders.city & ", " & getBidders.state & " " & getBidders.postal_code & nl>
+	<cfset message = message & "                 " & getBidders.country & nl & nl>
+  </cfloop>
+  
+  <cfset message = message & "Please contact these winners as soon as possible." & nl & nl>
+  
+  <!-- inc if IEscrow enabled -->
+  <!--- <cfif hIEscrow.bEnabled>
+    
+    <cfset message = message & "To initiate eNetSettle transaction Click here: http://#CGI.SERVER_NAME##VAROOT#/iescrow/index.cfm?itemnum=#Attributes.itemnum#&user_id=#getInfo.user_id#" & nl & nl>
+  </cfif> --->
+  
+<cfelse>
+  <cfset message = message & "No qualified bids were placed on this item." & nl & nl>
+</cfif>
+	
+<!--- get buyer list --->
+<cfif getInfo.buynow eq 1 and getInfo.quantity lt getInfo.org_quantity>
+	<!-- get bidders -->
+	<cfquery username="#db_username#" password="#db_password#" name="getBuyers" datasource="#Attributes.datasource#">
+    SELECT B.user_id, B.bid, B.quantity, U.nickname, U.email
+      FROM bids B, users U, items I
+     WHERE B.itemnum = #Attributes.itemnum#
+	 	AND B.itemnum = I.itemnum
+       AND B.user_id = U.user_id
+	   AND B.bid > 0
+	   AND B.buynow = 1
+     ORDER BY bid DESC, time_placed ASC
+	</cfquery>
+	<cfif numBidders gt 0>
+	<cfset message = message & "---------------------------------------------------------" & nl & nl>
+	</cfif>
+	<cfset message = message & "BUYER LIST:" & nl & nl>
+	<cfloop query="getBuyers">
+	   <cfset buyprice = getBuyers.bid>
+
+    <cfset message = message & "Nickname: " & Trim(getBuyers.nickname) & nl>
+    <cfset message = message & "Email: " & Trim(getBuyers.email) & nl>
+    <cfset message = message & "Quantity desired: " & getBuyers.quantity & nl>
+    <cfset message = message & "Price: " & numberFormat(buyprice,numbermask) & " " & Trim(getCurrency.type) & nl>
+	<cfset message = message & "Total: " & numberFormat(evaluate(buyprice * getBuyers.quantity),numbermask) & " " & Trim(getCurrency.type) & nl & nl>
+    </cfloop>
+</cfif>
+	
+<cfset message = message & "Click here for the complete results of your auction: http://#CGI.SERVER_NAME##VAROOT#/listings/details/index.cfm?itemnum=#Attributes.itemnum#" & nl & nl>
+
+
+<!-- send email -->
+<cfmodule template="eml_seller_results.cfm"
+  to="#Trim(getInfo.email)#"
+  from="#Attributes.fromEmail#"
+  subject="Results: (Item ###Attributes.itemnum#) #Trim(getInfo.title)#"
+  message="#Variables.message#">
+
+<!--- log seller notified --->
+<cfmodule template="../../functions/addTransaction.cfm"
+  datasource="#Attributes.datasource#"
+  description="Auction Results emailed to Seller"
+  itemnum="#Attributes.itemnum#"
+  details="#Variables.message#"
+  user_id="#getInfo.user_id#">
+
+
+
+<!-------------------------------------------------------------->
+
+
+
+<cfelse>
+<!-- Reverse Auction -->
+
+<!-- get item information -->
+<cfquery username="#db_username#" password="#db_password#" name="getInfo" datasource="#Attributes.datasource#">
+    SELECT I.quantity, I.maximum_bid, I.reserve_bid, I.auction_type, I.private, I.title, I.date_start, I.date_end, I.user_id, U.email
+      FROM items I, users U
+     WHERE itemnum = #Attributes.itemnum#
+       AND I.user_id = U.user_id
+</cfquery>
+
+<!-- get currency type -->
+<cfquery username="#db_username#" password="#db_password#" name="getCurrency" datasource="#Attributes.datasource#">
+    SELECT pair AS type
+      FROM defaults
+     WHERE name = 'site_currency'
+</cfquery>
+
+<!-- get bidders -->
+<cfquery username="#db_username#" password="#db_password#" name="getBidders" datasource="#Attributes.datasource#">
+    SELECT B.user_id, B.bid, B.quantity, U.nickname, U.email, U.address1, U.address2, U.city, U.state, U.postal_code, U.country, U.same_address, U.shipping_address1, U.shipping_address2, U.shipping_city, U.shipping_state, U.shipping_postal_code, U.shipping_country
+      FROM bids B, users U
+     WHERE B.itemnum = #Attributes.itemnum#
+       AND B.user_id = U.user_id
+     ORDER BY bid ASC, time_placed ASC
+</cfquery>
+
+<!-- chk IEscrow enabled/disabled -->
+<cfmodule template="../../functions/iescrow.cfm"
+  sOpt="ChkStatus">
+
+<cfif getBidders.RecordCount>
+  <cfif getInfo.auction_type IS "E">
+        <cfset qualBid = getBidders.bid>
+    <cfset itemsSold = 1>
+    <cfset numBidders = 1>
+    
+  <cfelseif getInfo.auction_type IS "V">
+    <cfif getBidders.RecordCount LT 2>
+      <cfset qualBid = getInfo.maximum_bid>
+    <cfelse>
+      <cfloop query="getBidders" endrow="2">
+        <cfset qualBid = getBidders.bid>
+      </cfloop>
+    </cfif>
+    <cfset itemsSold = 1>
+    <cfset numBidders = 1>
+    
+  <cfelseif getInfo.auction_type IS "D">
+    <cfset itemsSold = 0>
+    <cfset numBidders = 0>
+    <cfloop query="getBidders">
+      <cfset itemsSold = itemsSold + getBidders.quantity>
+      <cfset numBidders = IncrementValue(numBidders)>
+      <cfif itemsSold GTE getInfo.quantity>
+        <cfset qualBid = getBidders.bid>
+        <cfbreak>
+      </cfif>
+    </cfloop>
+    <cfif itemsSold LT getInfo.quantity>
+      <cfset qualBid = getInfo.maximum_bid>
+    </cfif>
+    
+  <cfelseif getInfo.auction_type IS "Y">
+    <cfset itemsSold = 0>
+    <cfset numBidders = 0>
+    <cfloop query="getBidders">
+      <cfset itemsSold = itemsSold + getBidders.quantity>
+      <cfset numBidders = IncrementValue(numBidders)>
+      <cfif itemsSold GTE getInfo.quantity OR getBidders.CurrentRow IS getBidders.RecordCount>
+        <cfset qualBid = getBidders.bid>
+        <cfbreak>
+      </cfif>
+    </cfloop>
+  </cfif>
+<cfelse>
+  <cfset itemsSold = 0>
+  <cfset numBidders = 0>
+  <cfset qualBid = getInfo.maximum_bid>
+</cfif>
+
+<!-- setup message -->
+<cfset message = "">
+<cfset nl = Chr(13) & Chr(10)>
+
+<cfif getInfo.auction_type IS "E" AND numBidders AND qualBid LTE getInfo.reserve_bid
+  OR getInfo.auction_type IS "V" AND numBidders AND qualBid LTE getInfo.reserve_bid
+  OR getInfo.auction_type IS "D" AND numBidders
+  OR getInfo.auction_type IS "Y" AND numBidders>
+  
+  <!-- def auction type title -->
+  <cfset typeTitle = "">
+  <cfif getInfo.auction_type IS "E">
+    <cfset typeTitle = "English">
+  <cfelseif getInfo.auction_type IS "V">
+    <cfset typeTitle = "Vickery">
+  <cfelseif getInfo.auction_type IS "D">
+    <cfset typeTitle = "Dutch">
+  <cfelseif getInfo.auction_type IS "Y">
+    <cfset typeTitle = "Yankee">
+  </cfif>
+  
+  <cfset message = message & "Item Number: " & Attributes.itemnum & nl>
+  <cfset message = message & "Item Title: " & Trim(getInfo.title) & nl>
+  <cfset message = message & "Date Started: " & DateFormat(getInfo.date_start, "mm/dd/yyyy") & " " & TimeFormat(getInfo.date_start, "HH:mm:ss") & nl>
+  <cfset message = message & "Date Ended: " & DateFormat(getInfo.date_end, "mm/dd/yyyy") & " " & TimeFormat(getInfo.date_start, "HH:mm:ss") & nl>
+  <cfset message = message & "Auction Type: " & typeTitle & nl & nl>
+  <cfset message = message & "Qualified bidders in order of rank, highest to lowest" & nl & nl>
+  
+  <cfloop query="getBidders" endrow="#numBidders#">
+    <cfif getInfo.auction_type IS "E" OR getInfo.auction_type IS "Y">
+	   <cfset price = getBidders.bid>
+    <cfelseif getInfo.auction_type IS "V" OR getInfo.auction_type IS "D">
+      <cfset price = qualBid>
+    </cfif>
+    
+    <cfset message = message & "Nickname: " & Trim(getBidders.nickname) & nl>
+    <cfset message = message & "Email: " & Trim(getBidders.email) & nl>
+    <cfset message = message & "Rank: " & getBidders.CurrentRow & nl>
+    <cfset message = message & "Quantity desired: " & getBidders.quantity & nl>
+    <cfset message = message & "Price: " & numberFormat(price,numbermask) & " " & Trim(getCurrency.type) & nl>
+	<cfif getBidders.same_address eq 1>
+	<cfset message = message & "Shipping address is the same as billing address." & nl>
+	<cfelse>
+	<cfset message = message & "Shipping address: " & getBidders.shipping_address1 & nl>
+	<cfif getBidders.shipping_address2 neq ""><cfset message = message & "                 " & getBidders.shipping_address2 & nl></cfif>
+	<cfset message = message & "                 " & getBidders.shipping_city & ", " & getBidders.shipping_state & " " & getBidders.shipping_postal_code & nl>
+	<cfset message = message & "                 " & getBidders.shipping_country & nl>
+	</cfif>
+	<cfset message = message & "Billing address: " & getBidders.address1 & nl>
+	<cfif getBidders.address2 neq ""><cfset message = message & "                 " & getBidders.address2 & nl></cfif>
+	<cfset message = message & "                 " & getBidders.city & ", " & getBidders.state & " " & getBidders.postal_code & nl>
+	<cfset message = message & "                 " & getBidders.country & nl & nl>
+  </cfloop>
+  
+  <cfset message = message & "Please contact these winners as soon as possible." & nl & nl>
+  
+  <!-- inc if IEscrow enabled -->
+  <!--- <cfif hIEscrow.bEnabled>
+    
+    <cfset message = message & "To initiate eNetSettle transaction Click here: http://#CGI.SERVER_NAME##VAROOT#/iescrow/index.cfm?itemnum=#Attributes.itemnum#&user_id=#getInfo.user_id#" & nl & nl>
+  </cfif> --->
+  
+<cfelse>
+
+  <cfset message = message & "No qualified bids were placed on this item." & nl & nl>
+</cfif>
+
+<cfset message = message & "Click here for the complete results of your auction: http://#CGI.SERVER_NAME##VAROOT#/listings/details/index.cfm?itemnum=#Attributes.itemnum#" & nl & nl>
+
+
+<!-- send email -->
+<cfmodule template="eml_seller_results.cfm"
+  to="#Trim(getInfo.email)#"
+  from="#Attributes.fromEmail#"
+  subject="Results: (Item ###Attributes.itemnum#) #Trim(getInfo.title)#"
+  message="#Variables.message#">
+
+<!--- log seller notified --->
+<cfmodule template="../../functions/addTransaction.cfm"
+  datasource="#Attributes.datasource#"
+  description="Auction Results emailed to Seller"
+  itemnum="#Attributes.itemnum#"
+  details="#Variables.message#"
+  user_id="#getInfo.user_id#">
+</cfif>
+

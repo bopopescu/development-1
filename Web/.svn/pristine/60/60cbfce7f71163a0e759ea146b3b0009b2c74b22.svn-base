@@ -1,0 +1,5 @@
+1) If needed rename the table name from Zips to zips in PHPMyAdmin. In the SQL window use: RENAME TABLE Zips TO zips
+2) Download the file zips.csv (in the zipcodes folder) from the master VA10 copy.
+3) In PHPmyadmin click on the "zips" table and select the import tab.
+4) Browse to the file "zips.csv" and check "Ignore duplicate rows".
+5) Press "GO" and the file will be imported.

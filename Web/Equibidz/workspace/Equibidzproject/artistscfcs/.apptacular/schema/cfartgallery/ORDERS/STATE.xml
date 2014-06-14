@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<column>
+	<column>STATE</column>
+	<dataType>VARCHAR</dataType>
+	<displayLength>true</displayLength>
+	<displayName>State</displayName>
+	<foreignKey>N/A</foreignKey>
+	<foreignKeyTable>N/A</foreignKeyTable>
+	<includeInEntity>true</includeInEntity>
+	<isComputed>false</isComputed>
+	<isForeignKey>NO</isForeignKey>
+	<isIdentity>false</isIdentity>
+	<isMemeberOfCompositeForeignKey>false</isMemeberOfCompositeForeignKey>
+	<isPrimaryKey>NO</isPrimaryKey>
+	<length>50</length>
+	<name>STATE</name>
+	<ormType>string</ormType>
+	<TestType>string</TestType>
+	<Type>string</Type>
+	<uiType>string</uiType>
+</column>

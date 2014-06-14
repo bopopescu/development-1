@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<column>
+	<column>ORDERDATE</column>
+	<dataType>TIMESTAMP</dataType>
+	<displayLength>false</displayLength>
+	<displayName>Orderdate</displayName>
+	<foreignKey>N/A</foreignKey>
+	<foreignKeyTable>N/A</foreignKeyTable>
+	<includeInEntity>true</includeInEntity>
+	<isComputed>false</isComputed>
+	<isForeignKey>NO</isForeignKey>
+	<isIdentity>false</isIdentity>
+	<isMemeberOfCompositeForeignKey>false</isMemeberOfCompositeForeignKey>
+	<isPrimaryKey>NO</isPrimaryKey>
+	<length>26</length>
+	<name>ORDERDATE</name>
+	<ormType>timestamp</ormType>
+	<TestType>date</TestType>
+	<Type>date</Type>
+	<uiType>datetime</uiType>
+</column>

@@ -1,0 +1,28 @@
+VISUAL AUCTION SERVER 8.x - Monthly Billing 
+----------------------------------------------------------
+
+After you have selected monthly billing in the defaults section
+of your auction site's administrative section ( http://www.yourdomainame/admin/defaults.cfm )   
+You (or your host company) will then need to perform the following:
+
+NOTE:  The ColdFusion Administrator is usually located at
+    http://(www.yourdomain.com)/cfide/administrator/  
+    If you do not have access to the ColdFusion 
+    Administrator, you will have to notify your ISP of
+    of these required additions.  
+
+1.  A. Open the CF Administrator and log in.
+    B. Click on the "scheduled tasks" link located on the left panel.
+    C. Click on schedule new tasks.
+    D. Enter any task name of your choosing in the "task name" text field.
+    E. Check on the "recurring" radio button, select "monthly" from the drop down box, 
+       enter a starting time in the text field next to the drop down box.
+    F. Enter:  http://www.yourdomainame/bill_monthly/bill_member.cfm in the url text field.
+    G. Enter 600 in the "request timeout" text field.
+    H. If your website is running behind a firewall, or using a proxy server,
+       enter either the proxy server IP address, or proxy server name in the field "proxy server". 
+       Please contact your web hosting company for more information as regards to
+       their proxy server information.
+       
+2.  Click on "Submit Changes".
+    

@@ -1,0 +1,446 @@
+<cfsilent>
+
+<!--- define cache control page --->
+<cfset current_page = "indexhome">
+<cfinclude template = "./includes/app_globals.cfm">
+
+<!--- Include session tracking template (also sets link colors) --->
+<cfinclude template="./includes/session_include.cfm">
+
+<!--- define TIMENOW --->
+<cfmodule template="./functions/timenow.cfm">
+
+<!--- get days category considered new --->
+<cfquery username="#db_username#" password="#db_password#" name="CategoryNew" datasource="#DATASOURCE#">
+    SELECT pair AS days
+      FROM defaults
+     WHERE name = 'category_new'
+</cfquery>
+<cfquery username="#db_username#" password="#db_password#" name="get_featcolspage" datasource="#DATASOURCE#">
+   SELECT pair
+     FROM defaults
+    WHERE name='featcolspage'
+</cfquery>
+
+
+<cfset #featcolspage# = #get_featcolspage.pair#>
+<cfquery username="#db_username#" password="#db_password#" name="get_featitemspage" datasource="#DATASOURCE#">
+   SELECT pair
+     FROM defaults
+    WHERE name='featitemspage'
+</cfquery>
+<cfset #featitemspage# = #get_featitemspage.pair#>
+<cfquery username="#db_username#" password="#db_password#" name="get_limitcat_frontpage" datasource="#DATASOURCE#">
+   SELECT pair
+     FROM defaults
+    WHERE name='limitcat_frpage'
+</cfquery>
+<cfset #limitcat_frpage# = #get_limitcat_frontpage.pair#>
+<cfquery  name="get_news" datasource="#DATASOURCE#" maxrows=1>
+
+select  * from news
+where news is not NULL
+order by date_posted DESC
+</cfquery>
+
+
+
+<cfquery username="#db_username#" password="#db_password#" name="get_topsellers" datasource="#DATASOURCE#">
+   SELECT pair
+     FROM defaults
+    WHERE name='top_seller'
+</cfquery>
+<cfset #top_seller# = #get_topsellers.pair#>
+
+
+<cfquery username="#db_username#" password="#db_password#" name="get_sellers" datasource="#DATASOURCE#" maxrows=5>
+
+SELECT user_id, count(user_id) as counted from items
+where status = 1
+<!--- GROUP BY user_id HAVING count(user_id) > #top_seller# --->
+ORDER BY count(user_id) DESC
+
+
+
+ <!--- SELECT DISTINCTROW First(users.nickname) AS nickname, 
+First(items.user_id) AS [user_id Field], Count(items.user_id) AS moonpie
+FROM items, users 
+ 
+ SELECT DISTINCTROW users.nickname AS nickname, 
+items.user_id AS user_id_Field, Count(items.user_id) AS moonpie
+FROM items
+
+   INNER JOIN items ON items.user_id = users.user_id 
+where items.status=1
+
+GROUP BY items.user_id
+HAVING (((Count(items.user_id)) > #top_seller#))
+ 
+
+
+ ORDER BY Count(items.user_id) DESC --->
+</cfquery>
+
+<cfquery username="#db_username#" password="#db_password#" name="new_users" datasource="#DATASOURCE#" maxrows=5>
+    SELECT nickname,date_registered
+      FROM users
+     WHERE is_active= 1 
+order by date_registered DESC
+</cfquery>
+
+<!--- get /root categories for front page --->
+<cfquery username="#db_username#" password="#db_password#" name="get_Categories" datasource="#DATASOURCE#" maxrows="#limitcat_frpage#">
+    SELECT category, name, date_created, child_count, count_total
+      FROM categories
+     WHERE parent = 0
+       AND active = 1
+       AND require_login = 0
+     ORDER BY name ASC
+</cfquery>
+
+<!--- get category that require login --->
+<cfquery username="#db_username#" password="#db_password#" name="LoginCategories" datasource="#DATASOURCE#">
+    SELECT category
+      FROM categories
+     WHERE active = 1
+       AND require_login = 1
+</cfquery>
+
+<!--- get newest featured --->
+<cfquery username="#db_username#" password="#db_password#" name="get_Featured" datasource="#DATASOURCE#" maxrows="#featitemspage#">
+    SELECT itemnum, title, featured, bold_title, auction_mode
+      FROM items
+     WHERE featured = 1
+       AND status = 1
+       AND date_start < #TIMENOW#
+       AND date_end > #TIMENOW#
+  <!--- <cfloop query="LoginCategories">
+       AND category1 <> #LoginCategories.category#
+       AND category2 <> #LoginCategories.category#
+  </cfloop> --->
+     ORDER BY itemnum DESC
+</cfquery>
+
+<!--- get number of bids required for hot auction --->
+<cfquery username="#db_username#" password="#db_password#" name="HotAuction" datasource="#DATASOURCE#">
+    SELECT pair AS bids
+      FROM defaults
+     WHERE name = 'bids4hot'
+</cfquery>
+
+
+
+
+<cfquery username="#db_username#" password="#db_password#" name="get_hotauctions" datasource="#DATASOURCE#" maxrows="#featitemspage#">
+
+SELECT B.itemnum, count(B.itemnum) as total_items from bids B, items I
+WHERE B.itemnum = I.itemnum
+AND I.status = 1
+GROUP BY B.itemnum HAVING count(B.itemnum) >= #hotauction.bids#
+ORDER BY count(B.itemnum) DESC
+   
+    <!--- SELECT count(B.id) as total_items, I.itemnum, I.bold_title, I.title
+      FROM items I, bids B
+
+	  WHERE I.itemnum = B.itemnum
+
+	  AND I.status = 1
+
+
+
+   GROUP BY I.itemnum, I.title, I.bold_title
+
+HAVING  (((count(b.id))) > #hotauction.bids#) --->
+
+
+
+</cfquery>
+
+
+
+<!--- get total number items for sale,categories,bids and total auctions ever --->
+<cfquery username="#db_username#" password="#db_password#" name="get_stats" datasource="#DATASOURCE#">
+    SELECT auctions,bids,categories,total_auctions,tracking
+      FROM stats
+     WHERE id = 1
+</cfquery>
+
+
+<!--- get thumbs mode settings (Thumbnail display outside studio) --->
+<cfquery username="#db_username#" password="#db_password#" name="get_thumbsMode" datasource="#DATASOURCE#">
+    SELECT pair AS show_thumbs
+      FROM defaults
+     WHERE name = 'enable_thumbs'
+</cfquery>
+
+<!--- get bool iescrow enabled 
+<cfmodule template="./functions/iescrow.cfm"
+  sOpt="ChkStatus">
+--->
+<!--- if iescrow enabled, get current vals 
+<cfif hIEscrow.bEnabled>
+  
+  <cfmodule template="./functions/IEscrowIcons.cfm"
+    sOpt="DISP/FRONTPAGE">
+</cfif>
+--->
+
+
+<!----------------------------- End all required queries --------------------------->
+</cfsilent>
+<cfoutput>
+<html>
+  <head>
+    <title>Visual Auction</title>
+
+   
+    <meta name="keywords" content="#get_layout.keywords#">
+    <meta name="description" content="#get_layout.descriptions#">
+    
+    <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
+  </head>
+
+  <script language = "javascript">
+  function popup(){
+
+var popup = window.open("","picWin","height=400,width=370,top=110,left=407")
+popup.document.write('<B><font face=Arial size=2>Reverse Auctions!</FONT></B><BR>')
+
+    popup.document.write("<font face='Arial' size='2'><br>You've seen it used on top auction sites, now you can use it too - a Reverse Auction! Build a state-of-the-art marketplace on the web where everyone gets what they want. Buyers get the best prices and sellers make quick profits!<br><br>With a ")
+    popup.document.write("<img src='images/r_reverse.gif' border='0'>")
+    popup.document.write("\"reverse\" auction, prospective buyers can list any item that they wish to buy and then sellers bid to provide the best price. This concept is much more consumer oriented than a regular auction. The consumer decides the exact specifications of each item, instead of the specifications being dictated by the seller.<br><br>Buyers can find sellers who will offer the best prices on virtually any item. Sellers have access to an unlimited number of buyers who can compete for their business in an auction environment.<br><br>Reverse auctions can help corporate purchasing departments find the best deals for industrial parts and components, for example. No matter what the item is - tickets, raw material, services, etc. the reverse auction opens a gate to the world market for those who need merchandise and those willing to provide it.</font>")
+    popup.document.close()
+  }
+  
+  </script>  
+
+  <!--- Page body start here --->
+
+
+
+<!--- add your site to favorites folder . Replace 'Beyond solutions auction software with your own description --->
+
+<!---
+
+<body onload="window.external.AddFavorite('http://#cgi.server_name##VAROOT#/','Beyond Solutions Auction Software')";>
+
+
+--->
+<!--- Border Table --->
+<center>
+
+<!--- <cfinclude template="./includes/bodytag.html"> --->
+
+<!--- Top menu bar start here --->
+
+
+
+<cfinclude template="./includes/menu_bar.cfm">
+
+
+
+
+<!---<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="5" BORDER="0"> --->
+
+<cfif #get_layout.template# eq 1>
+
+
+<TABLE WIDTH="#get_layout.page_width#" CELLSPACING="0" CELLPADDING="2" BORDER="0">
+   <tr>
+   	<td>
+   
+<!--- START Content Table consisting of 3 Columns --->
+<TABLE border="0" align=left>
+	<tr valign="top">
+		
+<!--- ****************************** START COLUMN 1 ********************************* --->
+	<td width="300" align=center>
+
+<!--- Section 1 --->
+<cfif #get_layout.col1sec1# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col1sec1# eq 10><img src="admin/#get_layout.pageimage1#"></cfif>
+		
+<!--- Section 2 --->
+<cfif #get_layout.col1sec2# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col1sec2# eq 10><img src="admin/#get_layout.pageimage2#"></cfif>
+
+<!--- Section 3 --->
+<cfif #get_layout.col1sec3# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col1sec3# eq 10><img src="admin/#get_layout.pageimage3#"></cfif>
+
+	</td>
+<!--- ****************************** END COLUMN 1 ********************************* --->
+
+
+<!--- ******************************** START COLUMN 2 ********************************** --->
+	<td width="350" align=center>
+		
+<!--- Section 1 --->
+<cfif #get_layout.col2sec1# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col2sec1# eq 10><img src="admin/#get_layout.pageimage4#"></cfif>
+		
+<!--- Section 2 --->
+<cfif #get_layout.col2sec2# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col2sec2# eq 10><img src="admin/#get_layout.pageimage5#"></cfif>
+
+<!--- Section 3 --->
+<cfif #get_layout.col2sec3# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col2sec3# eq 10><img src="admin/#get_layout.pageimage6#"></cfif>
+
+	</td>
+<!--- ******************************** END COLUMN 2 ********************************** --->
+
+
+<!--- *************************************** START COLUMN 3 ************************ --->
+<td width="300" align=center>
+
+<!--- Section 1 --->
+<cfif #get_layout.col3sec1# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col3sec1# eq 10><img src="admin/#get_layout.pageimage7#"></cfif>
+		
+<!--- Section 2 --->
+<cfif #get_layout.col3sec2# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col3sec2# eq 10><img src="admin/#get_layout.pageimage8#"></cfif>
+
+<!--- Section 3 --->
+<cfif #get_layout.col3sec3# eq 1><cfinclude template="inc_map.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 2><cfinclude template="inc_categories.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 3><cfinclude template="inc_tellafriend.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 4><cfinclude template="inc_gallery.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 5><cfinclude template="inc_featured.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 6><cfinclude template="inc_hot.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 7><cfinclude template="inc_login.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 8><cfinclude template="inc_promotions.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 9><cfinclude template="inc_newusers.cfm"></cfif>
+<cfif #get_layout.col3sec3# eq 10><img src="admin/#get_layout.pageimage9#"></cfif>
+
+<!--- <cfinclude template="inc_links.cfm"> --->
+	</td>
+<!--- *************************************** END COLUMN 3 ************************ --->
+	</tr>
+</table>
+
+<!--- END Content Table consisting of 3 Columns --->
+
+		</TD>
+	</TR>
+</TABLE>
+
+
+</cfif>
+
+<!--- end border table --->
+
+<!--- ************************************ End Columns/Sections  ************************ --->
+
+
+	<cfquery username="#db_username#" password="#db_password#" name="get_counter" datasource="#DATASOURCE#">
+	select hit
+from stats
+		WHERE id=1
+	</cfquery>
+
+
+<cfparam name="cookie.site_counter" default="0">
+<cfif ListContains(cookie.site_counter, cr_set) is "FALSE">
+	<cfset hits = #IncrementValue(get_counter.hit)#>
+	<cfquery username="#db_username#" password="#db_password#" name="get_hits" datasource="#DATASOURCE#">
+		UPDATE stats
+		SET hit = #hits#
+		WHERE id=1
+	</cfquery>
+	<cfset item_cnt_list = listappend(cookie.site_counter, cr_set)>
+	<cfcookie name="site_counter" value="#item_cnt_list#" expires="1">
+<cfelse>
+	<cfset hits = get_counter.hit>
+</cfif>
+
+<cfif #get_layout.hits# eq 1>
+
+
+
+			<font color=green size=1>This page has been viewed</font> <font size="3" color="Red"><b>#hits#</b></font><font color=green size=1>&nbsp;times.</font></td>
+
+</cfif>
+
+
+<!--- Start footer in seperate table--->
+<cfinclude template="inc_footer.cfm">
+<!--- end footer --->
+</cfoutput>
+
+<script language="javascript">
+function stoperror() {
+return true
+}
+window.onerror=stoperror();
+</script>
+
+</body>
+</html>
+
+

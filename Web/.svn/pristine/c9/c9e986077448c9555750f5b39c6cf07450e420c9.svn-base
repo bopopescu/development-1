@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<column>
+	<column>GALLERYADMINID</column>
+	<dataType>INTEGER</dataType>
+	<displayLength>true</displayLength>
+	<displayName>Galleryadminid</displayName>
+	<foreignKey>N/A</foreignKey>
+	<foreignKeyTable>N/A</foreignKeyTable>
+	<includeInEntity>true</includeInEntity>
+	<isComputed>false</isComputed>
+	<isForeignKey>NO</isForeignKey>
+	<isIdentity>false</isIdentity>
+	<isMemeberOfCompositeForeignKey>false</isMemeberOfCompositeForeignKey>
+	<isPrimaryKey>YES</isPrimaryKey>
+	<length>10</length>
+	<name>GALLERYADMINID</name>
+	<ormType>integer</ormType>
+	<TestType>numeric</TestType>
+	<Type>numeric</Type>
+	<uiType>string</uiType>
+</column>

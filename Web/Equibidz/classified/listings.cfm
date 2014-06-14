@@ -1,0 +1,266 @@
+<!-- listings. -->
+<cfinclude template = "../includes/app_globals.cfm">
+
+<cfif IsDefined("category") IS 0>
+<cfset category = #url.category#>
+</cfif>
+<cfset records="">
+<cfset listing = "current">
+<cfset sortby = "default">
+<cfparam name="group" default="1">
+<cfset sortByAction = "category=#category#">
+
+<!--- define TIMENOW --->
+<cfmodule template="../functions/timenow.cfm">
+
+<!--- get parents of this category --->
+<cfmodule template="../functions/parentlookup.cfm"
+  CATEGORY="#category#"
+  datasource="#DATASOURCE#"
+  db_username="#db_username#"
+  db_password="#db_password#"
+  RETURN="parents_array">
+
+<!--- define number of pages for category --->
+<cfquery name="get_PageGroup" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT pair AS itemsperpage
+      FROM defaults
+     WHERE name = 'itemsperpage'
+</cfquery>
+
+<!--- get number of bids required for hot auction --->
+<cfquery name="HotAuction" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT pair AS offers4hot
+      FROM defaults
+     WHERE name = 'bids4hot'
+</cfquery>
+
+<!--- get this category's info --->
+<cfquery name="get_CategoryInfo" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT name, date_created, child_count, allow_sales, user_id
+      FROM categories
+     WHERE category = #category#
+</cfquery>
+
+<!--- get # of days category is new --->
+<cfquery name="CategoryNew" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT pair AS days
+      FROM defaults
+     WHERE name = 'category_new'
+</cfquery>
+
+<!--- get # of days item is new --->
+<cfquery name="ListingNew" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT pair AS days
+      FROM defaults
+     WHERE name = 'listing_new'
+</cfquery>
+
+<!--- get listing ending hours value --->
+<cfquery name="HrsEnding" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT pair AS hours
+      FROM defaults
+     WHERE name = 'hrsending'
+</cfquery>
+
+<!--- get listing ending hours color --->
+<cfquery name="HrsEndingColor" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT pair AS color
+      FROM defaults
+     WHERE name = 'hrsending_color'
+</cfquery>
+
+<!--- define EPOCH --->
+<cfmodule template="../functions/epoch.cfm">
+
+<!--- define listing row color --->
+<cfquery name="get_ListingColor" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT pair AS color
+      FROM defaults
+     WHERE name = 'listing_bgcolor'
+</cfquery>
+
+<cfset rowcolor=#get_ListingColor.color#>
+<!--- define sort order --->
+<cfif sortby EQ "date_asc">
+  <cfset orderby = "date_end ASC">
+<cfelseif sortby EQ "title_desc">
+  <cfset orderby = "title DESC">
+<cfelseif sortby EQ "title_asc">
+  <cfset orderby = "title ASC">
+<cfelse>
+  <cfset orderby = "date_end DESC">
+</cfif>
+
+
+  <cfquery name="get_ad_listings" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+      SELECT adnum, title, picture_url, ask_price, obo, date_start, date_end
+        FROM ad_info
+       WHERE category1 = #category#
+         AND status = 1
+         AND date_start < #TIMENOW#
+         AND date_end > #TIMENOW#
+     ORDER BY #orderby#
+  </cfquery>
+  <cfif #get_ad_listings.recordcount# LT 1>
+  <cfset records="no records">
+  </cfif>
+<cfoutput>
+<html>
+ <head>
+  <title>Classified Listings</title>
+  <link rel=stylesheet href="../includes/stylesheet.css" type="text/css">
+ </head>
+<cfinclude template = "../includes/bodytag.html">
+<cfinclude template = "../includes/menu_bar.cfm">
+    <div align="center">
+   <table border=0 cellspacing=0 cellpadding=2 width=800>
+        <tr>
+
+          <td colspan="2" align="center" valign="top"> <div align="center"><font size="2">
+</font></div></td>
+        </tr>
+        
+       <cfif get_CategoryInfo.allow_sales and (get_CategoryInfo.user_id is 0)>
+        <tr>
+          <td valign=top colspan=2>
+      
+            <a href="place_ad.cfm?cat=#category#">List your Ad</a> in this category:
+            <b>#Trim(get_CategoryInfo.name)#</b>
+            <cfif DateDiff("d", get_CategoryInfo.date_created, TIMENOW) LTE CategoryNew.days>
+              <font color=ff0000 size=1>
+                NEW!
+              </font>
+            </cfif>
+          <br>
+          <br>
+          </td>
+        </tr>
+       </cfif>
+      </table>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=640>
+        <tr>
+          <td valign=top>
+<!---             <font size=-1>
+              <br>
+              <cfmodule template="../functions/sortorderlinks.cfm"
+                sortby="#sortby#"
+                action="/listings/index.cfm"
+                addVars="#sortByAction#">
+            </font> --->
+          </td>
+        </tr>
+      </table>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=640>
+        <tr>
+          <td valign=top>
+            <font size=4>
+              <b>
+                <cfsetting enablecfoutputonly="Yes">
+                <!--- output parents --->
+                <cfloop index="i" from="#ArrayLen(parents_array)#" to="1" step="-1">
+                  <cfif i IS ArrayLen(parents_array)>
+                    <cfset link = "index.cfm">
+                  <cfelse>
+                    <cfset link = "index.cfm?cat=#parents_array[i][2]#">
+                  </cfif>
+                  <a href="#link#">#parents_array[i][1]#</a>:
+                </cfloop>
+                <cfsetting enablecfoutputonly="No">
+               #get_CategoryInfo.name#
+
+                <cfif #get_categoryInfo.child_count# GT 0>:<a href="index.cfm?cat=#category#">Subcategories</a></cfif>
+              </b>
+            </font>
+<hr width=100% size=1 color="#heading_color#" noshade>
+            <center>
+              <font size=2>
+                <cfsetting enablecfoutputonly="Yes">
+          </td>
+        </tr>
+      </table>
+
+      <br>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=640>
+        <tr>
+          <td>
+            <font size=4>
+              <b>
+                Classified Ads: #Trim(get_CategoryInfo.name)#
+              </b>
+            </font>
+<hr width=100% size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+      </table>
+
+
+  <!--- get currency type --->
+  <cfquery name="getCurrency" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+      SELECT pair AS type
+        FROM defaults
+       WHERE name = 'site_currency'
+  </cfquery>
+
+<cfmodule template = "prnt_ads.cfm"
+    part="HEADER"
+    datasource="#DATASOURCE#"
+    db_username="#db_username#"
+    db_password="#db_password#">
+
+<cfset item_count = 0>
+<cfset startrow = 1+(int(group-1)*int(get_PageGroup.itemsperpage))>
+
+<cfloop query="get_ad_listings" startrow=#startrow#>
+
+  <cfset item_count = IncrementValue(item_count)>
+
+  <cfmodule template = "prnt_ads.cfm"
+    part="LISTING"
+    datasource="#DATASOURCE#"
+    db_username="#db_username#"
+    db_password="#db_password#"
+    adnum="#get_ad_listings.adnum#"
+    rowcolor="#get_ListingColor.color#"
+    bids4hot="#HotAuction.offers4hot#"
+    timenow="#timenow#"
+    listingnew="#listingnew.days#"
+    picture_url="#get_ad_listings.picture_url#"
+    ask_price="#get_ad_listings.ask_price#"
+    obo="#get_ad_listings.obo#"
+    currentrow="#item_count#"
+    date_start="#get_ad_listings.date_start#"
+    date_end="#get_ad_listings.date_end#"
+    hrsending_color="#HrsEndingColor.color#"
+    hrsending="#HrsEnding.hours#"
+    title="#get_ad_listings.title#"
+	numbermask="#numbermask#">
+</cfloop>
+<cfif #records# IS "no records">
+
+<cfmodule template = "prnt_ads.cfm"
+    part="BLANK"
+    rowcolor="#get_ListingColor.color#">
+</cfif>
+
+<cfmodule template = "prnt_ads.cfm"
+    part="FOOTER">
+<table border=0 cellpadding=2 cellspacing=0 width="#get_layout.page_width#">
+        <tr>
+          <td>
+            <br>
+            <br>
+                        <hr width=#get_layout.page_width# size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            
+              <cfinclude template="../includes/copyrights.cfm">
+          
+          </td>
+        </tr>
+      </table></div>
+</body>
+</html>
+</cfoutput>

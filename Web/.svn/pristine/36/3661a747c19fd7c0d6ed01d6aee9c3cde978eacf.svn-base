@@ -1,0 +1,115 @@
+<cfsetting enablecfoutputonly="yes">
+<!---
+  Support/FAQ
+  index.cfm
+  Displays subjects/topics
+  06/16/00 TLingard
+--->
+
+<cfinclude template = "../includes/app_globals.cfm">
+
+<!--- Include session tracking template --->
+<cfinclude template="../includes/session_include.cfm">
+
+<!--- define TIMENOW --->
+<cfmodule template="../functions/timenow.cfm">
+
+<cfquery  name="listsub" username="#db_username#" password="#db_password#" datasource="#DATASOURCE#">
+SELECT *
+FROM faqsubject
+</cfquery>
+
+<!--- Set Subject Array for Loop --->
+<CFSET subarray=ArrayNew(2)>
+
+<cfloop query="listsub">
+<cfset subarray[CurrentRow][1]= listsub.sub_id[CurrentRow]>
+<cfset subarray[CurrentRow][2] = listsub.subjects[CurrentRow]>
+</cfloop>
+
+<!--- Set Subject Record Count --->
+<cfset total_records = listsub.RecordCount>
+
+<html>
+<head>
+<title>FAQ & Support</title>
+</head>
+
+<cfoutput>
+<cfinclude template="../includes/bodytag.html">
+ <cfinclude template="../includes/menu_bar.cfm">
+<!--- The main table --->
+  <div align="center">
+   <table border=0 cellspacing=0 cellpadding=2 width=800>
+
+    <tr><td><font size=5>Frequently Asked Questions</font></td></tr>
+    <tr><td><hr size=1 color=#heading_color# width=100%></td></tr>
+    <tr>
+     <td>
+      <font size=3>
+If you are a customer in need of support please look through the FAQ's for an answer to your question. If your question is not listed then you may <a href="#VAROOT#/support/faqsubmit.cfm">submit your question here</a>. 
+       <br>
+	   <br>
+<center>
+ <table border=0 cellspacing=10 width=100%>
+
+ <tr> 
+	<td align="right">
+<table border=0 cellspacing=10 width=80% align=center>
+
+<!--- Loop Subjects in table --->
+<cfloop index="Counter" from="1" to="#total_records#" step="2">
+<cfset record = Counter>
+<cfset subid = subarray[Counter][1]>
+
+<tr>
+	<td>
+	<font size="+1"><li><a href="#VAROOT#/support/faqquest.cfm?subject=#subid#"> #subarray[Counter][2]#</a></li>
+</font></td>
+	<td>
+		<cfif record lt total_records>
+		<cfset subid2 = subarray[counter + 1][1]>
+			<font size="+1"><li>
+			<a href="#VAROOT#/support/faqquest.cfm?subject=#subid2#"> #subarray[Counter + 1][2]# </a></li></font>
+
+		</cfif>
+	</td>
+</tr>
+
+</cfloop>
+<!--- End Loop --->
+
+</table>
+
+</td>
+</tr>
+</table>
+</center>
+</td>
+</tr>
+</table>
+
+<table border=0 cellpadding=2 cellspacing=0 width="#get_layout.page_width#">
+        <tr>
+          <td>
+            <br>
+            <br>
+                        <hr width=#get_layout.page_width# size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            
+              <cfinclude template="../includes/copyrights.cfm">
+          
+          </td>
+        </tr>
+      </table></div>
+</body>
+</html>
+</cfoutput>
+
+
+
+
+

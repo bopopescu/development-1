@@ -1,0 +1,6 @@
+body {margin:0; font-family:Arial, Helvetica, sans-serif; font-size:12px}
+#slider {}
+.header {border:2px solid #081d40; padding:8px; font-weight:bold; color:white; margin-top:5px; cursor:pointer; background:url(headerlight.gif)}
+.header:hover {background:url(headerdark.gif)}
+.content {overflow:hidden}
+.text {border:2px solid #081d40; border-top:none; padding:15px}

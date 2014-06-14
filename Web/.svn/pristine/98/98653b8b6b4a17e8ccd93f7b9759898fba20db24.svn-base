@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<table>
+	<createInterface>TRUE</createInterface>
+	<displayName>Media</displayName>
+	<displayPlural>Medias</displayPlural>
+	<entityName>media</entityName>
+	<ForeignKeyLabel>MEDIATYPE</ForeignKeyLabel>
+	<hasForeignKeys>FALSE</hasForeignKeys>
+	<hasJoinTable>FALSE</hasJoinTable>
+	<identity>MEDIAID</identity>
+	<isAutoIncrementing>true</isAutoIncrementing>
+	<isJoinTable>FALSE</isJoinTable>
+	<isReferencedAsForeignKey>false</isReferencedAsForeignKey>
+	<isView>false</isView>
+	<name>MEDIA</name>
+	<orderby>MEDIAID asc</orderby>
+	<plural>medias</plural>
+	<prefix></prefix>
+	<rowcount>8</rowcount>
+	<schema></schema>
+	<softDelete>FALSE</softDelete>
+</table>

@@ -1,0 +1,32 @@
+VISUAL AUCTION SERVER 10 (MYSQL) - INSTALLATION INSTRUCTIONS
+----------------------------------------------------------
+
+Setup three scheduled tasks with CFSCHEDULE or in the ColdFusion Administrator.
+
+    A. Open the CF Administrator and log in.
+    B. Click the "Scheduled Tasks" link in the automated 
+       tasks section.
+    C. Add task1 with the following properties:
+	(Replace www.yourdomain.com with the actual domain 
+         you are using.)
+
+       I. Occuring Daily every 10 minutes
+      II. Start Time: 00:00:00
+     III. URL:  www.yourdomain.com/event1/event.cfm
+      IV. Request Timeout:  600 seconds
+
+    D. Add task2 with the following properties:
+
+       I. Occuring Daily every 10 minutes
+      II. Start Time: 00:05:00
+     III. URL:  www.yourdomain.com/event2/event.cfm
+      IV. Request Timeout:  600 seconds
+
+    E. Add task3 with the following properties:
+
+       I. Occuring Daily every 120 minutes
+      II. Start Time: 00:05:00
+     III. URL:  www.yourdomain.com/event5/event.cfm
+      IV. Request Timeout:  600 seconds
+
+

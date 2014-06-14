@@ -1,0 +1,35 @@
+<cfsetting enablecfoutputonly="yes">
+<!--- include globals --->
+<cfinclude template="includes/app_globals.cfm">
+
+<!--- Include session tracking template --->
+<cfinclude template="includes/session_include.cfm">
+
+<!--- define TIMENOW --->
+<cfmodule template="functions/timenow.cfm">
+
+<cfoutput>
+<html>
+<head>
+	<title>Page In-Progress</title>
+	<meta name="keywords" content="#get_layout.keywords#">
+	<meta name="description" content="#get_layout.descriptions#">
+	<link rel=stylesheet href="#VAROOT#/includes/stylesheet.css" type="text/css">
+	<link rel=stylesheet href="#VAROOT#/includes/stylenew.css" type="text/css">		
+</head>
+<body>
+<div align="center" valign="middle">
+<table border='0' width='500' cellpadding="0" cellspacing="0">
+   <tr><td><br><br><br><br></td></tr>
+   <tr><td><img src="../images/under_const.jpeg" width=500></td></tr>
+   <tr><td>&nbsp;</td></tr>
+   <tr><td align="center"><font size=6 color="000000">You make check daily for progress.</font></td></tr>
+   <tr><td>&nbsp;</td></tr>
+   <tr><td align="center"><input type="button" name="submit" value="Return to previous page" onclick="JavaScript:history.back(1)"></td></tr>   
+<table>
+</div>
+</body>
+</html>
+</cfoutput>
+
+<cfsetting enablecfoutputonly="no">

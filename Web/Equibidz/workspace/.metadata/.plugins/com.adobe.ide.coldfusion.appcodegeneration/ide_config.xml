@@ -1,0 +1,89 @@
+<application>
+ <name>ModelGlue Assistant</name>
+ <author>Model-Glue Team</author>
+ <version>2.0</version>
+ <description>install.html</description>  
+ <license>license.html</license>
+  
+<menucontributions>
+
+	<contribution target="rdsview" >
+		<menu name="ModelGlue Assistant">
+			<!--
+    		<action name="Create Scaffold Entry" handlerid="createscaffold" >
+    			<input name="location" label="Select Project" tooltip="Select your current project" type="dir"/>
+    			<input name="uname" label="Datasource username" tooltip="Provide username for the datasource" type="string"/>
+    			<input name="pwd" label="Datasource password" tooltip="Provide password for current datasource" type="password"/>
+    			<input name="dbtype" label="DB type" tooltip="Datasource type mssql/mysql/mysql4/db2" type="list">
+    			<option value="db2"/>
+    			<option value="informix"/>
+    			<option value="mssql"/>
+    			<option value="mysql"/>
+    			<option value="mysql4/5" />
+    			<option value="oracle"/>
+    			<option value="oraclerdb"/>
+    			<option value="postgresql"/>
+    			<option value="sqlanywhere"/>
+    			</input>
+			</action>
+			-->
+		</menu>
+	</contribution>
+
+	<contribution target="projectview" >
+		<menu name="ModelGlue Assistant">
+    		<action name="Add Event" handlerid="eventhandler" >
+    			<filters>
+    				<filter type="file" pattern=".*?\.xml" />
+				</filters>
+    			<input name="eventname" label="Event Name" tooltip="Enter the name of the event handler" type="string"/>
+    			<input name="broadcastmsg" label="Broadcast message name" tooltip="Enter the name of the broadcast message" type="string"/>
+    			<input name="viewname" label="View name" tooltip="Enter the name of the view cfm to be created" type="string"/>
+    			<input name="viewpath" label="View Path" tooltip="Enter the folder where view cfm is to be created" type="dir"/>
+    			<input name="viewvalname" label="Value name" tooltip="Enter the value name from the view cfm" type="string"/>
+    			<input name="viewval" label="Value" tooltip="Enter the value passed drom the view cfm" type="string"/>
+			</action>
+			<action name="Debug Trace Toggle" handlerid="debugtrace">
+    		</action>
+    		<action name="Enable Reactor" handlerid="reactoruncomment">
+    		</action>
+    		<action name="Create Model-Glue Application" handlerid="projectcreate">
+    			<filters>
+    				<filter type="folder" />
+				</filters>
+			</action>
+    		<action name="Analyze Model-Glue Settings" handlerid="analyze" showResponse="true">
+    			<filters>
+    				<filter type="project" />
+				</filters>
+			</action>
+			<action name="Run Code Review" handlerid="codereview" showResponse="true">
+    			<filters>
+    				<filter type="project" />
+				</filters>
+			</action>
+			<action name="Update Settings" handlerid="settings" showResponse="true" />
+			<action name="Check for Updates" handlerid="updates" showResponse="true" />
+		</menu>
+	</contribution>
+	
+</menucontributions>
+
+
+<events>
+	<event type="onprojectcreate" handlerid="projectcreate" />
+</events>	
+
+<handlers>
+	<handler id="analyze" type="CFM" filename="analyze.cfm" />
+	<handler id="createscaffold" type="CFM" filename="createscaffold.cfm" />
+	<handler id="debugtrace" type="CFM" filename="debugtrace.cfm" />
+	<handler id="eventhandler" type="CFM" filename="eventhandler.cfm" />
+	<handler id="projectcreate" type="CFM" filename="projectcreate.cfm" />
+	<handler id="reactoruncomment" type="CFM" filename="reactoruncomment.cfm" />
+	<handler id="codereview" type="CFM" filename="handlerCodeReview.cfm" />
+	<handler id="settings" type="CFM" filename="handlerSettings.cfm" />
+	<handler id="updates" type="CFM" filename="handlerUpdate.cfm" />
+</handlers>
+
+</application>

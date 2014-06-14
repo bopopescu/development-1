@@ -1,0 +1,167 @@
+<html>
+
+<head>
+<title>Interactive Online Help System</title>
+</head>
+
+<body bgcolor="ffffff">
+<font size="4" color="000080"><b>
+
+<p>Administrator Help - Web Site Structure and Design Structure</b></font><br>
+</p>
+
+<hr size="1" noshade>
+
+<TABLE CELLPADDING=5>
+<TR>
+<TD>
+Below is a map of the Visual Auction 3.0 directory structure.<br>
+</TD>
+<TD>
+<FONT COLOR="#FF0080">Pink files can modified to personalize your info and graphics.</FONT>
+</TD>
+</TABLE>
+
+<table border="0" cellspacing="0" cellpadding="10">
+  <tr>
+    <td valign="top"><img
+    src="file:///H:/WebSite/htdocs/software-auction-3-0/help/admin/directory_structure.jpg"
+    width="217" height="787" alt="Website Directory Structure"></td>
+    <td valign="top"><font size="3" color="008000"><b>Visual Auction 3.0:</b></font><p><font
+    size="3"><b>admin:</b></font><ul>
+      <li><small>This section contains the Administration pages.&nbsp; These pages can only be
+        modified by Beyond Solutions, Inc.</small></li>
+    </ul>
+    <p><font size="3"><b>bid:</b></font><ul>
+      <li><small>Pages in this section process the user's bid.&nbsp; No changes need to be made to
+        these pages.</small></li>
+    </ul>
+    <p><font size="3"><b>buyers:</b></font><ul>
+      <li><font color="#FF0080">index.html</font>: <small>This file can be changed to add more information or graphics.</small></li>
+    </ul>
+    <p><font size="3"><b>dbase:</b></font><ul>
+      <li><small>This directory contains the auction database.  There are no modifiable files in this directory.&nbsp; </small></li>
+    </ul>
+    <p><font size="3"><b>event1:</b></font><ul>
+      <li><font color="#408080"><strong>listings:</strong></font></li>
+      <ul>
+        <li><font color="#800040"><strong>categories:</strong></font><ul>
+            <li><font color="#FF0080">gen_categories.cfm, default_h.cfm, default_f.cfm</font>: <small>These
+              files generate all /listings/categories and HTML files.&nbsp; The default_h.cfm (default
+              header) and the default_f.cfm (default footer) files will be included as the header and
+              footer of each generated file.&nbsp; Custom header and footer files for each category can
+              be included by placing header and footer files in this directory, where the name of those
+              custom files will be: (category number)_h.cfm and (category number)_f.cfm.&nbsp; Both
+              header and footer files must exist to be included in gen_categories.cfm file.</small></li>
+          </ul>
+        </li>
+        <li><font color="#800040"><strong>featured:</strong></font><ul>
+            <li><font color="#FF0080">gen_featured.cfm</font>: <small>This file generates all
+              /listings/featured/*.* files.</small></li>
+          </ul>
+        </li>
+        <li><strong><font color="#800040">primary_listings: </font></strong><ul>
+            <li><font color="#FF0080">gen_listings.cfm</font>: <small>This file generates all files in
+              these directories: </small><ol>
+                <li><small>/listings/completed/*.*</small></li>
+                <li><small>/listings/current/*.*</small></li>
+                <li><small>/listings/ending/*.*</small></li>
+                <li><small>/listings/going/*.*</small></li>
+                <li><small>/listings/new/*.*</small></li>
+              </ol>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </ul>
+    <ul>
+      <li><font color="#408080"><strong>pages:</strong></font><ul>
+          <li><font color="#800040"><strong>root:</strong></font><ul>
+              <li><font color="#FF0080">gen_index.cfm</font>: <small>This file generates your main
+                index.html page accessable at <a href="http://www.beyondsolutions.com/">http://www.yourdomain.com/</a></small></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p><font size="3"><b>event2:</b></font><ul>
+      <li><small>This directory contains files which run on a schedule.&nbsp; Their function is to
+        complete background processes, including billing, invoicing, future-watch, and proxy
+        bidding.&nbsp; No files in this directory should be modified.</small></li>
+    </ul>
+    <p><font size="3"><b>feedback:</b></font><ul>
+      <li><small>This directory contains files which are generated 'on the fly'.&nbsp; No changes
+        need to be made directly to these pages.</small></li>
+    </ul>
+    <p><font size="3"><b>help:</b></font><ul>
+      <li><font color="#FF0080">index.html</font>: <small>This file can be changed to add more information or graphics.</small></li>
+<li><font color="#FF0080">sitemap.html</font>: <small>This file can be changed to add more information or graphics.</small></li>
+<li><font color="#FF0080">auctiontypes.html</font>: <small>This file can be changed to add more information or graphics.</small></li>
+<li><font color="#FF0080">fee_schedule.html</font>: <small>This file can be changed to add more information or graphics.</small></li>
+
+      <li><font color="#408080"><strong>admin: </strong></font><small>This directory contains help files for the auction Administrator.&nbsp; No changes need to be made.</small></li>
+    </ul>
+    <p><font size="3"><b>images:</b></font><ul>
+      <li><font color="#FF0000">logohere.gif</font>:&nbsp;<small>This image should be replaced with your company logo. (The image name should not be changed.)</small></li>
+      <li>&nbsp;<font color="#FF0000">infohere.jpg</font>:&nbsp;<small>This image should be replaced with an image providing site info or an image map. (The image name should not be changed.)</small></li>
+
+    </ul>
+    <p><font size="3"><b>includes:</b></font><ul>
+      <li><font color="#FF0080">menu_bar.cfm</font>: <small>This file can be modified to personalize your menu bar site-wide.  You may also cut and paste this file to appear at the top of any HTML page needing the menu bar. <B>No other files in this directory should be modified!</B></small></li>
+
+    </ul>
+    <p><strong>listings:</strong>&nbsp;<small>The following directories contain automatically generated files relating to auction item listings. These do not need to be modified.</small><ul>
+      <li><font color="#408080"><strong>categories:</strong></font>&nbsp;<small>This  directory contains files relating to categories. </small></li>
+      <li><font color="#408080"><strong>completed:</strong></font>&nbsp;<small>This  directory contains files for completed auctions. </small></li>
+      <li><font color="#408080"><strong>current:</strong></font>&nbsp;<small>This  directory contains files for current auctions. </small></li>
+      <li><font color="#408080"><strong>details:</strong></font>&nbsp;<small>This  directory contains files for auction details. </small></li>
+      <li><font color="#408080"><strong>ending:</strong></font>&nbsp;<small>This  directory contains files for auctions ending. </small></li>
+      <li><font color="#408080"><strong>featured:</strong></font>&nbsp;<small>This  directory contains files for featured auctions. </small></li>
+      <li><font color="#408080"><strong>going:</strong></font>&nbsp;<small>This  directory contains files for going auctions.</small></li>
+      <li><font color="#408080"><strong>new:</strong></font>&nbsp;<small>This  directory contains files for new auctions.</small></li>
+    </ul>
+    <p><strong>messaging:</strong>&nbsp;<small>This  directory contains files relating to messaging.  No need to modify.</small><ul>
+	<li>&nbsp;</li>
+    </ul>
+    <p><strong>personal:</strong>&nbsp;<small>This  directory contains files relating to personal info.  No need to modify.</small><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>registration:</strong>&nbsp;<small>This  directory contains files relating to user registration.  No need to modify.</small><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>search:</strong>&nbsp;<small>This  directory contains files relating to the site search engine.  No need to modify.</small><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>sell:</strong>&nbsp;<small>This  directory contains files relating to selling issues.  No need to modify.</small><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>sellers:</strong><ul>
+      <li><font color="#FF0080">index.html</font>: <small>This file can be changed to add more information or graphics.</small></li>
+    </ul>
+<!--- 
+    <p><strong>studio:</strong>&nbsp;<small>This  directory contains files relating to the auction studio.  No need to modify.</small><ul>
+      <li><small></li>
+    </ul>
+ --->
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" colspan="2"><font color="#008000"><strong>Remember ...</strong></font><ul>
+      <li>All generated pages will have a time stamp like this: &quot;<b>last updated:</b>
+        mm/dd/yyy, hh:mm:ss&quot;.&nbsp; These pages are scheduled to re-generate every 2 hours.
+        &nbsp; In order to make changes to pages displaying this stamp, you will need to modify their respective source file.</li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<hr size="1" noshade>
+
+<table border="0" cellspacing="0" cellpadding="3" width="100%">
+  <tr>
+    <td align="left"></td>
+    <td align="right"></td>
+  </tr>
+</table>
+</body>
+</html>

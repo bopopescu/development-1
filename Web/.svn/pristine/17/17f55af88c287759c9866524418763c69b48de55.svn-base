@@ -1,0 +1,1 @@
+<cflocation url="../sell/index.cfm?cat=#category#">

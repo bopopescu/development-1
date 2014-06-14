@@ -1,0 +1,39 @@
+<!--
+  eml_bidder_results.cfm
+  
+  email file sent to winning bidder(s)..
+  used by gen_bidder_results.cfm..
+  
+  <!---
+
+  <cfmodule template="eml_bidder_results.cfm"
+    to="[bidder email address]"
+    from="[from email address]"
+    subject="[email subject]"
+    message="[email message]">
+
+  --->
+
+-->
+
+<!-- define values -->
+<cfset isGood = "TRUE">
+
+<!--- chk required params --->
+<cfloop index="l" list="to,from,subject,message">
+  <cfif not IsDefined("Attributes." & l)>
+    <cfset isGood = "FALSE">
+  </cfif>
+</cfloop>
+
+<!-- send email -->
+<cfmail from="#Attributes.from#" to="#Attributes.to#" subject="#Attributes.subject#"
+>Congratulations...  You are a qualified bidder on the following auction.
+
+#Attributes.message#
+
+Thank you!
+Customer Service
+
+
+</cfmail>

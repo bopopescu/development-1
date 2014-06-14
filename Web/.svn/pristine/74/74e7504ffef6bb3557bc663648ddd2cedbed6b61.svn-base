@@ -1,0 +1,383 @@
+<!--- classified/Place_ad.cfm
+	Form for placing Classified's Ads;
+	check for errors then goes to review_ad.cfm.
+	04/28/00 
+	classified ver 1.0a
+---> 
+<cfsetting enablecfoutputonly="Yes">
+<cfinclude template = "../includes/app_globals.cfm">
+<!--- Include this module to create a unique number for the ad --->
+<cfmodule template="../functions/epoch.cfm">
+<!--- Setup Session Information --->
+<cfinclude template="../includes/session_include.cfm">
+
+<cfif isdefined("session.user_id") and session.user_id neq "" and isdefined("session.password") and session.password neq "">
+<cfelse>
+   <cflocation url="/login.cfm?login=1&path=/advertise/index.cfm">
+</cfif>
+
+<cfif isDefined('form.return')>
+   <cflocation url="/index.cfm">
+</cfif>   
+
+<cfquery name="get_duration" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+    SELECT ad_dur, ad_fee
+      FROM adv_defaults
+    ORDER BY ad_dur ASC
+</cfquery>
+
+<cfif isDefined('session.user_id') is 0>
+<cflocation url="/login.cfm?login=1&path=#SCRIPT_NAME#">
+</cfif>
+<cfset error_message = "">
+<!--- define TIMENOW --->
+<cfmodule template="../functions/timenow.cfm">
+
+ <cfset error_message = ""> 
+
+<!--- Get ip address --->
+<cfset remote_ip = #cgi.remote_addr#>
+
+  <!--- upload full size image --->
+<cfif isdefined("form.picture") and form.picture is not "">
+  <cfset #curPath# = GetTemplatePath()>
+  <cfset directory = #GetDirectoryFromPath(curPath)#>
+  <cfset #directory# = Replace(GetDirectoryFromPath("#curPath#"),"advertise","advertise\images")>
+  <cfif findNoCase("msie",#cgi.http_user_agent#) is 0>
+    <cffile action="upload"
+      filefield="form.picture"
+      DESTINATION="#directory#"
+      nameconflict="overwrite" 
+      accept='image/jpg, image/jpeg, image/pjpg, image/gif,image/JPG'>
+  <cfelse>
+    <cffile action="upload"
+      filefield="form.picture"
+      DESTINATION="#directory#"
+      nameconflict="overwrite" 
+      accept='image/*'>
+  </cfif>
+  <cfset picture = #File.ServerFile#>
+  <CFIMAGE ACTION="RESIZE" SOURCE="#directory##File.ServerFile#" DESTINATION="#directory##File.ServerFile#" NAME="#File.ServerFile#" HEIGHT="150" WIDTH="130" OVERWRITE="YES">
+  <!--- Rename full size image with item number --->
+      <cfif fileExists("#directory##picture#")>
+        <cffile action="rename"
+          SOURCE = "#directory##picture#"  
+          DESTINATION = "#directory##adnum#.jpg">
+ </cfif>
+</cfif>
+
+<!--- If defined, merge the separate date and time objects into 1 object --->
+ <cfif #isDefined ("start_time")#>
+  <cfset #start_time# = "#start_time##start_time_s#">
+  <cfset #start_hour# = #timeFormat (start_time, 'H')#>
+  <cfset #start_min# = #timeFormat (start_time, 'm')#>
+  <cfset #date_start# = #createDateTime (start_year, start_month, start_day, start_hour, start_min, 0)#>
+ </cfif>
+
+<cfif IsDefined("user_id")>
+  <cfset user_id=#user_id#>
+<cfelse>
+  <cfset user_id="">
+</cfif>
+<cfif IsDefined("password")>
+  <cfset password=#password#>
+<cfelse>
+  <cfset password="">
+</cfif>
+<cfif IsDefined("title")>
+  <cfset title=#title#>
+<cfelse>
+  <cfset title="">
+</cfif>
+<cfif IsDefined("date_start")>
+  <cfset date_start=#date_start#>
+<cfelse>
+  <cfset #date_start# = "#timenow#">
+</cfif>
+<cfif IsDefined("duration")>
+  <cfset duration=#duration#>
+<cfelse>
+  <cfset duration="">
+</cfif>
+
+
+<!--- Reviewing Place_ad & error checking--->
+
+ <!-- Check for valid login & password --->
+<cfif isDefined('form.submit')>
+
+  <cfquery name="check_login" datasource="#DATASOURCE#" username="#db_username#" password="#db_password#">
+      SELECT user_id, nickname, is_active, email,cc_name,cc_number,cc_expiration
+      FROM users
+		 
+      WHERE
+
+<cfif isdefined("session.user_id") and session.user_id is not "" and isdefined("session.password") and session.password is not "" and #isnumeric(session.user_id)#>
+user_id =#session.user_id# and password = '#session.password#'
+<cfelse>
+ nickname = '#user_id#' AND password = '#password#'
+        </cfif>     
+  </cfquery>
+
+  
+<!--- set form fields to session variables --->
+	<cfset session.user_id= #check_login.user_id# >
+	<cfset session.password=form.password>
+	<cfset session.email=check_login.email>
+	<cfset session.adnum= form.adnum>
+	<cfset session.title= form.title>
+    <cfif #find("http://",session.title)# EQ 0>
+   	   <cfset session.title= "http://#session.title#">    
+	</cfif>
+	<cfset session.duration=#form.duration#>
+	<cfset session.set_session=1>
+	<cfset session.date_start=date_start>
+	<cfset #session.picture# = #picture#>
+	<cfif #session.picture# NEQ "">
+		<cfset session.picture="#adnum#.jpg">
+	</cfif>
+	
+<!--- set session to local variables --->
+	<cfset user_id = session.user_id>
+	<cfset password = session.password>
+	<cfset email=session.email>
+	<cfset adnum = session.adnum>
+	<cfset title = session.title>
+	<cfset duration = session.duration>
+	<cfset date_start = session.date_start>
+
+<!--- Error checking --->
+    <cfif #check_login.recordcount# is 0>  
+  	 <cfset #error_message# = "<font color=ff0000>Login incorrect. Please try again.</font>">  
+        <cfelseif #find("www.",title)# EQ 0>
+  	 <cfset #error_message# = "<font color=ff0000>Please specify a valid Web Link for this item.</font>">
+        <cfelseif #find(".com",title)# EQ 0 AND #find(".net",title)# EQ 0 AND #find(".org",title)# EQ 0 AND #find(".gov",title)# EQ 0 AND #find(".edu",title)# EQ 0>
+  	 <cfset #error_message# = "<font color=ff0000>Please specify a valid Web Link for this item.</font>">
+		<cfelseif #trim (picture)# is "">
+  	 <cfset #error_message# = "<font color=ff0000>Please upload Banner Ad.</font>">
+	</cfif>
+  	<cfif #error_message# is "">
+ 	 <cflocation url="review_ad.cfm">
+	</cfif> 
+</cfif> 
+
+
+<!--- Determine the Ad Number --->
+<cfif IsDefined("adnum")>
+  <cfset adnum = #adnum#>
+<cfelse>
+  <cfset adnum=#EPOCH#>
+</cfif>
+
+<cfif adnum IS "">
+  <cfset adnum=#EPOCH#>
+</cfif>
+
+<cfsetting enablecfoutputonly="No">
+<cfoutput>
+<HTML>
+<HEAD>
+<TITLE>Advertisement Section - Place Ad</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel=stylesheet href="#VAROOT#/includes/stylesheet.css" type="text/css">
+</HEAD>
+</cfoutput>
+
+
+ <script type="text/javascript">
+ 	function val_imagename() {
+        var pic = document.item_input.picture.value;
+        var iChars = "!@#$%^&*()+=-[]';,/{}|\"<>?~ ";         
+        for (var i = 0; i < pic.length; i++) {
+  	        if (iChars.indexOf(pic.charAt(i)) != -1) {
+  	           alert ("Your Image contains characters not allowed as filename.");
+  	           return false;
+  	        }
+        }
+  	    len = pic.length;
+  	    if(len > 0) {
+	      pos = pic.lastIndexOf( '.' );
+	      ext = pic.substr( pos + 1, len - pos )
+  	      if( ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'JPG' && ext != 'JPEG' && ext != 'GIF' ) {
+             alert ("Uploaded Image is not valid image file.");
+             return false; 	    
+          }   
+        }        
+	} 
+ </script>
+ 	 
+ <script type="text/javascript">
+ 	function preview_link() {
+        var weblink = document.item_input.title.value;
+        if (weblink == "" || (weblink.indexOf(".com")==-1 && weblink.indexOf(".net")==-1 && weblink.indexOf(".org")==-1 && weblink.indexOf(".gov")==-1 && weblink.indexOf(".edu")==-1)) {
+           alert("Please input a valid Web Link");
+           return false;
+        }   
+        if (weblink.indexOf("http://")>-1 || weblink.indexOf("https://")>-1) {
+    	   window.open( weblink, '_blank' );
+        } else {
+           weblink = "http://"+weblink;
+    	   window.open( weblink, '_blank' );
+	    }
+	}    
+ </script>
+<cfoutput>
+<!--- Include the body tag --->
+<cfinclude template="../includes/bodytag.html">
+<cfinclude template="../includes/menu_bar.cfm">
+<!--- // ENCAPSULATE THE MAIN CONTENT IN A TABLE // --->
+<table align="center" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+<div align="center">
+   <table border=0 cellspacing=0 cellpadding=2 width=700>   
+  <tr align="left" valign="top">
+    <td height="191" colspan="2"><font size=4><br><br><b>Place your Advertisement Here</b><br>
+      </font>
+      <hr width=100% size=1 color="#heading_color#" noshade>
+      <cfif error_message is not "">
+        <font color="red">#error_message#</font>
+      </cfif>
+      <font face="Arial, Helvetica, sans-serif" size="+2"> </font>
+      <form method="post" action="index.cfm" name="item_input" enctype="multipart/form-data">
+        <input type="hidden" name="adnum" value="#adnum#">
+        <table  border="0" align="center">
+          <tr><td colspan="3"><font size=3>
+       Please fill out the following form to place your ad, remembering
+       to be as accurate and honest as possible when describing your offering, as set
+       forth in the <A HREF="../terms.cfm">Terms & Conditions</A>.  You must be a <A HREF="..#VAROOT#/registration/index.cfm">registered user</A> to advertise.<br>
+            </font><br>
+     <font size=2>NOTE: This Advertisement will not be posted automatically pending Site Approval.</font>
+<hr width=100% size=1 color="#heading_color#" noshade>
+            </td>
+          </tr>
+<cfif isdefined("session.user_id") and session.user_id neq "" and isdefined("session.password") and session.password neq "">
+         
+
+ 		<input name="user_id" type="hidden" value="#session.user_id#">
+		<input name="password" type="hidden" value="#session.password#">
+
+ 	  <cfelse>
+
+
+          <tr>
+            <td>
+				
+            <font size=3 color="0000ff"><b>* User Name:</b></font>
+            </td>
+            <td ><input name="user_id" size="15" value="#user_id#" maxlength="20" >
+            </td>
+          </tr>
+          <tr>
+            <td><font size=3 color="0000ff"><b>* Password:</b></font>
+            </td>
+            <td>
+           <input type="password" name="password" size="15" value="#password#" maxlength="12">
+            </td>
+
+          </tr> 
+
+
+
+</cfif>
+        
+          <tr>
+            <td><font><b>Ad Number:</b></font></td>
+            <td colspan=2>#adnum#</td>
+          </tr>
+          <tr>
+          <td><font size=3><b>Web Link:</b></font></td>
+          <td colspan="2"><input name="title" value="#title#" size="45" >&nbsp;
+                          <input type="button" name="prevlink" value="Preview Link" onClick="return preview_link()"><br>&nbsp;(ex. http://www.yahoo.com)
+          </td>
+          </tr>
+       <tr>
+       <td><font size=3><b>Start Date/Time:</b></font></td>
+       <td>
+        <table border=0 cellspacing=0 cellpadding=1>
+         <tr>
+          <cfset the_month = #datePart ("m", "#date_start#")#>
+          <cfset the_day = #datePart ("d", "#date_start#")#>
+          <cfset the_year = #datePart ("yyyy", "#date_start#")#>
+          <cfset the_time = #timeFormat ("#date_start#", 'hh:mm')#>
+          <cfset the_time_s = #timeFormat ("#date_start#", 'tt')#>
+           <td>
+           <select name="start_month">
+            <option value="1"<cfif #the_month# is "1"> selected</cfif>>Jan</option>
+            <option value="2"<cfif #the_month# is "2"> selected</cfif>>Feb</option>
+            <option value="3"<cfif #the_month# is "3"> selected</cfif>>Mar</option>
+            <option value="4"<cfif #the_month# is "4"> selected</cfif>>Apr</option>
+            <option value="5"<cfif #the_month# is "5"> selected</cfif>>May</option>
+            <option value="6"<cfif #the_month# is "6"> selected</cfif>>Jun</option>
+            <option value="7"<cfif #the_month# is "7"> selected</cfif>>Jul</option>
+            <option value="8"<cfif #the_month# is "8"> selected</cfif>>Aug</option>
+            <option value="9"<cfif #the_month# is "9"> selected</cfif>>Sep</option>
+            <option value="10"<cfif #the_month# is "10"> selected</cfif>>Oct</option>
+            <option value="11"<cfif #the_month# is "11"> selected</cfif>>Nov</option>
+            <option value="12"<cfif #the_month# is "12"> selected</cfif>>Dec</option>
+           </select>
+          </td>
+          <td><input name="start_day" type="text" size=2 maxlength=2 value="#the_day#">,</td>
+          <td><input name="start_year" type="text" size=4 maxlength=4 value="#the_year#"></td>
+          <td><font size=3>&nbsp;at&nbsp;</font></td>
+          <td><input name="start_time" type="text" size=5 maxlength=5 value="#the_time#"></td>
+          <td>
+           <select name="start_time_s">
+            <option value="AM"<cfif #the_time_s# is "AM"> selected</cfif>>AM</option>
+            <option value="PM"<cfif #the_time_s# is "PM"> selected</cfif>>PM</option>
+           </select>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+       <tr><td colspan="3"><font size=2>(This Date is subject to change pending approval of this Ad)</font><br><br></td></tr>
+          <tr>
+            <td><font size=3><b>Ad Duration/Fees:</b></font></td>
+            <td colspan="2">
+              <select name="Duration">
+                <cfloop query="get_duration">
+                 
+                  <option value='#ad_dur#' <cfif #ad_dur# EQ 1>selected</cfif>>#ad_dur# Month(s) - $#numberformat(ad_fee,numbermask)#
+                </cfloop>
+              </select>
+            </td>
+          </tr>
+          <tr><td colspan=3>&nbsp;</td></tr>
+		  <tr><td><font face="helvetica" size=2><font size=3><b>Upload Ad Banner:</b><br>(150H X 130W)</font></td><td colspan="2"><input name="picture" type="file" size=45 maxlength=250></td></tr>
+         <tr>
+           <td colspan=3><br><br>
+
+              <input type="submit" name="submit" value="Submit" onClick="return val_imagename()"> &nbsp;
+              <input type="submit" name="return" value="Return">
+
+            </td>
+          </tr>
+
+        </table>
+      </form>
+    </td>
+  </tr>
+   </table>
+<table border=0 cellpadding=2 cellspacing=0 width="#get_layout.page_width#">
+        <tr>
+          <td>
+            <br>
+            <br>
+                        <hr width=98% size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            
+              <cfinclude template="../includes/copyrights.cfm">
+          
+          </td>
+        </tr>
+      </table></div>
+	  <!--- // ENCAPSULATE THE PAGE IN A TABLE // --->
+		</td>
+	</tr>
+</table>
+</BODY>
+</HTML></cfoutput>

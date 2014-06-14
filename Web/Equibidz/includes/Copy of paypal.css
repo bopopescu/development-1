@@ -1,0 +1,52 @@
+.btn-small [class^="icon-"],
+.btn-small [class*=" icon-"] {
+  margin-top: 0;
+}
+/*button styling starts*/
+.btn {
+  display: inline-block;
+  padding: 9px 15px 10px;
+  margin-bottom: 0;
+  background: #019cde;
+  font-size: 15px;
+  font-size: 1.07142857142857rem;
+  font-weight: bold;
+  line-height: 1.4545em;
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 5px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.btn:hover {
+  color: #fff;
+  text-decoration: none;
+  background: #0285d2;
+}
+.btn:focus {
+  color: #FFF;
+}
+.btn.active,
+.btn:active {
+  background-image: none;
+  outline: 0;
+  -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+}
+.btn.disabled,
+.btn[disabled],
+.btn.disabled:hover,
+.btn[disabled]:hover,
+.btn.disabled:active,
+.btn[disabled]:active {
+  background: #e5e5e5;
+  cursor: auto;
+}
+btn-small {
+  padding: 7px 8px;
+  font-size: 14px;
+  min-width: 66px;
+}

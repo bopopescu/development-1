@@ -1,0 +1,74 @@
+<cfoutput>
+<cfparam name="current_page" default="indexhome">
+<cfset classified_valid="No">
+
+<link rel=stylesheet href="#VAROOT#/includes/stylenew.css" type="text/css">			
+<body bgcolor="#get_layout.bg_color#" text="#get_layout.text_color#" marginheight="0" topmargin="0" vspace="0" marginwidth="0" leftmargin="0" hspace="0" style="margin:0; padding:0;font-family:#get_layout.text_font#" onLoad="ShowText();">
+
+<!--- Start: Main Body --->
+<table class="tbl-sidecolor" <!--- style="background-image: url('../images/bg_table.jpg')"---> width="706" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr valign="top">
+	<td align="center">
+		<table width="706" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="20"></td>
+		</tr>
+		<tr>
+			<td>
+             	<div class="main-menu">
+                	<span class="menu-item">
+						<a href="#VAROOT#/">HOME</a>
+					</span>
+                	<span class="menu-item">
+						<a href="#VAROOT#/search">SEARCH</a>
+					</span>
+                	<cfif isdefined("session.user_id") and session.user_id neq "" and isdefined("session.password") and session.password neq "">
+					<span class="menu-item">
+						<a href="#VAROOT#/personal">MY AUCTIONS</a>
+					</span>						
+					</cfif>
+                	<span class="menu-item">
+						<a href="#VAROOT#/stallions.cfm">STALLIONS</a>
+					</span>
+                	<span class="menu-item">
+						<a href="#VAROOT#/">MARES</a>
+					</span>
+                	<span class="menu-item">
+						<a href="#VAROOT#/">GELDINGS</a>
+					</span>
+                	<span class="menu-item">
+						<a href="#VAROOT#/terms.cfm">TERMS</a>
+					</span>
+                	<span class="menu-item">
+						<a href="#VAROOT#/registration">REGISTRATION</a>
+					</span>
+                	<span class="menu-item">
+						<a href="#VAROOT#/contactus.cfm">CONTACT US</a>
+					</span>
+                	<span class="menu-item">
+						<a href="#VAROOT#/help.cfm">HELP</a>
+					</span>
+                	<cfif isdefined("session.user_id") and session.user_id neq "" and isdefined("session.password") and session.password neq "">
+					<span class="menu-item">						
+						<a href="#VAROOT#/login.cfm?logout=1" ><font color=red>LOGOUT</font></a>
+					</span>						
+					<cfelse>
+					<span class="menu-item">
+						<a href="#VAROOT#/login.cfm?login=1">LOGIN</a>
+					</span>						
+					</cfif>					
+                </div>
+              	<div class="logo">
+					<img src="#VAROOT#/images/logo.jpg" alt="Equibidz Logo" />
+					<div class="logo-text">
+						Equibidz.com
+					</div>
+                </div>				
+			</td>
+		</tr>
+		<tr>
+			<td align='center' valign='top'>
+</td>
+</tr>
+</table>
+</cfoutput>

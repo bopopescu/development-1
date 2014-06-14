@@ -1,0 +1,106 @@
+Below is the list of changes in VA8.0:
+
+A. Changes in Visual Auction Administrator:
+
+ 1. Enable/Disable the sections on the home page such as: What's new, Promotions, Thumbnails Gallery, Statistics, Tell A Friend, Welcome New users. This can be done via Visual Auction Administrator, the "Preferences" tab.
+
+ 2. Update the company name, time, timezone, change logo, thumbnail gallery image, promotion banner. This can be done via Visual Auction Administrator, the "Preferences" tab.
+
+ 3. Update the Linkpoint info, Authorize.net, and Paypal integration. This can be done via Visual Auction Administrator, the "Preferences" tab.
+ 
+ 4. Update the Privacy, Terms and Conditions, About us, Contact us. This can be done via Visual Auction Administrator, the "Preferences" tab.
+
+ 5. Add/Delete news. This can be done via Visual Auction Administrator, the "Preferences" tab
+
+ 6. Manually send out invoices, winning notifications, delete the caching files, update categories. This can be done via Visual Auction Administrator, the "Admin" tab.
+
+ 7. Delete bids (including the proxy bids), end auctions early, delete auctions. This can be done via Visual Auction Administrator, the "Reports" tab, "All auctions" section.
+ 
+ 8. Add, enable/disable, delete rotating banners. This can be done via Visual Auction Administrator, the "Banners" tab.
+ 
+ 9. Can have up to 4 colums of featured auctions on the home page. Define the number of required posted auctions in order for the seller to be top seller. This can be done via Visual Auction Administrator, the "Defaults" tab.
+
+ 10. Charge seller a fee for additional full size images. This can be done via Visual Auction Administrator, the "Defaults" tab.
+
+ 11. Multiple administrators. Enable/Disable access to certain functions for each administrator. This can be done via the "Admin" and "Access" tabs.
+
+B. Changes in Personal section:
+
+ 1. View Bidding History.
+
+ 2. View Selling History.
+
+ 3. Leave Feedback.
+
+ 4. Add online bulkloader
+
+C. Change in Feedback section:
+
+ Only seller and auction winner can leave feedback for each others. Feedback can only be left one.
+
+D. Change in Sell section:
+ 
+ Can have up to 4 full size images for each auction posted.
+
+E. Change in Listings/Details:
+ 
+ 1. View a slide show of full size images.
+ 2. Hit counter.
+ 
+F. Change on the home page:
+
+ Add the "Tell A Friend" and "Top Seller" sections
+
+G. Change on the Search section:
+
+ Add zipcode search.
+
+H. Gateway:
+ Authorize.net is now fully integrated with Visual Auction 8.0.
+
+Changes in VA8.5:
+
+
+A. Home page:
+
+ 1. New login/logout section (aka auto login) added 
+ 2. Hit counter for the front page added 
+ 3. Unique visitors (IP based) added 
+ 4. Users online (track users once they logged in) added 
+ 5. Hot auctions section added 
+ 6. All home page sections can be fully customized via Visual Auction Administrators
+
+B. Menu bar:
+
+ 1. Ability to choose 3 templates via admin 
+ 2. "Suggest a category" and "report fraud" added 
+ 3. Translate page using babelfish.altavista.com added. 
+
+C. Personal section:
+
+ 1. Ability to delete bids and cancel auctions early for users with "full control" permission. Only Administrators can enable this permission (via /admin, "Users" tab) on a specific user. 
+ 2. "About me" page added. 
+ 3. Rating icon, member icon, and mypage icon added. These icons can be changed via Admin, "preferences" tab. 
+ 4. Block bidders from bidding on a specific item added. 
+
+D. Search:
+
+ Search by bidder added. 
+
+E. Bidding Page:
+
+ 1. Rating legend, member, and aboutme icons added. 
+ 2. Translate auction description using babelfish.altavista.com added. 
+ 3. Auto login for bidding added. 
+
+F. Visual Auction Administrator.
+
+ 1. Ability to change virtually the whole site layout via /admin, "preferences" tab. 
+ 2. Ability to change rating legends, bidding, membership, and about me icons. 
+ 3. Ability to enable/disable caching. 
+ 4. Ability to enable/disable home page hit counter, unique visitors tracking, and users online. 
+ 5. Ability to trace the users' network as well as the referred page via /admin, "reports" tab, "visitors tracking" section 
+ 6. Ability to add/change meta keyword and meta description. 
+ 7. Ability to choose the ready-made templates (3 to choose from) 
+ 8. Ability to change the header font size on home page sections (default layout and layout 3 only.)
+ 9. Ability to edit the membership on a specific user.

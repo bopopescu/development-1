@@ -1,0 +1,115 @@
+
+<html>
+    <cfinclude template="app_globals.cfm">
+<head>
+    <title>
+        Menu
+    </title>
+	<cfoutput>
+<link rel="stylesheet" href="#VAROOT#/includes/stylesheet.css" type="text/css">
+	</cfoutput>
+</head>
+   <body bgcolor="white">         
+      <form name="search" action="<cfoutput>#VAROOT#</cfoutput>/search/search_results.cfm" method="get" >
+      	<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" width="100%">
+      		<TR>
+      			<TD><IMG SRC="<cfoutput>#VAROOT#</cfoutput>/images/logo.gif" border="0" alt="">
+      			</TD>
+      			<TD>
+      				<TABLE CELLPADDING="3" CELLSPACING="0" BORDER="0">
+      					<TR>
+      						<TD COLSPAN="2">	<!---<IMG SRC="/images/menu_bar.gif" border="0" alt="" usemap="#menu">--->      						   
+      						   <font size=4 ><a href="<cfoutput>#VAROOT#</cfoutput>/index.cfm">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Home</font>
+</a>&nbsp;&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/registration">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Register</font>
+</a>&nbsp;&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/listings/categories/all_cats.cfm">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Sell</font>
+</a>&nbsp;&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/help/">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Help</font>
+</a>&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/messaging/">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Messaging</font>
+</a>&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/feedback/leavefeedback.cfm">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Feedback</font>
+</a>      						       		
+      						       	<cfif classified_valid IS "Yes"><a href="<cfoutput>#varoot#</cfoutput>/classified/index.cfm">
+      						       	         						       	   <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       		>Classified</font>
+</a>&nbsp;<a href="<cfoutput>#varoot#</cfoutput>/classified/search/index.cfm">
+      						       	         						       	   <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       		>Classified Search</font>
+</a>
+      						       	</CFIF>
+      						       	&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/help/sitemap.cfm">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Site&nbsp;Map</font>
+</a>&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/listings/categories">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Browse</font>
+</a>&nbsp;<a href="<cfoutput>#VAROOT#</cfoutput>/personal">
+      						                						          <font size=2 color=<cfoutput>#heading_color#
+</cfoutput>
+      						       	>Login</font>
+</a></font>
+      						</TD>
+      					</TR>
+      					<TR>	<!--- Flash Header Here --->
+      						<TD>	<!--- disable flash banner ---><!---
+      						    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#3,0,0,0" width="400" height="70">
+      							<param name="SRC" value="http://<cfoutput>#cgi.server_name##VAROOT#</cfoutput>/VA_header.swf">
+      							<param name="bgcolor" value="#003300">
+<embed src="http://<cfoutput>#cgi.server_name##VAROOT#</cfoutput>/VA_header.swf" pluginspage="http://www.macromedia.com/shockwave/download/" type="application/x-shockwave-flash" width="400" height="70" bgcolor="#003300">
+</embed>
+</object>---><!--- use animated gif instead , less overhead --->
+      						    <cfinclude template="banner.cfm">
+      						</TD>
+      						<TD WIDTH="220">	<!--- Orange color is FF9700 --->
+      							<cfoutput>
+      								<table cellspacing="0" cellpadding="2" border="0" bgcolor="#heading_color#">
+      							</cfoutput>
+      							<tr>
+      								<cfoutput>
+      									<td valign="top" style="color:#heading_fcolor#; font-family:#heading_font#">
+      								</cfoutput>
+      							              Search
+      							              	<table cellspacing="0" cellpadding="3" border="0" bgcolor="DDDDDD">
+      							              		<tr>
+      							              			<td valign="top" WIDTH="100%">	<!--- Search Code Start --->
+      							              			   <input type="text" name="search_text" size="12">
+      							              			   <input type="submit" name="search" value="Search"><A HREF="<cfoutput>#VAROOT#</cfoutput>/search/index.cfm">
+      							              			         							              			   <FONT SIZE=1 FACE="arial,helvetica,geneva">Advanced Search</FONT>
+</A>
+      							              			   <input type="hidden" name="search_type" value="title_search">
+      							              			   <input type="hidden" name="search_name" value="Title &amp; Description Search">
+      							              			   <input name="phrase_match" type="hidden" value="any"><!--- Search Code End --->
+      							              			</td>
+      							              		</tr>
+      							              	</table>
+      						</td>
+      					</tr>
+      				</table>
+      			</TD>
+      			<TR>
+      	</TABLE>
+</TD>
+</TR>
+</TABLE>
+      </form>
+   </body>
+</html>

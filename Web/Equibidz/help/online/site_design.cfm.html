@@ -1,0 +1,156 @@
+<html>
+
+<head>
+<title>Interactive Online Help System</title>
+</head>
+
+<body bgcolor="ffffff">
+<font size="4" color="000080"><b>
+
+<p>Administrator Help - Web Site Design and Generation Structure</b></font><br>
+</p>
+
+<hr size="1" noshade>
+
+<p>In this section, we walk you through the strtucture of your web site.&nbsp; <br>
+</p>
+
+<table border="0" cellspacing="0" cellpadding="10">
+  <tr>
+    <td valign="top"><img
+    src="file:///H:/WebSite/htdocs/software-auction-3-0/help/admin/directory_structure.gif"
+    width="217" height="787" alt="directory_structure.gif (9809 bytes)"></td>
+    <td valign="top"><font size="3" color="008000"><b>Visual Auction 3.0:</b></font><p><font
+    size="3"><b>admin:</b></font><ul>
+      <li><small>This section contains the Administration pages.&nbsp; These pages can only be
+        modified by Beyond Solutions, Inc.</small></li>
+    </ul>
+    <p><font size="3"><b>bid:</b></font><ul>
+      <li><small>Pages in this section process the user's bid.&nbsp; No changes need to be made to
+        these pages.</small></li>
+    </ul>
+    <p><font size="3"><b>buyers:</b></font><ul>
+      <li><font color="#FF0080">index.html</font>: <small>This file is not generated, and will
+        need to be changed if you desire a different look or feel.</small></li>
+    </ul>
+    <p><font size="3"><b>dbase:</b></font><ul>
+      <li><small>There are no pages in this directory.&nbsp; </small></li>
+    </ul>
+    <p><font size="3"><b>event1:</b></font><ul>
+      <li><font color="#408080"><strong>listings:</strong></font></li>
+      <ul>
+        <li><font color="#800040"><strong>categories:</strong></font><ul>
+            <li><font color="#FF0080">gen_categories.cfm, default_h.cfm, default_f.cfm</font>: <small>These
+              files generate all /listings/categories/*.html files.&nbsp; The default_h.cfm (default
+              header) and the default_f.cfm (default footer) files will be included as the header and
+              footer of each generated file.&nbsp; Custom header and footer files for each category can
+              be included by placing header and footer files in this directory, where the name of those
+              custom files will be: (category number)_h.cfm and (category number)_f.cfm.&nbsp; Both
+              header and footer files must exist to be included in gen_categories.cfm.</small></li>
+          </ul>
+        </li>
+        <li><font color="#800040"><strong>featured:</strong></font><ul>
+            <li><font color="#FF0080">gen_featured.cfm</font>: <small>This file generates all
+              /listings/featured/*.* files.</small></li>
+          </ul>
+        </li>
+        <li><strong><font color="#800040">primary_listings: </font></strong><ul>
+            <li><font color="#FF0080">gen_listings.cfm</font>: <small>This file generates all files in
+              these directories: </small><ol>
+                <li><small>/listings/completed/*.*</small></li>
+                <li><small>/listings/current/*.*</small></li>
+                <li><small>/listings/ending/*.*</small></li>
+                <li><small>/listings/going/*.*</small></li>
+                <li><small>/listings/new/*.*</small></li>
+              </ol>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </ul>
+    <ul>
+      <li><font color="#408080"><strong>pages:</strong></font><ul>
+          <li><font color="#800040"><strong>root:</strong></font><ul>
+              <li><font color="#FF0080">gen_index.cfm</font>: <small>This file generates your main
+                index.html page accessable at <a href="http://www.yourdomain.com/">http://www.yourdomain.com/</a></small></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p><font size="3"><b>event2:</b></font><ul>
+      <li><small>This directory contains files which run on a schedule.&nbsp; Their function is to
+        complete background processes, including billing, invoicing, future-watch, and proxy
+        bidding.&nbsp; No files in this directory should be modified.</small></li>
+    </ul>
+    <p><font size="3"><b>feedback:</b></font><ul>
+      <li><small>This directory contains files which are generated 'on the fly'.&nbsp; No changes
+        need to be made directly to these pages.</small></li>
+    </ul>
+    <p><font size="3"><b>help:</b></font><ul>
+      <li>&nbsp;</li>
+      <li><font color="#408080"><strong>admin: </strong></font><small>These help files are not
+        publically referenced.&nbsp; No changes need to be made.</small></li>
+    </ul>
+    <p><font size="3"><b>images:</b></font><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><font size="3"><b>includes:</b></font><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>listings:</strong><ul>
+      <li><font color="#408080"><strong>categories:</strong></font></li>
+      <li><font color="#408080"><strong>completed:</strong></font></li>
+      <li><font color="#408080"><strong>current:</strong></font></li>
+      <li><font color="#408080"><strong>details:</strong></font></li>
+      <li><font color="#408080"><strong>ending:</strong></font></li>
+      <li><font color="#408080"><strong>featured:</strong></font></li>
+      <li><font color="#408080"><strong>going:</strong></font></li>
+      <li><font color="#408080"><strong>new:</strong></font></li>
+    </ul>
+    <p><strong>messaging:</strong><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>personal:</strong><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>registration:</strong><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>search:</strong><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>sell:</strong><ul>
+      <li>&nbsp;</li>
+    </ul>
+    <p><strong>sellers:</strong><ul>
+      <li>&nbsp;</li>
+    </ul>
+<!--- 
+    <p><strong>studio:</strong><ul>
+      <li><small>This section is new, and has not yet been completed.</small></li>
+    </ul>
+ --->
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" colspan="2"><font color="#008000"><strong>Rule of thumb:</strong></font><ul>
+      <li>All generated pages will have a time stamp like this: &quot;<b>last updated:</b>
+        mm/dd/yyy, hh:mm:ss&quot;.&nbsp; These pages are scheduled to re-generate every 2 hours.
+        &nbsp; In order to make thanges to pages with this stamp, you will need to modify their
+        respective source file.</li>
+    </ul>
+    </td>
+  </tr>
+</table>
+
+<hr size="1" noshade>
+
+<table border="0" cellspacing="0" cellpadding="3" width="100%">
+  <tr>
+    <td align="left"></td>
+    <td align="right"><a href="../help_intro.cfm">Back to main help page</a></td>
+  </tr>
+</table>
+</body>
+</html>

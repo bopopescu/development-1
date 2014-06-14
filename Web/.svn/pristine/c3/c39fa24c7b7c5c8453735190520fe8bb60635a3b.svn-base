@@ -1,0 +1,6 @@
+#Tue Sep 20 16:47:29 CDT 2011
+com.aptana.ide.editor.html.AUTO_SAVE_PROMPTED=true
+com.aptana.ide.editor.html.preview.HTML_PREVIEW_ADDON_TYPE=com.aptana.ide.editor.html.preview.SERVER_BASED_TYPE
+com.aptana.ide.editor.html.preview.HTML_PREVIEW_VALUE=
+eclipse.preferences.version=1
+com.aptana.ide.editor.html.BROWSER_PREVIEW_PREFERENCE=Firefox,IE

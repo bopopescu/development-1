@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<table>
+	<createInterface>TRUE</createInterface>
+	<displayName>Galleryadmin</displayName>
+	<displayPlural>Galleryadmins</displayPlural>
+	<entityName>galleryadmin</entityName>
+	<ForeignKeyLabel>FIRSTNAME</ForeignKeyLabel>
+	<hasForeignKeys>FALSE</hasForeignKeys>
+	<hasJoinTable>FALSE</hasJoinTable>
+	<identity>GALLERYADMINID</identity>
+	<isAutoIncrementing>true</isAutoIncrementing>
+	<isJoinTable>FALSE</isJoinTable>
+	<isReferencedAsForeignKey>false</isReferencedAsForeignKey>
+	<isView>false</isView>
+	<name>GALLERYADMIN</name>
+	<orderby>GALLERYADMINID asc</orderby>
+	<plural>galleryadmins</plural>
+	<prefix></prefix>
+	<rowcount>3</rowcount>
+	<schema></schema>
+	<softDelete>FALSE</softDelete>
+</table>

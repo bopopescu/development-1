@@ -1,0 +1,195 @@
+<cfsetting enablecfoutputonly="Yes">
+<!---
+  index.cfm
+  
+  main bid page...
+  displays form using "itemnum"...
+  and/or displays confirm bid...
+  
+  Files used:
+    - ./eml_bidconfirmation.cfm
+    - ./eml_outbiduser.cfm
+    - ./proxy.cfm
+    - /functions/cf_currencies.cfm
+    - /functions/checkbid.cfm
+    - /functions/setupDefProxyMax.cfm
+    - /functions/timenow.cfm
+    - /includes/404notfound.cfm
+    - /includes/app_globals.cfm
+    - /includes/copyrights.cfm
+  
+--->
+
+<!--- include globals --->
+<cfinclude template="../includes/app_globals.cfm">
+  
+<!--- define TIMENOW --->
+<cfmodule template="../functions/timenow.cfm">
+
+<!--- Include session tracking template --->
+<cfinclude template="../includes/session_include.cfm">
+
+<!--- set auction_mode --->
+<cfquery username="#db_username#" password="#db_password#" name="get_auction_mode" datasource="#DATASOURCE#">
+   	SELECT auction_mode
+    FROM items
+   	WHERE itemnum = #itemnum#
+</cfquery>
+<cfset session.auction_mode = get_auction_mode.auction_mode>
+<cfset auction_mode = session.auction_mode>
+
+
+<cfquery username="#db_username#" password="#db_password#" name="get_user" datasource="#DATASOURCE#">
+   SELECT user_id, nickname, password
+   FROM users
+   WHERE nickname = '#nickname#' AND password = '#password#'
+</cfquery>
+<cfif #get_user.RecordCount#>
+   <cfset session.user_id = #get_user.user_id#>
+   <cfset session.nickname = #get_user.nickname#>
+   <cfset session.password = #get_user.password#>
+</cfif>   
+
+<cfif isDefined('url.itemnum')>
+   <cfset session.itemnum = url.itemnum>
+</cfif>
+
+<!--- define if item number valid & retrieve info --->
+<cftry>
+  <!--- get item's info --->
+  <cfquery username="#db_username#" password="#db_password#" name="get_ItemInfo" datasource="#DATASOURCE#">
+      SELECT itemnum, title, name, auction_type, auction_mode, increment, increment_valu, minimum_bid, 
+             reserve_bid, date_end, quantity,dynamic, buynow_price, buynow
+        FROM items
+       WHERE itemnum = #itemnum#
+  </cfquery>
+  
+  
+  <!--- define found/not found --->
+  <cfset isvalid = IIf(get_ItemInfo.RecordCount, DE("TRUE"), DE("FALSE"))>
+  
+  <cfcatch>
+    <cfset isvalid = "FALSE">
+  </cfcatch>
+</cftry>
+
+<!--- if valid, setup info --->
+<cfif isvalid>
+  
+  <!--- enable Session state management --->
+  <cfset mins_until_timeout = 60>
+  <cfapplication name="UserManagement" sessionmanagement="Yes" sessiontimeout="#CreateTimeSpan(0, 0, mins_until_timeout, 0)#">
+
+  <cfparam name="session.nickname" default="">
+  <cfparam name="session.password" default="">
+  <cfparam name="session.bid"      default="0">
+  <cfparam name="session.bidType" default="">
+  <cfparam name="session.quantity" default="">
+  <cfparam name="session.increment_valu" default="">
+  
+  <cfset session.nickname = iif(isdefined("nickname"), "nickname", "session.nickname")>
+  <cfset session.password = iif(isdefined("password"), "password", "session.password")>
+  <cfset session.bid      = iif(isdefined("bid"),      "bid",      "session.bid")>
+  <cfset session.bidType = iif(isdefined("bidType"), "bidType", "session.bidType")>
+  <!---<cfset session.quantity = iif(isdefined("quantity"), "quantity", "session.quantity")>--->
+  <cfset session.quantity = 1>
+  <cfset session.increment_valu = iif(isdefined('increment_valu'), "increment_valu", "session.increment_valu")>
+    
+  <cfinclude template="./inc_bid_logic.cfm">
+
+</cfif>
+
+<!--- get bool iescrow enabled --->
+<!--- if iescrow enabled, get current vals --->
+<!--- <cfif hIEscrow.bEnabled>
+  
+  <cfmodule template="../functions/IEscrowIcons.cfm"
+    sOpt="DISP/FRONTPAGE">
+</cfif> --->
+
+<cftry>
+  <cfset title_itemnum = "##" & get_ItemInfo.itemnum>
+  <cfset title_itemtitle = " (" & get_ItemInfo.title & ")">
+
+  <cfcatch>
+    <cfset title_itemnum = "">
+    <cfset title_itemtitle = "">
+
+  </cfcatch>
+</cftry>
+
+<!--- output page --->
+<cfsetting enablecfoutputonly="No">
+
+
+<cfoutput>
+<html>
+<head>
+	<title>Equibidz-Bidding</title>
+	<meta name="keywords" content="#get_layout.keywords#">
+	<meta name="description" content="#get_layout.descriptions#">
+	<link rel=stylesheet href="#VAROOT#/includes/stylesheet.css" type="text/css">
+	<link rel=stylesheet href="#VAROOT#/includes/stylenew.css" type="text/css">		
+</head>
+<cfinclude template="../includes/menu_bar.cfm"> 
+
+<body>
+<table border='0' width='1000' style="background-image: url('images/bg_table.jpg')" cellpadding="0" cellspacing="0">
+<tr><td><br></td></tr>
+<tr valign="top">
+	<td align="center">
+		<!--- Start: Main Body --->
+		<div align="center">
+		<table border='0' width='800' cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+		  	<cfif isdefined("buynow_yes") or isdefined("buynow")>
+			   <font size=5><b>Buy on Item</b></font>
+			<cfelseif #get_ItemInfo.auction_mode# EQ 0>
+               <font size=5><b>Bid on Item</b></font>
+			<cfelseif #get_ItemInfo.auction_mode# EQ 1>
+               <font size=5><b>Offer on Item or Service</b></font>
+			</cfif>
+            <hr size=1 color=#heading_color# width=100% color="#heading_color#" noshade> 
+            </td>
+          </tr>
+        </table>
+        <cfif isvalid>
+           <cfparam name="isGoodBid" default="false">
+        
+           <cfif (IsDefined("reviewBid") OR IsDefined("buynow_yes")) AND isGoodBid>
+
+	          <cfinclude template="./inc_form_verify_bid.cfm">
+
+           <cfelseif IsDefined("submitBid") AND isGoodBid>
+
+             <cfinclude template="./inc_html_final.cfm">
+
+           <cfelse>
+
+             <cfinclude template="./inc_form_redo_bid.cfm">
+             
+           </cfif>
+
+        <cfelse>
+          <cfinclude template="./inc_item_not_found.cfm">
+        </cfif>
+        <br>
+        <br>
+		</div>
+		<tr>
+			<td>
+				<hr width='#get_layout.page_width#' size=1 color="#heading_color#" noshade>
+			</td>
+		</tr>			
+		<tr>
+			<td align="left">
+				<cfinclude template="../includes/copyrights.cfm">
+			</td>
+		</tr>
+	</td>
+</tr>
+<table>
+</cfoutput>
+</body>
+</html>
