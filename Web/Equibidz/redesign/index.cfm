@@ -2,8 +2,7 @@
 <cfset current_page = "indexhome">
 <cfinclude template = "./includes/app_globals.cfm">
 
-<!--- Include session tracking template (also sets link colors) --->
-<cfinclude template="./includes/session_include.cfm">
+
 
 <!--- define TIMENOW --->
 <cfmodule template="./functions/timenow.cfm">

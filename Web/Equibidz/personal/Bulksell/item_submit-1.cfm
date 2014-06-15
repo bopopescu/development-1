@@ -21,8 +21,7 @@
 <cfif isdefined("cookie.user_id") eq 0 OR cookie.user_id eq "">
 	<cflocation url="index.cfm" addtoken="No">
 </cfif>
-<!--- Include session tracking template --->
-<cfinclude template="../../includes/session_include.cfm">
+
 <!--- <cfinclude template="setdefaults.cfm"> --->
 <cfparam name="studio" default="0">
 <cfparam name="picture_studio" default="">

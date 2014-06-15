@@ -33,8 +33,7 @@
 </cftry>
 -->
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 
  <!--- set auction_mode --->
 		<cfquery username="#db_username#" password="#db_password#" name="get_auction_mode" datasource="#DATASOURCE#">

@@ -1,5 +1,4 @@
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 
  <!--- include globals --->
 <cfset current_page="register">

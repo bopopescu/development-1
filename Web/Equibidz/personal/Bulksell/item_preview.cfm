@@ -31,8 +31,7 @@
 <cfif auction_mode is 0>
 <!-- Regular auctions -- reverse auction begins on line 819 -->
 
-  <!--- Include session tracking template --->
-  <cfinclude template="../includes/session_include.cfm">
+  
 
   <!--- Check for item storage session variables --->
   <cfif #isDefined ("session.held_item")# is 1>
@@ -856,8 +855,7 @@
 <!---------------------------------------------------------------------------------------------->
 <cfelse>
 <!-- Reverse Auction -->
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 <!--- Check for item storage session variables --->
 <cfif #isDefined ("session.held_item")# is 1>

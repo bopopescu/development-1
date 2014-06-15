@@ -19,8 +19,7 @@
 <!--- inc app_globals.cfm --->
 <cfinclude template="../includes/app_globals.cfm">
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 <cfif session.auction_mode is 0>
 
 <!-- Regular Auction --> 

@@ -7,8 +7,7 @@
   <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
  </head>
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 
  <!--- Include this module to obtain a unique ID for the user --->
  <CFMODULE TEMPLATE="../functions/epoch.cfm">

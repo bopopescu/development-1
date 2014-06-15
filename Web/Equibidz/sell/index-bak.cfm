@@ -5,8 +5,7 @@ Auction items listing form.
 
 <!--- include globals --->
 <cfinclude template="../includes/app_globals.cfm">
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 <cfif isDefined('session.user_id') is 0>
 <cflocation url="/login.cfm?login=1&path=#script_name#" addtoken="No"></cfif>

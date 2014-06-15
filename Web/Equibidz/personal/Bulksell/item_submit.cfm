@@ -11,8 +11,7 @@
 <cftry>
   <!--- include globals --->
   <!--- <cfinclude template="../../includes/app_globals.cfm"> --->
-  <!--- Include session tracking template, mostly disabled, using hidden form fields and cookies --->
-<cfinclude template="../../includes/session_include.cfm">
+  
   <!--- define TIMENOW --->
   <cfmodule template="../../functions/timenow.cfm">
   <cfcatch>

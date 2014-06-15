@@ -7,8 +7,7 @@
 <!--- include globals --->
 <cfinclude template="../includes/app_globals.cfm">
 
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 <!--- Check for invalid page access --->
  <cfif (#isDefined ("session.user_id")# is 0) or

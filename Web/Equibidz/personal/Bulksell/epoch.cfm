@@ -11,8 +11,7 @@
 
 
 
-<!--- Include session tracking template --->
-<cfinclude template="../../includes/session_include.cfm">
+
 
 <cfparam name="db_username" default="">
 <cfparam name="db_password" default="">

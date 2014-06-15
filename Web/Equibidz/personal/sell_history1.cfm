@@ -38,8 +38,7 @@ select * from status
   <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
  </head>
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 
  <!--- define TIMENOW --->
  <cfmodule template="../functions/timenow.cfm">
@@ -636,8 +635,7 @@ totalpages="#total_pages#"
   <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
  </head>
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 
  <!--- define TIMENOW --->
  <cfmodule template="../functions/timenow.cfm">

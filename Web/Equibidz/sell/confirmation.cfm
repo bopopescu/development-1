@@ -3,8 +3,7 @@
  <cfinclude template="../includes/app_globals.cfm">
   
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 
  <!--- Include this module to obtain a unique ID for the user --->
  <CFMODULE TEMPLATE="../functions/epoch.cfm">

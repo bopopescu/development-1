@@ -1,5 +1,4 @@
-<!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+
  
  <!--- include globals --->
  <cfinclude template="../includes/app_globals.cfm">

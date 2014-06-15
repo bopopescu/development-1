@@ -7,8 +7,7 @@
 <!--- Include EPOCH module  --->
  <CFMODULE TEMPLATE="../../functions/epoch.cfm">
  
-  <!--- Include session tracking template --->
- <cfinclude template="../../includes/session_include.cfm">
+  
 
  
 	

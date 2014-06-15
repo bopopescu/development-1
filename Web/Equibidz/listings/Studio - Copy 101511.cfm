@@ -22,8 +22,7 @@ added body tag include & stylesheet.css - 11/06/00TL
 <cfinclude template = "../includes/app_globals.cfm">
 <cfmodule template="../functions/timenow.cfm">
 
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 <cfparam name="category" default="0">
 <cfparam name="hot_auctions" default="FALSE">                              

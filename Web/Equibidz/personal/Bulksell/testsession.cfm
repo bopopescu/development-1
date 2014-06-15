@@ -1,7 +1,6 @@
 <!--- include globals --->
 <cfinclude template="../../includes/app_globals.cfm">
-<!--- Include session tracking template, mostly disabled, using hidden form fields and cookies --->
-<cfinclude template="../../includes/session_include.cfm">
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 

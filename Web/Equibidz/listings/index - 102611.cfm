@@ -7,8 +7,7 @@ Modified 10/30/11 - JM
 <!--- include globals --->
 <cfinclude template="../includes/app_globals.cfm">
 
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 <!--- define TIMENOW --->
 <cfmodule template="../functions/timenow.cfm">

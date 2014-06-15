@@ -18,8 +18,7 @@
  </head>
 
 <cfsetting enablecfoutputonly="Yes">
-<!--- Include session tracking template --->
-<cfinclude template="../../includes/session_include.cfm">
+
 <cfmodule template="../../functions/timenow.cfm">
 <!--- include globals --->
   <cfinclude template="../../includes/app_globals.cfm">

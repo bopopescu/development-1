@@ -27,8 +27,7 @@
 	<cfinclude template="../includes/app_globals.cfm">
 </cfif>
   
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 
 

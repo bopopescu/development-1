@@ -1,7 +1,6 @@
 <cfsetting enablecfoutputonly="yes">
 
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 
 <cfset bid_qty = 1>

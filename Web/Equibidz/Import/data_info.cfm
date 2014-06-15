@@ -1,6 +1,5 @@
 <cfinclude template = "../includes/app_globals.cfm">
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 <cfif (#isDefined ("session.user_id")# is 0) or
        (#isDefined ("session.password")# is 0)>

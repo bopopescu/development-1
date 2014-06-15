@@ -10,8 +10,7 @@
 
 --->
 
-<!--- Include session tracking template --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 <!--- Check for item storage session variables --->
 <cfif #isDefined ("session.held_item")# is 1>

@@ -1,8 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 <cfsetting enablecfoutputonly="Yes">
-<!--- Include session tracking template --->
-<cfinclude template="../../includes/session_include.cfm">
+
 
 <!--- include globals --->
   <cfinclude template="../../includes/app_globals.cfm">

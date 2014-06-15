@@ -3,8 +3,7 @@
  <cfinclude template="../includes/app_globals.cfm">
  <cfmodule template="../functions/timenow.cfm">
  
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
  <cfif isDefined('session.user_id')>
  <cfelse>
  <cflocation url="../personal/index.cfm">

@@ -32,8 +32,7 @@
 <!--- inc app_globals --->
 <cfinclude template="../includes/app_globals.cfm">
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 <cfif session.auction_mode is 0>
 <!-- Regular Auctions --> <!-- Reverse Auction begins on line 326 -->
 <!--- chk required params --->

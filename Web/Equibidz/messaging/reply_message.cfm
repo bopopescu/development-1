@@ -4,8 +4,7 @@
   <link rel=stylesheet href="../includes/stylesheet.css" type="text/css">
  </head>
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 <!--- 
 <cfif isDefined('form.user_id')>
 <cfset session.user_id = form.user_id>

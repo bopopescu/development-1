@@ -13,8 +13,7 @@
 --->
 <cfsetting enablecfoutputonly="Yes">
 <cfinclude template="../includes/app_globals.cfm">
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 <cfif session.auction_mode is 0>
 <!-- Regular Auctions -- Reverse Auction begins on line 238 > -->
 <!--- define values --->

@@ -7,8 +7,7 @@
 
 
 <cfsetting enablecfoutputonly="Yes">
-<!--- Include session tracking template --->
-<cfinclude template="../../includes/session_include.cfm">
+
 
 <cfparam name="itemnum" default="0">
 <cfparam name="img_width" default="500">

@@ -1,7 +1,6 @@
 <cfsetting enablecfoutputonly="yes">
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
 <cfif session.auction_mode is 0>
 <!-- Regular Auctions -- Reverse Auction on line  46-->
           <!--- see if user still high bidder --->

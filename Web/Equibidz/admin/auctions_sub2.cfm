@@ -1,7 +1,6 @@
 <!--- SourceSafe $Logfile: /Visual-Auction-4/admin/ad_categories.cfm $ $Revision: 2 $ $Date: 1/27/00 8:39p $ $Author: Davidh1 $ --->
 <cfinclude template = "../includes/app_globals.cfm">
-<!--- Include session tracking template (also sets link colors) --->
-<cfinclude template="../includes/session_include.cfm">
+
 
 
 <cfif #isDefined ("submit")# is 0>

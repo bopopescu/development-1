@@ -3,8 +3,7 @@
   
 
 
- <!--- Include session tracking template --->
- <cfinclude template="../includes/session_include.cfm">
+ 
  
  <cfset structdelete(session, "category1")>
  <cfset structdelete(session, "category2")>
