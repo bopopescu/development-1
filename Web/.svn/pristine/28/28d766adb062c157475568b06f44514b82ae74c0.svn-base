@@ -1,0 +1,133 @@
+<cfsetting enablecfoutputonly="yes">
+<!---
+  Support/FAQ
+  faqquestdetail.cfm
+  Displays answer to specified question
+  06/16/00 TLingard
+--->
+<cfinclude template = "../includes/app_globals.cfm">
+
+<!--- Include session tracking template --->
+<cfinclude template="../includes/session_include.cfm">
+
+<!--- define TIMENOW --->
+<cfmodule template="../functions/timenow.cfm">
+
+<cfset quest_id = url.quest_id>
+
+<cfquery name="showquest" username="#db_username#" password="#db_password#" datasource="#DATASOURCE#">
+SELECT *
+FROM faqquestion
+WHERE quest_id = #quest_id#
+AND answer <> ''
+</cfquery>
+
+<cfset sub_id = showquest.sub_id>
+
+<cfquery name="listsub" username="#db_username#" password="#db_password#" datasource="#DATASOURCE#">
+SELECT subjects
+FROM faqsubject
+WHERE sub_id = #sub_id#
+</cfquery>
+
+<cfquery name="questwsub" username="#db_username#" password="#db_password#" datasource="#DATASOURCE#">
+SELECT quest_id
+FROM faqquestion
+WHERE sub_id = #sub_id#
+AND active = 1
+AND answer <> ''
+</cfquery>
+
+<cfset questlist = ValueList(questwsub.quest_id)>
+
+<cfset nextid = ListFind(questlist, "#quest_id#") + 1>
+<cfset backid = ListFind(questlist, "#quest_id#") - 1>
+
+<cfif nextid gt ListLen(questlist)>
+<cfset nextid = 1>
+</cfif>
+<cfif backid lt 1>
+<cfset backid = ListLen(questlist)>
+</cfif>
+
+<cfset next = ListGetAt(questlist, "#nextid#")>
+<cfset back = ListGetAt(questlist, "#backid#")>
+
+<html>
+<head>
+	<title>FAQ</title>
+</head>
+
+<cfoutput>
+<cfinclude template="../includes/bodytag.html">
+ <cfinclude template="../includes/menu_bar.cfm">
+<!--- The main table --->
+<div align="center">
+   <table border=0 cellspacing=0 cellpadding=2 width=800>
+
+  <tr><td><center></center><br><br></td></tr>
+  <tr><td><font size=4><b>#listsub.subjects#</b></font></font></td></tr>
+  <tr><td><hr size=1 color=#heading_color# width=100%></td></tr>
+  <tr>
+   <td>
+    <font size=3>
+     If you have addition questions you may <a href="./faqsubmit.cfm">submit them here</a>.
+    <br>
+    <center>
+  <table border=0 cellpadding=5 width=100%>
+    <tr>
+     <td>
+      <table border=0 cellspacing="10" width="90%">
+       <tr>
+        <td width="20%" align="right" valign="top"><font size="3"><b>Question :</b></font></td>
+        <td>#showquest.question#</td>
+       </tr>
+       <tr>
+        <td></td>
+        <td></td>
+       </tr>
+       <tr>
+        <td align="right" valign="top"><font size="3" color=0000ff><b> Answer :</b></font></td>
+        <td>#showquest.answer#</td>
+       </tr>
+       <tr>
+        <td></td>
+        <td></td>
+       </tr>
+      </table>
+	  <table border=0 width="100%">
+	   <tr>
+	    <td width="33%" align="left"><a href="faqquestdetail.cfm?quest_id=#back#">< Back</a></td>
+	    <td width="33%" align="center"><a href="#VAROOT#/support/index.cfm">Support</a></font></td>
+	    <td width="33%" align="right"><a href="faqquestdetail.cfm?quest_id=#next#">Next ></a></td>
+	   </tr>
+	  </table>
+    </td>
+   </tr>
+  </table>
+  </td>
+ </tr>
+</table>
+
+</table>
+<table border=0 cellpadding=2 cellspacing=0 width="#getLayout.page_width#">
+        <tr>
+          <td>
+            <br>
+            <br>
+                        <hr width=#getLayout.page_width# size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            
+              <cfinclude template="../includes/copyrights.cfm">
+          
+          </td>
+        </tr>
+      </table></div>
+
+</center>
+</body>
+</html>
+</cfoutput>

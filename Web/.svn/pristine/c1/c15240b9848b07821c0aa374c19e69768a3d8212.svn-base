@@ -1,0 +1,2 @@
+<cfinclude template="../includes/app_globals.cfm">
+<cfoutput>#getLayout.terms#</cfoutput>

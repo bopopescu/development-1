@@ -1,0 +1,23 @@
+<!---
+  --- DateUtil
+  --- --------
+  ---
+  --- Provides date and time related functions.
+  ---
+  --- author: bsterner
+  --- date:   6/14/14
+  --->
+<cfcomponent displayname="Date Util" hint="Provides date and time related functions." extends="AbstractBaseComponent" accessors="true" output="false" persistent="false">
+
+
+	<cffunction name="getEpoch" displayname="Get EPOCH" hint="Gets Defines Unix time seconds since 12/31/1999 24:00:00 GMT set "zone_adjust" +/- to calc GMT from your server time" access="public" output="false" returntype="date">
+		<!--- define # of hours to adjust server time to get GMT time --->
+		<cfset var zone_adjust = 8>
+		<!--- define GMT time --->
+		<cfset var GMTtime = DateAdd("h", zone_adjust, Now())>
+		<!--- set EPOCH in Caller --->
+		<cfset var epoch = DateDiff("s", "12-31-1979 00:00:00", GMTtime)>
+
+		<cfreturn epoch>
+	</cffunction>
+</cfcomponent>

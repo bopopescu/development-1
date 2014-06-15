@@ -1,0 +1,178 @@
+<!--- 
+add_watchlist.cfm
+Phillip Nguyen 1-18-2001
+ --->
+
+<cfsetting enablecfoutputonly="yes">
+
+ <!--- include globals --->
+ <cfinclude template="../includes/app_globals.cfm">
+  
+ <!--- Include session tracking template --->
+ <cfinclude template="../includes/session_include.cfm">
+
+ <!--- define TIMENOW --->
+ <cfmodule template="../functions/timenow.cfm">
+
+ <!--- Get the listing background color --->
+ <cfquery username="#db_username#" password="#db_password#" name="get_listing_bgcolor" datasource="#DATASOURCE#">
+  SELECT pair
+    FROM defaults
+   WHERE name = 'listing_bgcolor'
+ </cfquery>
+ <cfset #header_bg# = #get_listing_bgcolor.pair#>
+
+<cfsetting enablecfoutputonly="no">
+<!--- Get item info --->
+<cfquery username="#db_username#" password="#db_password#" name="get_iteminfo" datasource="#DATASOURCE#">
+	SELECT *
+    FROM items
+   	WHERE itemnum = #itemnum#
+</cfquery>
+
+<!--- check id and password --->
+<cfif isdefined("submit") and #submit# eq "Watch Item">
+	<cfquery username="#db_username#" password="#db_password#" name="verify_login" datasource="#DATASOURCE#">
+    SELECT user_id, nickname, watch_list, password, confirmation
+      FROM users
+     WHERE nickname = '#user_id#'
+     <cfif isNumeric(user_id) is 1>
+        OR user_id = #user_id#
+     </cfif>
+       AND password = '#password#'
+	   AND is_active = 1
+   </cfquery>
+   <cfif verify_login.recordCount is 0>
+    <cfoutput><cflocation url="add_watchlist.cfm?failed=1&itemnum=#itemnum#"></cfoutput>
+   <cfelse>
+   		<cfif verify_login.confirmation eq 0><cfoutput><cflocation url="add_watchlist.cfm?failed=2&itemnum=#itemnum#"></cfoutput></cfif>
+   		<cfset session.password = verify_login.password>
+    	<cfset session.nickname = verify_login.nickname>
+		
+   		<cfloop index="N" list="#verify_login.watch_list#" delimiters=",">
+			<cfif #itemnum# eq #N#>
+				<cfoutput><cflocation url="add_watchlist.cfm?duplicate=1&itemnum=#itemnum#"></cfoutput>
+			</cfif>
+ 		</cfloop>
+		
+	  <cfif #verify_login.watch_list# neq "">
+			<cfparam name="watchlist" default="">
+ 		<cfloop index="I" list="#verify_login.watch_list#" delimiters=",">
+ 			<cfquery username="#db_username#" password="#db_password#" name="get_expired_items" datasource="#DATASOURCE#">
+  				SELECT *
+    			FROM items
+   				WHERE date_end > #TIMENOW#
+   				AND itemnum = #I#
+			</cfquery>
+			<cfif #get_expired_items.recordcount# eq 1>
+				<cfset watchlist = #ListAppend(watchlist, I, ",")#>
+			</cfif>
+ 		</cfloop>
+			<cfset new_watchlist = #ListAppend(watchlist, itemnum, ",")#>
+	  <cfelse>
+			<cfset new_watchlist = #ListAppend(verify_login.watch_list, itemnum, ",")#>
+	  </cfif>
+	  
+		<cfquery username="#db_username#" password="#db_password#" name="add_watch_list" datasource="#DATASOURCE#">
+			UPDATE users
+			SET watch_list = '#new_watchlist#'
+			WHERE user_id = #verify_login.user_id#
+			AND password = '#password#'
+		</cfquery>
+		
+   </cfif>
+</cfif>
+
+
+
+<html>
+ <head>
+  <title>Add watch list</title>
+  <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
+ </head>
+
+ <cfinclude template="../includes/bodytag.html">
+ <cfinclude template="../includes/menu_bar.cfm">
+
+
+ <cfoutput>
+
+  <!--- The main table --->
+ <div align="center">
+   <table border=0 cellspacing=0 cellpadding=2 width=800>
+    <tr><td><center></center><br><br></td></tr>
+    <tr><td><font size=4 color="000000"><b>Add watch list</b></font></td></tr>
+    <tr><td><hr size=1 color=#heading_color# width=100%></td></tr>
+    <tr>
+     <td>
+      <!--- <font size=3>
+       This section of our site allows you to change and update your personal information,
+       as well as view statistics such as your bidding history, feedback you've left, and
+       items you've auctioned.
+       <br><br> --->
+       
+	   		<cfif isdefined("submit") and #submit# eq "Watch Item" and verify_login.recordCount gt 0>
+				<font color="green"><b>The item has been added into your watch list successfully</b>.</font><br><br>
+				To view watch list go to <a href="index.cfm"><b>Personal Page</b></a>.<br>
+				<a href="../listings/details/index.cfm?itemnum=#itemnum#"><b>Go back</b></a> to previous bidding page.
+			<cfelse>
+			  <cfif isdefined("duplicate")>
+				<font color="green"><b>You had previously added this item in your watch list</b>.</font><br><br>
+				To view watch list go to <a href="index.cfm"><b>Personal Page</b></a>.<br>
+				<a href="../listings/details/index.cfm?itemnum=#itemnum#"><b>Go back</b></a> to previous bidding page.
+			  <cfelse>
+				<cfif #isDefined ("failed")# and failed eq 1>
+        			<font color="ff0000"><b>Invalid account or account not active.</b></font><br>
+       			</cfif>
+				<cfif #isDefined ("failed")# and failed eq 2>
+        			<font color="ff0000"><b>Please check your email to confirm your registration before loging in.</b></font><br>
+       			</cfif>
+			<font size="+2">Add this item to my Watch list:<br>
+			 Item&nbsp;###get_iteminfo.itemnum#&nbsp;&nbsp;#get_iteminfo.title#<br><br></font>
+
+        You must enter your ID and password below to add this item to the watch list link of your <a href="index.cfm"><b>Personal Page</b></a>.<br><br>
+		  
+       <form name="loginform" action="add_watchlist.cfm" method="post">
+	   		<input  type="Hidden" name="itemnum" value="#url.itemnum#">
+        <table border=0 cellspacing=0 cellpadding=4>
+<!---
+         <tr><td bgcolor="ffffff"><b>User ID:</b></td><td><input type="text" name="user_id" size=15 maxlength=20></td><td>(User ID number or nickname)</td></tr>
+         <tr><td bgcolor="ffffff"><b>Password:</b></td><td><input type="password" name="password" size=15 maxlength=12></td></tr>
+--->        
+		<cfif #isDefined ("session.nickname")# and #isDefined ("session.password")#>
+			<cfset nickname = #session.nickname#>
+			<cfset password = #session.password#>
+		<cfelse>
+			<cfset nickname = "">
+			<cfset password = "">
+		</cfif>
+         <tr><td bgcolor="ffffff"><b>User ID:</b></td><td><input type="text" name="user_id" value="#nickname#" size=15 maxlength=20></td><td>(User ID number or nickname)</td></tr>
+         <tr><td bgcolor="ffffff"><b>Password:</b></td><td><input type="password" name="password" value="#password#" size=15 maxlength=12></td></tr>
+         <tr><td>&nbsp;</td><td><input type="submit" name="submit" value="Watch Item" width=75></td></tr>       
+        
+        </table>
+        <br>
+        
+       </form>
+	   </cfif>
+	   </cfif>
+     </td>
+    </tr></table>
+   <table border=0 cellpadding=2 cellspacing=0 width="#getLayout.page_width#">
+        <tr>
+          <td>
+            <br>
+            <br>
+                        <hr width=#getLayout.page_width# size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            
+              <cfinclude template="../includes/copyrights.cfm">
+          
+          </td>
+        </tr>
+      </table></cfoutput></div>
+ </body>
+</html>

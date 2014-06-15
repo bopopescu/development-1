@@ -1,0 +1,835 @@
+<!---
+  emailauction.cfm
+  
+  form used for sending auction information to a friend
+  uses eml_auction2friend.cfm
+  
+--->
+<cfsetting enablecfoutputonly="Yes">
+
+<cftry>
+  <!--- include globals --->
+  <cfinclude template="../../includes/app_globals.cfm">
+  
+  <!--- define TIMENOW --->
+  <cfmodule template="../../functions/timenow.cfm">
+  
+  <cfcatch>
+    <cflocation url="http://#CGI.SERVER_NAME##VAROOT#/includes/404notfound.cfm">
+  </cfcatch>
+</cftry>
+
+<cfif auction_mode is 0>
+<!-- Regular Auctions --> <!-- Reverse Auction begins on line 436 -->
+<!--- define if item number valid & retrieve info --->
+<cftry>
+  <!--- get item's info --->
+  <cfquery username="#db_username#" password="#db_password#" name="get_ItemInfo" datasource="#DATASOURCE#">
+      SELECT I.itemnum, I.title, I.date_end, I.quantity, I.minimum_bid, I.description
+        FROM items I
+       WHERE I.itemnum = #itemnum#
+  </cfquery>
+  
+  <!--- define found/not found --->
+  <cfset isvalid = IIf(get_ItemInfo.RecordCount, DE("TRUE"), DE("FALSE"))>
+  
+  <cfcatch>
+    <cfset isvalid = "FALSE">
+  </cfcatch>
+</cftry>
+
+<!--- if valid setup info --->
+<cfif isvalid>
+
+  <!--- enable Session state management --->
+  <cfset mins_until_timeout = 60>
+  <cfapplication name="UserManagement" sessionmanagement="Yes" sessiontimeout="#CreateTimeSpan(0, 0, mins_until_timeout, 0)#">
+  
+  <!--- define nickname --->
+  <cfif IsDefined("Form.nickname")>
+    <cfset nickname = Trim(Form.nickname)>
+  <cfelseif IsDefined("Session.nickname")>
+    <cfset nickname = Trim(Session.nickname)>
+  <cfelse>
+    <cfset nickname = "">
+  </cfif>
+  
+  <!--- define friends email --->
+  <cfif IsDefined("Form.email")>
+    <cfset email = Trim(Form.email)>
+  <cfelse>
+    <cfset email = "">
+  </cfif>
+  
+  <!--- define include description --->
+  <cfif IsDefined("Form.includedescription")>
+    <cfset includedescription = "CHECKED">
+  <cfelse>
+    <cfset includedescription = "">
+  </cfif>
+  
+  <!--- define message --->
+  <cfif IsDefined("Form.message")>
+    <cfset message = Trim(Form.message)>
+  <cfelse>
+    <cfset message = "I saw this auction posted and thought you might be interested in it. =)">
+  </cfif>
+  
+  <!--- define chk values --->
+  <cfset chkAccount = "TRUE">
+  <cfset chkFriendEmail = "TRUE">
+  <cfset chkSubmit = "TRUE">
+    
+  <!--- if sumbit, check info --->
+  <cfif IsDefined("Form.sendemail")>
+    
+    <!--- get currency type --->
+    <cfquery username="#db_username#" password="#db_password#" name="getCurrency" datasource="#DATASOURCE#">
+        SELECT pair AS type
+          FROM defaults
+         WHERE name = 'site_currency'
+    </cfquery>
+    
+    <!--- chk account --->
+    <cftry>
+      <cfquery username="#db_username#" password="#db_password#" name="getAccount" datasource="#DATASOURCE#">
+          SELECT name, email, nickname
+            FROM users
+           WHERE nickname = '#LCase(Trim(Form.nickname))#'
+             AND password = '#Trim(Form.password)#'
+             AND is_active = 1
+			 AND confirmation = 1
+             AND last_login_date <> #CreateODBCDateTime("12/31/1969 00:00:00")#
+      </cfquery>
+      
+      <cfif getAccount.RecordCount>
+        <cfset chkAccount = "TRUE">
+        <cfset fromName = Trim(getAccount.name)>
+        <cfset fromEmail = Trim(getAccount.email)>
+      <cfelse>
+        <cfthrow>
+      </cfif>
+      
+      <cfcatch>
+        <cftry>
+          <cfquery username="#db_username#" password="#db_password#" name="getAccount" datasource="#DATASOURCE#">
+              SELECT name, email, nickname
+                FROM users
+               WHERE user_id = #Trim(Form.nickname)#
+                 AND password = '#Trim(Form.password)#'
+                 AND is_active = 1
+                 AND last_login_date <> #CreateODBCDateTime("12/31/1969 00:00:00")#
+          </cfquery>
+          
+          <cfif getAccount.RecordCount>
+            <cfset chkAccount = "TRUE">
+            <cfset fromName = Trim(getAccount.name)>
+            <cfset fromEmail = Trim(getAccount.email)>
+          <cfelse>
+            <cfthrow>
+          </cfif>
+          
+          <cfcatch>
+            <cfset chkAccount = "FALSE">
+            <cfset fromName = "">
+            <cfset fromEmail = "">
+          </cfcatch>
+        </cftry>
+      </cfcatch>
+    </cftry>
+    
+    <!--- if account checks out load into Session --->
+    <cfif chkAccount>
+      <cfset Session.nickname = Trim(getAccount.nickname)>
+    </cfif>
+    
+    <!--- chk friend's email --->
+    <cftry>
+      <cfmodule template="../../functions/mailtest.cfm"
+        EMail="#Trim(Form.email)#">
+      
+      <cfif EMail_Level IS 0>
+        <cfset chkFriendEmail = "TRUE">
+        <cfset toEmail = Trim(Form.email)>
+      <cfelse>
+        <cfthrow>
+      </cfif>
+      
+      <cfcatch>
+        <cfset chkFriendEmail = "FALSE">
+        <cfset toEmail = "">
+      </cfcatch>
+    </cftry>
+    
+    <!--- define include description --->
+    <cfif IsDefined("Form.includedescription")>
+      <cfset incDescription = "TRUE">
+    <cfelse>
+      <cfset incDescription = "FALSE">
+    </cfif>
+    
+    <!--- define good submit --->
+    <cfif not Variables.chkAccount OR not Variables.chkFriendEmail>
+      <cfset chkSubmit = "FALSE">
+    </cfif>
+    
+    <!--- send email --->
+    <cfif Variables.chkSubmit>
+      
+      <!--- define current bid on item --->
+      <cfquery username="#db_username#" password="#db_password#" name="getCurrentBid" datasource="#DATASOURCE#">
+          SELECT MAX(bid) AS highbid, COUNT(bid) AS totalbids
+            FROM bids
+           WHERE itemnum = #get_ItemInfo.itemnum#
+      </cfquery>
+      
+      <cfif getCurrentBid.totalbids>
+        <cfset currentBid = numberFormat(getCurrentBid.highbid,numbermask)>
+      <cfelse>
+        <cfset currentBid = numberFormat(get_ItemInfo.minimum_bid,numbermask)>
+      </cfif>
+      
+      <!--- setup message --->
+      <cfset mimeType = "TEXT">
+      <cfset lf = Chr(13) & Chr(10)>
+      <cfset emlMesg = "">
+      <cfset emlMesg = emlMesg & Trim(Form.message) & lf & lf>
+      <cfset emlMesg = emlMesg & Variables.fromName & lf & lf & lf>
+      <cfset emlMesg = emlMesg & Trim(get_ItemInfo.title) & lf & lf>
+      <cfset emlMesg = emlMesg & "Item Number: " & get_ItemInfo.itemnum & lf>
+      <cfset emlMesg = emlMesg & "Available at: http://" & #CGI.SERVER_NAME# & "#VAROOT#/listings/details/index.cfm?itemnum=" & get_ItemInfo.itemnum & lf>
+      <cfset emlMesg = emlMesg & "Auction ends: " & DateFormat(get_ItemInfo.date_end, "mm/dd/yy") & " " & TimeFormat(get_ItemInfo.date_end, "HH:mm:ss") & lf>
+      <cfset emlMesg = emlMesg & "Quantity: " & get_ItemInfo.quantity & lf>
+      <cfset emlMesg = emlMesg & "Current bid: " & Variables.currentBid & " " & Trim(getCurrency.type) & lf & lf>
+      <cfif Variables.incDescription>
+        <cfset emlMesg = emlMesg & "Description:" & lf & lf>
+        <cfset emlMesg = HTMLCodeFormat(emlMesg)>
+        <cfset emlMesg = emlMesg & Trim(get_ItemInfo.description) & lf & lf>
+        <cfset mimeType = "HTML">
+      </cfif>
+      
+      <cftry>
+        <cfmodule template="eml_auction2friend.cfm"
+          to="#Variables.toEmail#"
+          from="#Variables.fromEmail#"
+          subject="Thought you might be interested in this..."
+          message="#emlMesg#"
+          mimeType="#mimeType#">
+        
+        <cfset sendIsSuccess = "TRUE">
+        
+        <cfcatch>
+          <cfset sendIsSuccess = "FALSE">
+        </cfcatch>
+      </cftry>
+    </cfif>
+    
+    <!--- define highlights start/end --->
+    <cftry>
+      <cfquery username="#db_username#" password="#db_password#" name="getHighLight" datasource="#DATASOURCE#">
+          SELECT pair AS alink_color
+            FROM defaults
+           WHERE name = 'alink_color'
+      </cfquery>
+      
+      <cfset theColor = Trim(getHighLight.alink_color)>
+      
+      <cfset hlightStart = '<font color="' & theColor & '">'>
+      <cfset hlightEnd = '</font>'>
+      
+      <cfcatch>
+        <cfset hlightStart = '<font color="ff0000">'>
+        <cfset hlightEnd = '</font>'>
+      </cfcatch>
+    </cftry>
+  </cfif>
+  
+  <!--- get SSL on/off --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getSSL" datasource="#DATASOURCE#">
+        SELECT pair AS enable_ssl
+          FROM defaults
+         WHERE name = 'enable_ssl'
+    </cfquery>
+    
+    <cfif not getSSL.RecordCount>
+      <cfthrow>
+    <cfelseif not IsBoolean(getSSL.enable_ssl)>
+      <cfthrow>
+    <cfelse>
+      <cfset use_ssl = getSSL.enable_ssl>
+    </cfif>
+    
+    <cfcatch>
+      <cfset use_ssl = "FALSE">
+    </cfcatch>
+  </cftry>
+</cfif>
+
+<!--- output page --->
+<cfsetting enablecfoutputonly="No">
+
+<html>
+  <head>
+    <title>Send an auction to a friend.</title>
+
+    <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
+  </head>
+  
+  <cfinclude template="../../includes/bodytag.html">
+ <cfinclude template="../../includes/menu_bar.cfm">
+    <center>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+        <tr>
+          <td>
+            <!--- include menu bar --->
+            <center>
+              <br>
+<!--- 
+              <br>
+              Browse the <a href="<cfoutput>#VAROOT#</cfoutput>/studio/index.html">studio</a> for items.
+ --->
+            </center>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+        <tr>
+          <td>
+            <font size=4>
+              <b>Email auction to a friend</b>
+            </font>
+                        <hr size=2 color=#heading_color# width=100%>
+          </td>
+        </tr>
+      </table>
+      <cfif Variables.isValid>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              <cfif not IsDefined("Variables.sendIsSuccess")>
+                <center>
+                  <cfoutput>#Trim(get_ItemInfo.title)# (item ###get_ItemInfo.itemnum#)</cfoutput>
+                </center>
+              </cfif>
+              <cfif not chkSubmit>
+                <br>
+                <cfoutput>#hlightStart#<b>INCOMPLETE:</b> Please verify that the highlighted items are correct.#hlightEnd#</cfoutput><br>
+              </cfif>
+            </td>
+          </tr>
+        </table>
+        <cfif IsDefined("Variables.sendIsSuccess")>
+          <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+            <tr>
+              <td>
+                <cfif Variables.sendIsSuccess>
+                  Message sent.<br>
+                  <br>
+                  Thank you for using the message center.  We hope your stay here is an 
+                  enjoyable one.<br>
+                <cfelse>
+                  Submit unsuccessful.<br>
+                  <br>
+                  For some undetermined reason we were unable to process your message at 
+                  this time.  You may try changing the attributes of your message and 
+                  resubmitting it.  This may resolve any unforeseen problems.<br>
+                </cfif>
+                <br>
+                <br>
+              </td>
+            </tr>
+          </table>
+        <cfelse>
+          <form name="emailAuction" action="emailauction.cfm" method="POST">
+          <cfoutput>
+          <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+            <tr>
+              <td width=280>
+                <font size=2><b><cfif not chkAccount>#hlightStart#</cfif>Your User ID<cfif not chkAccount>#hlightEnd#</cfif></b> or <b><cfif not chkAccount>#hlightStart#</cfif>Nickname<cfif not chkAccount>#hlightEnd#</cfif></b></font><br>
+                <input type=text name="nickname" value="#Variables.nickname#" size=20>
+              </td>
+              <td width=360>
+                <font size=2><b><cfif not chkSubmit>#hlightStart#</cfif>Your Password<cfif not chkSubmit>#hlightEnd#</cfif></b></font><br>
+                <input type=password name="password" value="" size=20>
+              </td>
+            </tr>
+            <tr>
+              <td valign=top>
+                <font size=2><b><cfif not chkFriendEmail>#hlightStart#</cfif>Friends email address<cfif not chkFriendEmail>#hlightEnd#</cfif></b> (will not be reused)</font><br>
+                <input type=text name="email" value="#Variables.email#" size=20><br>
+                <br>
+                <input type=checkbox name="includedescription" #includedescription#> 
+                <font size=2><b>Include the item's description.</b><br>
+                (only recommended if the recipient has a HTML compatible email client)</font>
+              </td>
+              <td>
+                <table border=0 cellspacing=0 cellpadding=2 width=340 noshade>
+                  <tr><td height=6></td></tr>
+                  <tr bgcolor=000080>
+                    <td align=center><font color=ffffff size=2 face="Arial"><b>Spamming Policy</b></font></td>
+                  </tr>
+                  <tr bgcolor=d3d3d3>
+                    <td>
+                      <font size=2>
+                        We do not allow our site to be used for spamming purposes.  Please 
+                        send emails only to people you know who would be interested in this 
+                        item.  If this person asks you not to send this type of email to 
+                        them again, please comply.  If you are using this service to 
+                        advertise an item that you are selling, and the recipient complains 
+                        your account may be inactivated.
+                      </font>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan=2>
+                <font size=2>
+                  <b>Personal message</b> for your friend (optional)<br>
+                </font>
+                <textarea name="message" rows=5 cols=75 wrap=virtual>#message#</textarea>
+                <br>
+                <br>
+                <cfif use_ssl>
+                  <b>Use <a href="https://#CGI.SERVER_NAME##VAROOT#/listings/details/emailauction.cfm?itemnum=#get_ItemInfo.itemnum#">Secure Sockets Layer</a></b><br>
+                  <br>
+                </cfif>
+                <input type=submit name="sendemail" value="Send Email"> 
+                <input type=reset value="Reset Form">
+                <input type=hidden name="itemnum" value="#get_ItemInfo.itemnum#">
+              </td>
+            </tr>
+          </table>
+          </cfoutput>
+          </form>
+        </cfif>
+      <cfelse>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              Sorry... item not found.  Please try a different item number.<br>
+              <br>
+            </td>
+          </tr>
+        </table>
+      </cfif>
+      
+	<cfelse>
+	<!-- Reverse Auction -->
+	<!--- define if item number valid & retrieve info --->
+<cftry>
+  <!--- get item's info --->
+  <cfquery username="#db_username#" password="#db_password#" name="get_ItemInfo" datasource="#DATASOURCE#">
+      SELECT I.itemnum, I.title, I.date_end, I.quantity, I.maximum_bid, I.description
+        FROM items I
+       WHERE I.itemnum = #itemnum#
+  </cfquery>
+  
+  <!--- define found/not found --->
+  <cfset isvalid = IIf(get_ItemInfo.RecordCount, DE("TRUE"), DE("FALSE"))>
+  
+  <cfcatch>
+    <cfset isvalid = "FALSE">
+  </cfcatch>
+</cftry>
+
+<!--- if valid setup info --->
+<cfif isvalid>
+
+  <!--- enable Session state management --->
+  <cfset mins_until_timeout = 60>
+  <cfapplication name="UserManagement" sessionmanagement="Yes" sessiontimeout="#CreateTimeSpan(0, 0, mins_until_timeout, 0)#">
+  
+  <!--- define nickname --->
+  <cfif IsDefined("Form.nickname")>
+    <cfset nickname = Trim(Form.nickname)>
+  <cfelseif IsDefined("Session.nickname")>
+    <cfset nickname = Trim(Session.nickname)>
+  <cfelse>
+    <cfset nickname = "">
+  </cfif>
+  
+  <!--- define friends email --->
+  <cfif IsDefined("Form.email")>
+    <cfset email = Trim(Form.email)>
+  <cfelse>
+    <cfset email = "">
+  </cfif>
+  
+  <!--- define include description --->
+  <cfif IsDefined("Form.includedescription")>
+    <cfset includedescription = "CHECKED">
+  <cfelse>
+    <cfset includedescription = "">
+  </cfif>
+  
+  <!--- define message --->
+  <cfif IsDefined("Form.message")>
+    <cfset message = Trim(Form.message)>
+  <cfelse>
+    <cfset message = "I saw this item for sale and thought you might be interested in it. =)">
+  </cfif>
+  
+  <!--- define chk values --->
+  <cfset chkAccount = "TRUE">
+  <cfset chkFriendEmail = "TRUE">
+  <cfset chkSubmit = "TRUE">
+    
+  <!--- if sumbit, check info --->
+  <cfif IsDefined("Form.sendemail")>
+    
+    <!--- get currency type --->
+    <cfquery username="#db_username#" password="#db_password#" name="getCurrency" datasource="#DATASOURCE#">
+        SELECT pair AS type
+          FROM defaults
+         WHERE name = 'site_currency'
+    </cfquery>
+    
+    <!--- chk account --->
+    <cftry>
+      <cfquery username="#db_username#" password="#db_password#" name="getAccount" datasource="#DATASOURCE#">
+          SELECT name, email, nickname
+            FROM users
+           WHERE nickname = '#LCase(Trim(Form.nickname))#'
+             AND password = '#Trim(Form.password)#'
+             AND is_active = 1
+             AND last_login_date <> #CreateODBCDateTime("12/31/1969 00:00:00")#
+      </cfquery>
+      
+      <cfif getAccount.RecordCount>
+        <cfset chkAccount = "TRUE">
+        <cfset fromName = Trim(getAccount.name)>
+        <cfset fromEmail = Trim(getAccount.email)>
+      <cfelse>
+        <cfthrow>
+      </cfif>
+      
+      <cfcatch>
+        <cftry>
+          <cfquery username="#db_username#" password="#db_password#" name="getAccount" datasource="#DATASOURCE#">
+              SELECT name, email, nickname
+                FROM users
+               WHERE user_id = #Trim(Form.nickname)#
+                 AND password = '#Trim(Form.password)#'
+                 AND is_active = 1
+                 AND last_login_date <> #CreateODBCDateTime("12/31/1969 00:00:00")#
+          </cfquery>
+          
+          <cfif getAccount.RecordCount>
+            <cfset chkAccount = "TRUE">
+            <cfset fromName = Trim(getAccount.name)>
+            <cfset fromEmail = Trim(getAccount.email)>
+          <cfelse>
+            <cfthrow>
+          </cfif>
+          
+          <cfcatch>
+            <cfset chkAccount = "FALSE">
+            <cfset fromName = "">
+            <cfset fromEmail = "">
+          </cfcatch>
+        </cftry>
+      </cfcatch>
+    </cftry>
+    
+    <!--- if account checks out load into Session --->
+    <cfif chkAccount>
+      <cfset Session.nickname = Trim(getAccount.nickname)>
+    </cfif>
+    
+    <!--- chk friend's email --->
+    <cftry>
+      <cfmodule template="../../functions/mailtest.cfm"
+        EMail="#Trim(Form.email)#">
+      
+      <cfif EMail_Level IS 0>
+        <cfset chkFriendEmail = "TRUE">
+        <cfset toEmail = Trim(Form.email)>
+      <cfelse>
+        <cfthrow>
+      </cfif>
+      
+      <cfcatch>
+        <cfset chkFriendEmail = "FALSE">
+        <cfset toEmail = "">
+      </cfcatch>
+    </cftry>
+    
+    <!--- define include description --->
+    <cfif IsDefined("Form.includedescription")>
+      <cfset incDescription = "TRUE">
+    <cfelse>
+      <cfset incDescription = "FALSE">
+    </cfif>
+    
+    <!--- define good submit --->
+    <cfif not Variables.chkAccount OR not Variables.chkFriendEmail>
+      <cfset chkSubmit = "FALSE">
+    </cfif>
+    
+    <!--- send email --->
+    <cfif Variables.chkSubmit>
+      
+      <!--- define current bid on item --->
+      <cfquery username="#db_username#" password="#db_password#" name="getCurrentBid" datasource="#DATASOURCE#">
+          SELECT MIN(bid) AS lowbid, COUNT(bid) AS totalbids
+            FROM bids
+           WHERE itemnum = #get_ItemInfo.itemnum#
+      </cfquery>
+      
+      <cfif getCurrentBid.totalbids>
+        <cfset currentBid = numberFormat(getCurrentBid.lowbid,numbermask)>
+      <cfelse>
+        <cfset currentBid = numberFormat(get_ItemInfo.maximum_bid,numbermask)>
+      </cfif>
+      
+      <!--- setup message --->
+      <cfset mimeType = "TEXT">
+      <cfset lf = Chr(13) & Chr(10)>
+      <cfset emlMesg = "">
+      <cfset emlMesg = emlMesg & Trim(Form.message) & lf & lf>
+      <cfset emlMesg = emlMesg & Variables.fromName & lf & lf & lf>
+      <cfset emlMesg = emlMesg & Trim(get_ItemInfo.title) & lf & lf>
+      <cfset emlMesg = emlMesg & "Item Number: " & get_ItemInfo.itemnum & lf>
+      <cfset emlMesg = emlMesg & "Available at: http://" & #CGI.SERVER_NAME# & "#VAROOT#/listings/details/index.cfm?itemnum=" & get_ItemInfo.itemnum & lf>
+      <cfset emlMesg = emlMesg & "Auction ends: " & DateFormat(get_ItemInfo.date_end, "mm/dd/yy") & " " & TimeFormat(get_ItemInfo.date_end, "HH:mm:ss") & lf>
+      <cfset emlMesg = emlMesg & "Quantity: " & get_ItemInfo.quantity & lf>
+      <cfset emlMesg = emlMesg & "Current bid: " & Variables.currentBid & " " & Trim(getCurrency.type) & lf & lf>
+      <cfif Variables.incDescription>
+        <cfset emlMesg = emlMesg & "Description:" & lf & lf>
+        <cfset emlMesg = HTMLCodeFormat(emlMesg)>
+        <cfset emlMesg = emlMesg & Trim(get_ItemInfo.description) & lf & lf>
+        <cfset mimeType = "HTML">
+      </cfif>
+      
+      <cftry>
+        <cfmodule template="eml_auction2friend.cfm"
+          to="#Variables.toEmail#"
+          from="#Variables.fromEmail#"
+          subject="Thought you might be interested in this..."
+          message="#emlMesg#"
+          mimeType="#mimeType#">
+        
+        <cfset sendIsSuccess = "TRUE">
+        
+        <cfcatch>
+          <cfset sendIsSuccess = "FALSE">
+        </cfcatch>
+      </cftry>
+    </cfif>
+    
+    <!--- define highlights start/end --->
+    <cftry>
+      <cfquery username="#db_username#" password="#db_password#" name="getHighLight" datasource="#DATASOURCE#">
+          SELECT pair AS alink_color
+            FROM defaults
+           WHERE name = 'alink_color'
+      </cfquery>
+      
+      <cfset theColor = Trim(getHighLight.alink_color)>
+      
+      <cfset hlightStart = '<font color="' & theColor & '">'>
+      <cfset hlightEnd = '</font>'>
+      
+      <cfcatch>
+        <cfset hlightStart = '<font color="ff0000">'>
+        <cfset hlightEnd = '</font>'>
+      </cfcatch>
+    </cftry>
+  </cfif>
+  
+  <!--- get SSL on/off --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getSSL" datasource="#DATASOURCE#">
+        SELECT pair AS enable_ssl
+          FROM defaults
+         WHERE name = 'enable_ssl'
+    </cfquery>
+    
+    <cfif not getSSL.RecordCount>
+      <cfthrow>
+    <cfelseif not IsBoolean(getSSL.enable_ssl)>
+      <cfthrow>
+    <cfelse>
+      <cfset use_ssl = getSSL.enable_ssl>
+    </cfif>
+    
+    <cfcatch>
+      <cfset use_ssl = "FALSE">
+    </cfcatch>
+  </cftry>
+</cfif>
+
+<!--- output page --->
+<cfsetting enablecfoutputonly="No">
+
+<html>
+  <head>
+    <title>Send an auction to a friend.</title>
+
+    <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
+  </head>
+  
+  <cfinclude template="../../includes/bodytag.html">
+    <div align="center">
+   <table border=0 cellspacing=0 cellpadding=2 width=800>
+        <tr>
+          <td>
+            <!--- include menu bar --->
+            <center>
+              <br>
+<!--- 
+              <br>
+              Browse the <a href="<cfoutput>#VAROOT#</cfoutput>/studio/index.html">studio</a> for items.
+ --->
+            </center>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+        <tr>
+          <td>
+            <font size=4>
+              <b>Email auction to a friend</b>
+            </font>
+                        <hr size=2 color=#heading_color# width=100%>
+          </td>
+        </tr>
+      </table>
+      <cfif Variables.isValid>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              <cfif not IsDefined("Variables.sendIsSuccess")>
+                <center>
+                  <cfoutput>#Trim(get_ItemInfo.title)# (item ###get_ItemInfo.itemnum#)</cfoutput>
+                </center>
+              </cfif>
+              <cfif not chkSubmit>
+                <br>
+                <cfoutput>#hlightStart#<b>INCOMPLETE:</b> Please verify that the highlighted items are correct.#hlightEnd#</cfoutput><br>
+              </cfif>
+            </td>
+          </tr>
+        </table>
+        <cfif IsDefined("Variables.sendIsSuccess")>
+          <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+            <tr>
+              <td>
+                <cfif Variables.sendIsSuccess>
+                  Message sent.<br>
+                  <br>
+                  Thank you for using the message center.  We hope your stay here is an 
+                  enjoyable one.<br>
+                <cfelse>
+                  Submit unsuccessful.<br>
+                  <br>
+                  For some undetermined reason we were unable to process your message at 
+                  this time.  You may try changing the attributes of your message and 
+                  resubmitting it.  This may resolve any unforeseen problems.<br>
+                </cfif>
+                <br>
+                <br>
+              </td>
+            </tr>
+          </table>
+        <cfelse>
+          <form name="emailAuction" action="emailauction.cfm" method="POST">
+          <cfoutput>
+          <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+            <tr>
+              <td width=280>
+                <font size=2><b><cfif not chkAccount>#hlightStart#</cfif>Your User ID<cfif not chkAccount>#hlightEnd#</cfif></b> or <b><cfif not chkAccount>#hlightStart#</cfif>Nickname<cfif not chkAccount>#hlightEnd#</cfif></b></font><br>
+                <input type=text name="nickname" value="#Variables.nickname#" size=20>
+              </td>
+              <td width=360>
+                <font size=2><b><cfif not chkSubmit>#hlightStart#</cfif>Your Password<cfif not chkSubmit>#hlightEnd#</cfif></b></font><br>
+                <input type=password name="password" value="" size=20>
+              </td>
+            </tr>
+            <tr>
+              <td valign=top>
+                <font size=2><b><cfif not chkFriendEmail>#hlightStart#</cfif>Friends email address<cfif not chkFriendEmail>#hlightEnd#</cfif></b> (will not be reused)</font><br>
+                <input type=text name="email" value="#Variables.email#" size=20><br>
+                <br>
+                <input type=checkbox name="includedescription" #includedescription#> 
+                <font size=2><b>Include the item's description.</b><br>
+                (only recommended if the recipient has a HTML compatible email client)</font>
+              </td>
+              <td>
+                <table border=0 cellspacing=0 cellpadding=2 width=340 noshade>
+                  <tr><td height=6></td></tr>
+                  <tr bgcolor=000080>
+                    <td align=center><font color=ffffff size=2 face="Arial"><b>Spamming Policy</b></font></td>
+                  </tr>
+                  <tr bgcolor=d3d3d3>
+                    <td>
+                      <font size=2>
+                        We do not allow our site to be used for spamming purposes.  Please 
+                        send emails only to people you know who would be interested in this 
+                        item.  If this person asks you not to send this type of email to 
+                        them again, please comply.  If you are using this service to 
+                        advertise an item that you are selling, and the recipient complains 
+                        your account may be inactivated.
+                      </font>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan=2>
+                <font size=2>
+                  <b>Personal message</b> for your friend (optional)<br>
+                </font>
+                <textarea name="message" rows=5 cols=75 wrap=virtual>#message#</textarea>
+                <br>
+                <br>
+                <cfif use_ssl>
+                  <b>Use <a href="https://#CGI.SERVER_NAME##VAROOT#/listings/details/emailauction.cfm?itemnum=#get_ItemInfo.itemnum#">Secure Sockets Layer</a></b><br>
+                  <br>
+                </cfif>
+                <input type=submit name="sendemail" value="Send Email"> 
+                <input type=reset value="Reset Form">
+                <input type=hidden name="itemnum" value="#get_ItemInfo.itemnum#">
+              </td>
+            </tr>
+          </table>
+          </cfoutput>
+          </form>
+        </cfif>
+      <cfelse>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              Sorry... item not found.  Please try a different item number.<br>
+              <br>
+            </td>
+          </tr>
+        </table>
+      </cfif>
+      
+	</cfif>
+<cfoutput>
+<table border=0 cellpadding=2 cellspacing=0 width="#getLayout.page_width#">
+        <tr>
+          <td>
+            <br>
+            <br>
+                        <hr width=#getLayout.page_width# size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            
+              <cfinclude template="../../includes/copyrights.cfm">
+          
+          </td>
+        </tr>
+      </table></cfoutput></div>
+  </body>
+</html>

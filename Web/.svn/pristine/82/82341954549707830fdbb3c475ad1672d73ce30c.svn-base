@@ -1,0 +1,738 @@
+<!---
+  bidhistory.cfm
+  displays bidding history of a given item...
+--->
+
+<cfsetting enablecfoutputonly="Yes">
+
+<cftry>
+  <!--- include globals --->
+  <cfinclude template="../../includes/app_globals.cfm">
+  
+  <!--- define TIMENOW --->
+  <cfmodule template="../../functions/timenow.cfm">
+  
+  <cfcatch>
+    <cflocation url="http://#CGI.SERVER_NAME##VAROOT#/includes/404notfound.cfm">
+  </cfcatch>
+</cftry>
+<cfinclude template="../../includes/session_include.cfm">
+
+<!--- set auction_mode --->
+		<cfquery username="#db_username#" password="#db_password#" name="get_auction_mode" datasource="#DATASOURCE#">
+      	SELECT auction_mode
+        FROM items
+       	WHERE itemnum = #itemnum#
+  		</cfquery>
+  		<cfset session.auction_mode = get_auction_mode.auction_mode>
+
+<cfif session.auction_mode is 0>
+<cfset auction_mode = session.auction_mode>
+<!-- Regular Auctions --> <!-- Reverse Auction begins on line 373 -->
+<!--- define if item number valid & retrieve info --->
+<cftry>
+  <!--- get item's info --->
+  <cfquery username="#db_username#" password="#db_password#" name="get_ItemInfo" datasource="#DATASOURCE#">
+      SELECT itemnum, user_id, title, date_start, date_end, minimum_bid, reserve_bid, private
+        FROM items
+       WHERE itemnum = #URL.itemnum#
+  </cfquery>
+  
+  <!--- define found/not found --->
+  <cfset isvalid = IIf(get_ItemInfo.RecordCount, DE("TRUE"), DE("FALSE"))>
+  
+  <cfcatch>
+    <cfset isvalid = "FALSE">
+  </cfcatch>
+</cftry>
+
+<!--- if valid get rest of info --->
+<cfif Variables.isvalid>
+  <!--- get currency type --->
+  <cfquery username="#db_username#" password="#db_password#" name="getCurrency" datasource="#DATASOURCE#">
+      SELECT pair AS type
+        FROM defaults
+       WHERE name = 'site_currency'
+  </cfquery>
+  
+  <!--- get highest bidder, number of bids --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getHighBid" datasource="#DATASOURCE#">
+        SELECT MAX(bid) AS highest, COUNT(bid) AS found
+          FROM bids
+         WHERE itemnum = #get_ItemInfo.itemnum#
+		 AND buynow = 1
+    </cfquery>
+    
+    <cfif getHighBid.found>
+      <cfset lastBid = getHighBid.highest>
+      <cfset numberBids = Round(getHighBid.found)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset lastBid = get_ItemInfo.minimum_bid>
+      <cfset numberBids = 0>
+    </cfcatch>
+  </cftry>
+  
+  <!--- define if reserve met --->
+  <cftry>
+    <cfif lastBid GTE get_ItemInfo.reserve_bid OR get_ItemInfo.reserve_bid IS 0>
+      <cfset reserveMet = "TRUE">
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset reserveMet = "FALSE">
+    </cfcatch>
+  </cftry>
+  
+  <!--- get seller info for item --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getSeller" datasource="#DATASOURCE#">
+        SELECT nickname, email
+          FROM users
+         WHERE user_id = #get_ItemInfo.user_id#
+    </cfquery>
+    
+    <cfif getSeller.RecordCount>
+      <cfset sellerNick = Trim(getSeller.nickname)>
+      <cfset sellerEmail = Trim(getSeller.email)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset sellerNick = "Not Available">
+      <cfset sellerEmail = "Not Available">
+    </cfcatch>
+  </cftry>
+  
+  <!--- sum seller rating --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getSellerRate" datasource="#DATASOURCE#">
+        SELECT SUM(rating) AS rate, COUNT(rating) AS found
+          FROM feedback
+         WHERE user_id = #get_ItemInfo.user_id#
+    </cfquery>
+    
+    <cfif getSellerRate.found>
+      <cfset sellerRating = Round(getSellerRate.rate)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset sellerRating = 0>
+    </cfcatch>
+  </cftry>
+  
+  <!--- define "mailto" link value --->
+  <cfif get_ItemInfo.private>
+    <cfset mailToLink = "#VAROOT#/messaging/index.cfm?user_id=" & get_ItemInfo.user_id>
+  <cfelse>
+    <cfset mailToLink = "mailto:" & sellerEmail>
+  </cfif>
+  
+  <!--- get bids --->
+  <cfquery username="#db_username#" password="#db_password#" name="getHistory" datasource="#DATASOURCE#">
+      SELECT B.user_id, B.time_placed, B.bid, B.quantity, U.nickname, U.email
+        FROM bids B, users U
+       WHERE B.itemnum = #get_ItemInfo.itemnum#
+         AND B.user_id = U.user_id
+		 AND B.buynow = 1
+       ORDER BY B.bid DESC, B.time_placed ASC
+  </cfquery>
+  
+  <!--- get bgcolor for listings --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="bgColor" datasource="#DATASOURCE#">
+        SELECT pair AS listing_bgcolor
+          FROM defaults
+         WHERE name = 'listing_bgcolor'
+    </cfquery>
+    
+    <cfif bgColor.RecordCount>
+      <cfset rowBgcolor = Trim(bgColor.listing_bgcolor)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset rowBgcolor = "d3d3d3">
+    </cfcatch>
+  </cftry>
+</cfif>
+
+<!--- output page --->
+<cfsetting enablecfoutputonly="No">
+
+<html>
+  <head>
+    <title>Item Bid History</title>
+
+    <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
+  </head>
+  
+  <cfinclude template="../../includes/bodytag.html">
+ <cfinclude template="../../includes/menu_bar.cfm">
+    <div align="center">
+   <table border=0 cellspacing=0 cellpadding=2 width=800>
+        <tr>
+          <td>
+            <!--- include menu bar --->
+            <center>
+              <br>
+<!--- 
+              <br>
+              Browse the <a href="<cfoutput>#VAROOT#</cfoutput>/studio/index.html">studio</a> for items.
+ --->
+            </center>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+        <tr>
+          <td>
+            <font size=4>
+              <b>BuyNow History for</b>
+            </font>
+                        <hr size=2 color=#heading_color# width=100%>
+          </td>
+        </tr>
+      </table>
+      <cfif isvalid>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              <center>
+                <cfoutput>#Trim(get_ItemInfo.title)# (item <a href="./index.cfm?itemnum=#get_ItemInfo.itemnum#">###get_ItemInfo.itemnum#</a>)</cfoutput>
+              </center>
+              <br>
+              If you have any questions about this item, please contact the seller using 
+              the link provided below.  Seller assumes all responsibility for listing 
+              this item.<br>
+              <br>
+            </td>
+          </tr>
+        </table>
+        <cfoutput>
+        <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+          <!--- <tr>
+            <td width=320><b>Last buynow for this item:</b></td>
+            <td width=320><b>#numberFormat(lastBid,numbermask)# #Trim(getCurrency.type)#</b> <cfif not reserveMet>(reserve price not yet met)</cfif></td>
+          </tr> --->
+          <tr>
+            <td><b>Date auction ends:</b></td>
+            <td><b>#DateFormat(get_ItemInfo.date_end, "mm/dd/yy")# #TimeFormat(get_ItemInfo.date_end, "HH:mm:ss")#</b></td>
+          </tr>
+          <tr>
+            <td>Date auction starts<b>:</b></td>
+            <td>#DateFormat(get_ItemInfo.date_start, "mm/dd/yy")# #TimeFormat(get_ItemInfo.date_start, "HH:mm:ss")#</td>
+          </tr>
+          <tr>
+            <td>Seller<b>:</b></td>
+            <td><a href="#mailToLink#">#sellerNick#</a> (<a href="#VAROOT#/feedback/index.cfm?user_id=#get_ItemInfo.user_id#">#sellerRating#</a>)</td>
+          </tr>
+          <!--- <tr>
+            <td>First bid at<b>:</b></td>
+            <td>#numberFormat(get_ItemInfo.minimum_bid,numbermask)# #Trim(getCurrency.type)#</td>
+          </tr> --->
+          <tr>
+            <td><b>Number of buynows made:</b></td>
+            <td><b>#numberBids#</b> <cfif numberBids GT 1><font size=2>(may include multiple bids by the same bidder)</font></cfif></td>
+          </tr>
+          <tr>
+            <td colspan=2>[<a href="./index.cfm?itemnum=#get_ItemInfo.itemnum#">Item Details</a>] [<a href="./index.cfm?itemnum=#get_ItemInfo.itemnum###BID">BuyNow on Item</a>]</td>
+          </tr>
+        </table>
+        </cfoutput>
+        <br>
+        <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+          <tr>
+            <td>
+              <font size=4><b>BuyNow Placed</b></font>
+                          <hr size=2 color=#heading_color# width=100%>
+              <center>
+                (ordered by oldest to newest)
+              </center>
+            </td>
+          </tr>
+        </table>
+        <cfsetting enablecfoutputonly="Yes">
+          <!--- output history --->
+          <cfif getHistory.RecordCount>
+            
+            <cfoutput>
+              <table border=0 cellspacing=0 cellpadding=2 width=800 noshade>
+              <tr bgcolor=#rowBgcolor#>
+                <td><b>User:</b> (Rating)</td>
+                <td><b>BuyNow Price:</b></td>
+                <td><b>Quantity:</b></td>
+                <td><b>Date:</b></td>
+              </tr>
+            </cfoutput>
+
+            <cfset loop_count = 0>
+
+            <cfloop query="getHistory">
+
+            <!--- define mailtoLink --->
+            <cfif get_ItemInfo.private>
+              <cfset mailToLink = "#VAROOT#/messaging/index.cfm?user_id=" & getHistory.user_id>
+            <cfelse>
+              <cfset mailToLink = "mailto:" & Trim(getHistory.email)>
+            </cfif>
+            
+            <!--- get users rating --->
+            <cftry>
+              <cfquery username="#db_username#" password="#db_password#" name="getRating" datasource="#DATASOURCE#">
+                  SELECT SUM(rating) AS userrating, COUNT(rating) AS found
+                    FROM feedback
+                   WHERE user_id = #getHistory.user_id#
+              </cfquery>
+              
+              <cfif getRating.found>
+                <cfset userRating = Round(getRating.userrating)>
+              <cfelse>
+                <cfthrow>
+              </cfif>
+              
+              <cfcatch>
+                <cfset userRating = 0>
+              </cfcatch>
+            </cftry>
+
+            <cfset bgcolor = iif(int(loop_count/2) neq (loop_count/2), "rowBgcolor", DE(""))>
+
+            <cfoutput><tr bgcolor=#bgcolor#></cfoutput>
+                <cfoutput><td><a href="#mailToLink#">#Trim(getHistory.nickname)#</a>&nbsp;(<a href="#VAROOT#/feedback/index.cfm?user_id=#getHistory.user_id#">#userRating#</a>)</td></cfoutput>
+                <cfoutput><td>#numberFormat(getHistory.bid,numbermask)# #Trim(getCurrency.type)#</td></cfoutput>
+                <cfoutput><td>#getHistory.quantity#</td></cfoutput>
+                <cfoutput><td>#DateFormat(getHistory.time_placed, "mm/dd/yy")#&nbsp;#TimeFormat(getHistory.time_placed, "HH:mm:ss")#</td></cfoutput>
+              <cfoutput></tr>
+            </cfoutput>
+
+            <cfset loop_count = loop_count + 1>
+            
+            </cfloop>
+            
+            <cfoutput>
+              </table>
+            </cfoutput>
+            
+          <cfelse>
+            <cfoutput>
+              <table border=0 cellspacing=0 cellpadding=0 width=800 noshade>
+                <tr>
+                  <td>
+                    <br>
+                    No bids have been placed yet.
+                  </td>
+                </tr>
+              </table>
+            </cfoutput>
+          </cfif>
+        <cfsetting enablecfoutputonly="No">
+        <br>
+        <br>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              <!--- include menu bar --->
+              <center>
+              </center>
+            </td>
+          </tr>
+        </table>
+      <cfelse>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              Sorry... item not found.  Please try a different item number.<br>
+              <br>
+            </td>
+          </tr>
+        </table>
+      </cfif>
+      <br>
+      <br>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+        <tr>
+          <td align=left valign=top>
+             <font size=2>
+               <cfinclude template="../../includes/copyrights.cfm">
+               <br>
+               <br>
+               <br>
+            </font>
+          </td>
+        </tr>
+      </table>
+    </center>
+<cfelse>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Reverse Auction -->
+<cfset auction_mode = session.auction_mode>
+<!--- define if item number valid & retrieve info --->
+<cftry>
+  <!--- get item's info --->
+  <cfquery username="#db_username#" password="#db_password#" name="get_ItemInfo" datasource="#DATASOURCE#">
+      SELECT itemnum, user_id, title, date_start, date_end, maximum_bid, reserve_bid, private
+        FROM items
+       WHERE itemnum = #URL.itemnum#
+  </cfquery>
+  
+  <!--- define found/not found --->
+  <cfset isvalid = IIf(get_ItemInfo.RecordCount, DE("TRUE"), DE("FALSE"))>
+  
+  <cfcatch>
+    <cfset isvalid = "FALSE">
+  </cfcatch>
+</cftry>
+
+<!--- if valid get rest of info --->
+<cfif Variables.isvalid>
+  <!--- get currency type --->
+  <cfquery username="#db_username#" password="#db_password#" name="getCurrency" datasource="#DATASOURCE#">
+      SELECT pair AS type
+        FROM defaults
+       WHERE name = 'site_currency'
+  </cfquery>
+  
+  <!--- get highest bidder, number of bids --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getLowBid" datasource="#DATASOURCE#">
+        SELECT MIN(bid) AS lowest, COUNT(bid) AS found
+          FROM bids
+         WHERE itemnum = #get_ItemInfo.itemnum#
+    </cfquery>
+    
+    <cfif getLowBid.found>
+      <cfset lastBid = getLowBid.lowest>
+      <cfset numberBids = Round(getLowBid.found)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset lastBid = get_ItemInfo.maximum_bid>
+      <cfset numberBids = 0>
+    </cfcatch>
+  </cftry>
+  
+  <!--- define if reserve met --->
+  <cftry>
+    <cfif lastBid LTE get_ItemInfo.reserve_bid OR get_ItemInfo.reserve_bid IS 0>
+      <cfset reserveMet = "TRUE">
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset reserveMet = "FALSE">
+    </cfcatch>
+  </cftry>
+  
+  <!--- get seller info for item --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getSeller" datasource="#DATASOURCE#">
+        SELECT nickname, email
+          FROM users
+         WHERE user_id = #get_ItemInfo.user_id#
+    </cfquery>
+    
+    <cfif getSeller.RecordCount>
+      <cfset sellerNick = Trim(getSeller.nickname)>
+      <cfset sellerEmail = Trim(getSeller.email)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset sellerNick = "Not Available">
+      <cfset sellerEmail = "Not Available">
+    </cfcatch>
+  </cftry>
+  
+  <!--- sum seller rating --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="getSellerRate" datasource="#DATASOURCE#">
+        SELECT SUM(rating) AS rate, COUNT(rating) AS found
+          FROM feedback
+         WHERE user_id = #get_ItemInfo.user_id#
+    </cfquery>
+    
+    <cfif getSellerRate.found>
+      <cfset sellerRating = Round(getSellerRate.rate)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset sellerRating = 0>
+    </cfcatch>
+  </cftry>
+  
+  <!--- define "mailto" link value --->
+  <cfif get_ItemInfo.private>
+    <cfset mailToLink = "#VAROOT#/messaging/index.cfm?user_id=" & get_ItemInfo.user_id>
+  <cfelse>
+    <cfset mailToLink = "mailto:" & sellerEmail>
+  </cfif>
+  
+  <!--- get bids --->
+  <cfquery username="#db_username#" password="#db_password#" name="getHistory" datasource="#DATASOURCE#">
+      SELECT B.user_id, B.time_placed, B.bid, B.quantity, U.nickname, U.email
+        FROM bids B, users U
+       WHERE B.itemnum = #get_ItemInfo.itemnum#
+         AND B.user_id = U.user_id
+       ORDER BY B.bid ASC, B.time_placed ASC
+  </cfquery>
+  
+  <!--- get bgcolor for listings --->
+  <cftry>
+    <cfquery username="#db_username#" password="#db_password#" name="bgColor" datasource="#DATASOURCE#">
+        SELECT pair AS listing_bgcolor
+          FROM defaults
+         WHERE name = 'listing_bgcolor'
+    </cfquery>
+    
+    <cfif bgColor.RecordCount>
+      <cfset rowBgcolor = Trim(bgColor.listing_bgcolor)>
+    <cfelse>
+      <cfthrow>
+    </cfif>
+    
+    <cfcatch>
+      <cfset rowBgcolor = "d3d3d3">
+    </cfcatch>
+  </cftry>
+</cfif>
+
+<!--- output page --->
+<cfsetting enablecfoutputonly="No">
+
+<html>
+  <head>
+    <title>Item Bid History</title>
+
+    <link rel=stylesheet href="<cfoutput>#VAROOT#</cfoutput>/includes/stylesheet.css" type="text/css">
+  </head>
+  
+  <cfinclude template="../../includes/bodytag.html">
+    <center>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+        <tr>
+          <td>
+            <!--- include menu bar --->
+            <center>
+              <br>
+            </center>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+        <tr>
+          <td>
+            <font size=4>
+              <b>Offers History for</b>
+            </font>
+                        <hr size=2 color=#heading_color# width=100%>
+          </td>
+        </tr>
+      </table>
+      <cfif isvalid>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              <center>
+                <cfoutput>#Trim(get_ItemInfo.title)# (item <a href="./index.cfm?itemnum=#get_ItemInfo.itemnum#">###get_ItemInfo.itemnum#</a>)</cfoutput>
+              </center>
+              <br>
+              If you have any questions about this item, please contact the buyer using 
+              the link provided below.  Buyer assumes all responsibility for listing 
+              this item.<br>
+              <br>
+            </td>
+          </tr>
+        </table>
+        <cfoutput>
+        <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+          <tr>
+            <td width=320><b>Last offer for this item:</b></td>
+            <td width=320><b>#numberFormat(lastBid,numbermask)# #Trim(getCurrency.type)#</b> <cfif not reserveMet>(reserve price not yet met)</cfif></td>
+          </tr>
+          <tr>
+            <td><b>Date auction ends:</b></td>
+            <td><b>#DateFormat(get_ItemInfo.date_end, "mm/dd/yy")# #TimeFormat(get_ItemInfo.date_end, "HH:mm:ss")#</b></td>
+          </tr>
+          <tr>
+            <td>Date auction starts<b>:</b></td>
+            <td>#DateFormat(get_ItemInfo.date_start, "mm/dd/yy")# #TimeFormat(get_ItemInfo.date_start, "HH:mm:ss")#</td>
+          </tr>
+          <tr>
+            <td>Buyer<b>:</b></td>
+            <td><a href="#mailToLink#">#sellerNick#</a> (<a href="#VAROOT#/feedback/index.cfm?user_id=#get_ItemInfo.user_id#">#sellerRating#</a>)</td>
+          </tr>
+          <tr>
+            <td>First offer at<b>:</b></td>
+            <td>#numberFormat(get_ItemInfo.maximum_bid,numbermask)# #Trim(getCurrency.type)#</td>
+          </tr>
+          <tr>
+            <td><b>Number of offers made:</b></td>
+            <td><b>#numberBids#</b> <cfif numberBids GT 1><font size=2>(may include multiple offers by the same bidder)</font></cfif></td>
+          </tr>
+          <tr>
+            <td colspan=2>[<a href="./index.cfm?itemnum=#get_ItemInfo.itemnum#">Item Details</a>] [<a href="./index.cfm?itemnum=#get_ItemInfo.itemnum###BID">Make Offer on Item</a>]</td>
+          </tr>
+        </table>
+        </cfoutput>
+        <br>
+        <table border=0 cellspacing=0 cellpadding=1 noshade width=800>
+          <tr>
+            <td>
+              <font size=4><b>Offers Placed</b></font>
+                          <hr size=2 color=#heading_color# width=100%>
+              <center>
+                (ordered lowest offer to highest and oldest to newest)
+              </center>
+            </td>
+          </tr>
+        </table>
+        <cfsetting enablecfoutputonly="Yes">
+          <!--- output history --->
+          <cfif getHistory.RecordCount>
+            
+            <cfoutput>
+              <table border=0 cellspacing=0 cellpadding=2 width=800 noshade>
+              <tr bgcolor=#rowBgcolor#>
+                <td><b>User:</b> (Rating)</td>
+                <td><b>Offer:</b></td>
+                <td><b>Quantity:</b></td>
+                <td><b>Date:</b></td>
+              </tr>
+            </cfoutput>
+
+            <cfset loop_count = 0>
+
+            <cfloop query="getHistory">
+
+            <!--- define mailtoLink --->
+            <cfif get_ItemInfo.private>
+              <cfset mailToLink = "#VAROOT#/messaging/index.cfm?user_id=" & getHistory.user_id>
+            <cfelse>
+              <cfset mailToLink = "mailto:" & Trim(getHistory.email)>
+            </cfif>
+            
+            <!--- get users rating --->
+            <cftry>
+              <cfquery username="#db_username#" password="#db_password#" name="getRating" datasource="#DATASOURCE#">
+                  SELECT SUM(rating) AS userrating, COUNT(rating) AS found
+                    FROM feedback
+                   WHERE user_id = #getHistory.user_id#
+              </cfquery>
+              
+              <cfif getRating.found>
+                <cfset userRating = Round(getRating.userrating)>
+              <cfelse>
+                <cfthrow>
+              </cfif>
+              
+              <cfcatch>
+                <cfset userRating = 0>
+              </cfcatch>
+            </cftry>
+
+            <cfset bgcolor = iif(int(loop_count/2) neq (loop_count/2), "rowBgcolor", DE(""))>
+
+            <cfoutput><tr bgcolor=#bgcolor#></cfoutput>
+                <cfoutput><td><a href="#mailToLink#">#Trim(getHistory.nickname)#</a>&nbsp;(<a href="#VAROOT#/feedback/index.cfm?user_id=#getHistory.user_id#">#userRating#</a>)</td></cfoutput>
+                <cfoutput><td>#numberFormat(getHistory.bid,numbermask)# #Trim(getCurrency.type)#</td></cfoutput>
+                <cfoutput><td>#getHistory.quantity#</td></cfoutput>
+                <cfoutput><td>#DateFormat(getHistory.time_placed, "mm/dd/yy")#&nbsp;#TimeFormat(getHistory.time_placed, "HH:mm:ss")#</td></cfoutput>
+              <cfoutput></tr>
+            </cfoutput>
+
+            <cfset loop_count = loop_count + 1>
+            
+            </cfloop>
+            
+            <cfoutput>
+              </table>
+            </cfoutput>
+            
+          <cfelse>
+            <cfoutput>
+              <table border=0 cellspacing=0 cellpadding=0 width=800 noshade>
+                <tr>
+                  <td>
+                    <br>
+                    No Offers have been made yet.
+                  </td>
+                </tr>
+              </table>
+            </cfoutput>
+          </cfif>
+        <cfsetting enablecfoutputonly="No">
+        <br>
+        <br>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              <!--- include menu bar --->
+              <center>
+              </center>
+            </td>
+          </tr>
+        </table>
+      <cfelse>
+        <table border=0 cellspacing=0 cellpadding=0 noshade width=800>
+          <tr>
+            <td>
+              Sorry... item not found.  Please try a different item number.<br>
+              <br>
+            </td>
+          </tr>
+        </table>
+      </cfif>
+      
+</cfif>
+<cfoutput>
+<table border=0 cellpadding=2 cellspacing=0 width="#getLayout.page_width#">
+        <tr>
+          <td>
+            <br>
+            <br>
+                        <hr width=#getLayout.page_width# size=1 color="#heading_color#" noshade>
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            
+              <cfinclude template="../includes/copyrights.cfm">
+          
+          </td>
+        </tr>
+      </table></cfoutput></div>
+  </body>
+</html>

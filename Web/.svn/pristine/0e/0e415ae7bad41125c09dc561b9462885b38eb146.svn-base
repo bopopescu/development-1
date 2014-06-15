@@ -1,0 +1,152 @@
+<!---
+
+global information for site
+--->
+<cfsetting enablecfoutputonly="Yes">
+
+<!--- root dir of VA 3.x
+  if URL resolves to root dir of VA then should be "",
+  else should be a sub-dir (ie. "/auction")
+  
+  (NOTE: if sub-dir, then should always be preceded by a slash, like the example above.)
+  --->
+<cfset VAROOT = "">
+
+
+<CFSET classified_valid = "Yes">
+<CFSET COMPANY_NAME = "#getLayout.company_name#">
+<CFSET FEE_URL = "http://#SITE_ADDRESS##VAROOT#/help/fee_schedule.cfm">
+<CFSET PROBLEM_EMAIL = "#getLayout.problem_email#">
+<CFSET QUESTION_EMAIL = "#getLayout.question_email#">
+<CFSET SERVICE_EMAIL = "#getLayout.service_email#">
+<CFSET TIME_ZONE = "#getLayout.timezone#">      <!--- should be set to match /functions/timenow.cfm value or blank "" --->
+
+<!--- Change Database connection Information Here --->
+<!--- ******************************************************* --->
+<cfset db_USERNAME="c148196_h218913">
+<cfset db_PASSWORD="Admin2011">
+<!--- ******************************************************* --->
+
+<!--- Number format mask for different currency types --->
+<!--- use 99999999999 for for non decimal format --->
+<CFSET numbermask = 99999999999.99>
+
+<!---	CyberCash Settings:
+	CYBERCASH_ERROR_EMAIL	Address where to send email when a cybercash error occures.
+		This is mainly for development purposes, but will also show card number and
+		expiration date errors when they occure. 
+	CC_MERCHANT_KEY   	These values are supplied by CyberCash
+	CC_CYBERCASH_ID   	...
+	CYBER_CASH		Set this to "yes" when ready to go live,
+		set to "no" to turn off, and set to "test" for testing purposes.
+	--->
+
+<!--- Change the email address!!! I don't want to see card errors.  Thanks.
+	Feel free to forward to me unknown errors.  --->
+<cfset CYBERCASH_ERROR_EMAIL = "admin@#domain#">
+<cfset CC_MERCHANT_KEY="1CeXOCXWkqZn3MtYMDJpW19KZ9c0Oz">
+<cfset CC_CYBERCASH_ID="beyondsoultionsinc-74">
+<cfset CYBER_CASH = "no">
+<!--- End CyberCash --->
+
+<!---Begin Link Point API --->
+
+<cfset link_point = "#getLayout.linkpoint_enable#">
+	
+<cfset LP_REQSTORENAME = "#getLayout.LP_REQSTORENAME#">
+<cfset LP_REQKEYFILE = "#getLayout.LP_REQKEYFILE##getLayout.LP_REQSTORENAME#.pem">
+<cfset LP_REQHOSTADDR = "#getLayout.LP_REQHOSTADDR#">
+<cfset LP_REQPORT = "1139">
+<cfset LP_ORDERUSERID = "#getLayout.LP_REQSTORENAME#">
+
+
+<!--- End Link Point --->
+
+<!--- Begin PayPal --->
+<cfset paypal = "#getLayout.paypal_enable#">
+
+<cfset paypal_business_acct = "#getLayout.paypal_email#"><!--- paypal account name --->
+<cfset paypal_bttn = "http://www.paypal.com/images/paypal_logo.gif"><!--- images.paypal.com/images/x-click-but01.gif --->
+<cfset paypal_return = "http://#SITE_ADDRESS##VAROOT#/paypal/paypal_complete.cfm">
+<cfset paypal_cancel_return = "http://#SITE_ADDRESS##VAROOT#/paypal/paypal_cancel.cfm">
+<cfset paypal_notify_url = "http://#SITE_ADDRESS##VAROOT#/paypal/paypal_notification.cfm">
+<cfset paypal_notify_url_membership = "http://#SITE_ADDRESS##VAROOT#/paypal/paypal_notification_membership.cfm">
+<!--- end paypal --->
+
+<!---
+<cfset LP_REQSTORENAME = "800218">
+<cfset LP_REQKEYFILE = "c:\\winnt\\system32\\800218.pem">
+<cfset LP_REQHOSTADDR = "staging.linkpt.net">
+<cfset LP_REQPORT = "1139">
+<cfset LP_ORDERUSERID = "800218">
+
+--->
+<!---
+<cfset LP_REQSTORENAME = "800219">
+<cfset LP_REQKEYFILE = "c:\\winnt\\system32\\800219.pem">
+<cfset LP_REQHOSTADDR = "staging.linkpt.net">
+<cfset LP_REQPORT = "1139">
+<cfset LP_ORDERUSERID = "800219">
+--->
+<!---Begin authorize.net AIM --->
+<cfset authorize_net_aim = "#getLayout.authorize_enable#">
+<cfset authorize_net_login = "#getLayout.authorize_login#">
+<cfset authorize_net_pw = "#getLayout.authorize_password#">
+<!---end authorize.net AIM --->
+
+	<!--- Get default heading color 
+	<cfquery username="#db_username#" password="#db_password#" NAME="get_heading_color" DATASOURCE="#DATASOURCE#">
+	  SELECT pair FROM defaults
+	  WHERE name = 'heading_color'
+	</cfquery>--->
+	<cfset heading_color = getLayout.heading_color>
+
+
+
+<!--- <cfquery username="#db_username#" password="#db_password#" NAME="get_heading_font_size" DATASOURCE="#DATASOURCE#">
+	  SELECT pair FROM defaults
+	  WHERE name = 'heading_fsize'
+	</cfquery> --->
+	<cfset heading_font_size = getLayout.heading_fsize>
+	<!--- Get default heading color 
+	<cfquery username="#db_username#" password="#db_password#" NAME="get_heading_fcolor" DATASOURCE="#DATASOURCE#">
+	  SELECT pair FROM defaults
+	  WHERE name = 'heading_fcolor'
+	</cfquery>--->
+	<cfset heading_fcolor = getLayout.heading_fcolor>
+	<!--- Get default heading color 
+	<cfquery username="#db_username#" password="#db_password#" NAME="get_heading_font" DATASOURCE="#DATASOURCE#">
+	  SELECT pair FROM defaults
+	  WHERE name = 'heading_font'
+	</cfquery>--->
+	<cfset heading_font = getLayout.heading_font>
+
+<cfif isdefined("mode_switch") is not true >
+	<!--- Get Mode Switch Setting --->
+	<cfquery username="#db_username#" password="#db_password#" NAME="getModeSwitch" DATASOURCE="#DATASOURCE#">
+	  SELECT pair FROM defaults
+	  WHERE name = 'mode_switch'
+	</cfquery>
+	<cfset mode_switch = getModeSwitch.pair>
+
+	<cfif mode_switch is "single">
+	  <cfquery username="#db_username#" password="#db_password#" NAME="getAuctionMode" datasource="#DATASOURCE#">
+	    SELECT pair FROM defaults
+	    WHERE name = 'auction_mode'
+	  </cfquery>
+	  <cfset auction_mode = getAuctionMode.pair>
+	<cfelse>
+	  <!--- If Mode Switch setting is "Dual" get auction_mode from items --->
+	  <cfif isDefined('session.itemnum')>
+	    <cfquery username="#db_username#" password="#db_password#" name="getAuctionMode" datasource="#DATASOURCE#">
+	      SELECT auction_mode FROM items
+	      WHERE itemnum = #session.itemnum#
+	      </cfquery>
+	    <cfset auction_mode = getAuctionMode.auction_mode>
+	  <cfelse>
+	    <cfparam name="auction_mode" default="0">
+	  </cfif>
+	</cfif>
+</cfif>
+
+<cfsetting enablecfoutputonly="No">

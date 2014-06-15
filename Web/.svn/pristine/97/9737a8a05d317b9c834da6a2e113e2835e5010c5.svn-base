@@ -1,0 +1,10 @@
+<cfset current_page = "indexhome">
+<cfinclude template = "./includes/main_header.cfm">
+<!---
+<! - - - Include session tracking template (also sets link colors) - - ->
+<cfinclude template="./includes/session_include.cfm">
+define TIMENOW - - ->
+<cfmodule template="./functions/timenow.cfm">
+--->
+<cfinvoke component="/CF-INF/cfc/HomePageRenderer" method="getPageModel" returnvariable="pageModel" />
+<dumpAndExit var="#pageModel#">
