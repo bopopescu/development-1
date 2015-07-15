@@ -29,6 +29,8 @@ set -x DS_LOG $APP_LOG_DIR/delivery-service.log
 set -x DEVELOPMENT_DIR ~/Development
 set -x DEV_DIR $DEVELOPMENT_DIR
 set -x RESOURCE_DIR src/main/resources
+set -x EOL "
+"
 
 # export PATH JAVA_HOME GIT_REPO SCRIPTS_DIR APP_LOG_DIR SS_LOG AS_LOG DS_LOG DEVELOPMENT_DIR DEV_DIR
 
@@ -43,6 +45,9 @@ alias eenv='vi $PROFILE_FILE'
 alias pd='pushd'
 alias cdh='cd ~'
 alias pdh='pd ~'
+alias f='functions'
+alias fnc='functions'
+alias func='functions'
 
 alias devhome='pushd $DEV_DIR'
 alias dev='devhome'
@@ -57,6 +62,7 @@ alias gg='gogit'
 alias gosecurity='gogit; pushd security-service'
 alias gosec='gosecurity'
 alias gose='gosecurity'
+alias goss='gosecurity'
 alias goasset='gogit; pushd asset-service'
 alias goas='goasset'
 alias goass='goasset'
@@ -64,6 +70,9 @@ alias godelivery='gogit; pushd delivery-service'
 alias gode='godelivery'
 alias godel='godelivery'
 alias goans='gogit; pd analytics-service'
+alias goms='gogit; pd metadata-search-service'
+alias gomes='goms'
+alias goem='gogit; pd event-messaging-module'
 alias gor='pd src/main/resources'
 alias gore='gor'
 alias gores='gor'
@@ -186,9 +195,7 @@ alias guc2='`guc`2'
 alias gpr='git pull --rebase upstream master'
 alias grhum='git reset --hard upstream/master'
 alias gitreset='grhum'
-# Finds current branch and pushes origin
-alias gitpob='git push origin (eval gb | awk \'/\* [a-zA-Z]/ {print $2}\')'
-
+alias gprall='goas;gpr;goans;gpr;godel;gpr;goms;gpr;gose;gpr;goem;gpr'
 # Process search & action aliases
 alias pstc='ps -aef | grep tomcat | grep -v grep'
 alias tcstatus='pstc | grep -v grep'
@@ -230,6 +237,12 @@ function echoconfigprops
     echo "  region: us-west-1"
     echo "  endpoint: sqs.us-west-1.amazonaws.com"
     echo "  queueName: test_cloudform_bsterner_queue"
+end
+
+function gitpob  -d "Finds current branch and pushes origin"
+    set gitcmd (eval gb | awk '/\* [a-zA-Z]/ {print $2}')
+    echo "Executing command: git push origin $gitcmd"
+    git push origin $gitcmd
 end
 
 # Run custom commands in ci config file
