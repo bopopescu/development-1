@@ -27,6 +27,7 @@ AS_LOG=$APP_LOG_DIR/asset-service.log
 DS_LOG=$APP_LOG_DIR/delivery-service.log
 DEVELOPMENT_DIR=~/Development
 DEV_DIR=$DEVELOPMENT_DIR
+RESOURCE_DIR=src/main/resources
 
 export PATH JAVA_HOME GIT_REPO SCRIPTS_DIR APP_LOG_DIR SS_LOG AS_LOG DS_LOG DEVELOPMENT_DIR DEV_DIR
 
@@ -39,6 +40,8 @@ alias egrep='egrep -i'
 alias renv='. $PROFILE_FILE'
 alias eenv='vi $PROFILE_FILE'
 alias pd='pushd'
+alias cdh='cd ~'
+alias pdh='pd ~'
 
 alias devhome='pushd $DEV_DIR'
 alias dev='devhome'
@@ -67,7 +70,11 @@ alias gore='goreach'
 alias m2='pushd ~/.m2'
 alias mc='mvn clean'
 alias mci='mc install'
+alias mciq='mci -q'
+alias mcix='mci -X'
 alias mcis='mci -DskipTests'
+alias mcisq='mcis -q'
+alias mcisx='mci -X'
 alias mt='mvn test'
 alias fn='find . -name'
 alias fd='find . -type d -name'
@@ -143,6 +150,8 @@ alias vidslog='vi $APP_LOG_DIR/delivery-service.log'
 alias vimslog='vi $APP_LOG_DIR/metadata-search-service.log'
 alias vianslog='vi $APP_LOG_DIR/analytics-service.log'
 alias vidc='vi src/main/resources/default-configuration.yml'
+alias mvdc='mv $RESOURCE_DIR/default-configuration.yml $RESOURCE_DIR/default-configuration.yml.bak; git checkout $RESOURCE_DIR/default-configuration.yml'
+alias rsdc='mv $RESOURCE_DIR/default-configuration.yml.bak $RESOURCE_DIR/default-configuration.yml'
 
 alias rsss='killss;startss'
 alias rsas='killas;startas'
@@ -172,6 +181,8 @@ alias gfu='git fetch upstream'
 alias guc='git rebase -i HEAD~3'
 alias guc2='`guc`2'
 alias gpr='git pull --rebase upstream master'
+alias grhum='git reset --hard upstream/master'
+alias gitreset='grhum'
 
 # Process search & action aliases
 alias pstc='ps -aef | grep tomcat | grep -v grep'
@@ -179,6 +190,14 @@ alias tcstatus='pstc | grep -v grep'
 alias pspg='ps -aef | grep -i gres | grep -v grep'
 alias psmg='ps -aef | grep -i mongo | grep -v grep'
 alias psmq='ps -aef | grep -i activemq | grep -v grep'
+
+# Node (NPM) Aliases
+alias ni='npm install'
+alias nodeinstall='ni'
+alias nodeupdate='ni'
+
+# Miscellaneous
+alias ecp='echoconfigprops'
 
 # Useful functions
 function killps {
@@ -193,6 +212,12 @@ function killps {
         echo "*** Error: Please provide a process name to search for and terminate ***"
         echo "***"
     fi
+}
+
+function echoconfigprops {
+    echo "  region: us-west-1"
+    echo "  endpoint: sqs.us-west-1.amazonaws.com"
+    echo "  queueName: test_cloudform_bsterner_queue"
 }
 
 # Run custom commands in ci config file
